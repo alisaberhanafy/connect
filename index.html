@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3f6fb">
+  <meta name="description" content="بوابة كونكت واي فاي للخدمات وإدارة الاشتراكات.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <title>كونكت واي فاي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      color-scheme:light;
+      --page:#f3f6fb;--surface:#fff;--ink:#142238;--muted:#64748b;
+      --line:#dce5f0;--blue:#078bff;--blue-soft:#e5f2ff;
+      --shadow:0 8px 22px rgba(25,48,78,.055);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100svh;padding:20px 16px 34px;
+      background:var(--page);color:var(--ink);
+      font-family:"Cairo",system-ui,sans-serif;
+      transition:background .2s,color .2s;
+    }
+    .wrap{width:min(100%,560px);margin:0 auto}
+    .hero{
+      position:relative;background:var(--surface);border:1px solid var(--line);
+      border-radius:25px;box-shadow:var(--shadow);min-height:208px;
+      padding:23px 20px 20px;text-align:center;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+    }
+    .brand-logo{
+      width:91px;height:91px;object-fit:contain;border-radius:22px;
+      background:#fff;box-shadow:0 5px 17px rgba(0,126,220,.12);
+      margin:0 0 13px;
+    }
+    .brand-title{font-size:23px;line-height:1.45;font-weight:900;margin:0 0 2px}
+    .brand-subtitle{font-size:13px;color:var(--muted);margin:0}
+    .theme-toggle{position:absolute;top:17px;left:18px;width:30px;height:30px;display:grid;place-items:center;border:0;border-radius:0;background:transparent;color:var(--muted);cursor:pointer;padding:0}
+    .theme-toggle svg{width:23px;height:23px}
+    .links{display:grid;gap:12px;margin-top:20px}
+    .portal{
+      min-height:86px;display:grid;grid-template-columns:44px minmax(0,1fr) 24px;
+      align-items:center;gap:13px;padding:12px 15px;
+      text-decoration:none;color:var(--ink);background:var(--surface);
+      border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);
+      transition:transform .18s,border-color .18s,box-shadow .18s;
+    }
+    .portal:hover{transform:translateY(-2px);border-color:#b9d9f7;box-shadow:0 10px 25px rgba(25,48,78,.09)}
+    .portal:focus-visible,.theme-toggle:focus-visible,.install:focus-visible,.whatsapp:focus-visible{
+      outline:3px solid #80c4ff;outline-offset:3px
+    }
+    .portal-icon{
+      width:44px;height:44px;border-radius:13px;background:var(--blue-soft);
+      color:var(--blue);display:grid;place-items:center;
+    }
+    .portal-icon svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .portal-copy{text-align:right;min-width:0;display:block;overflow:hidden}
+    .portal-title{display:block;font-size:16px;font-weight:800;line-height:1.55;margin:0 0 2px;white-space:normal}
+    .portal-desc{display:block;font-size:11.5px;color:var(--muted);line-height:1.65;margin:0;white-space:normal;overflow-wrap:anywhere}
+    .arrow{color:#71839b;display:grid;place-items:center}
+    .arrow svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .actions{display:flex;justify-content:center;margin:22px 0 0}
+    .install{
+      display:inline-flex;align-items:center;justify-content:center;gap:7px;
+      border:1px solid #078bff55;background:#e8f4ff;color:#0875cf;
+      border-radius:13px;padding:10px 17px;font:800 13px "Cairo",sans-serif;cursor:pointer;
+    }
+
+    .support-cta{
+      width:100%;min-height:50px;margin-top:20px;padding:11px 16px;
+      display:flex;align-items:center;justify-content:center;gap:9px;
+      border:0;border-radius:16px;background:#20c968;color:#fff;
+      text-decoration:none;font:800 14px "Cairo",sans-serif;
+      box-shadow:0 7px 17px rgba(32,201,104,.20);
+      transition:transform .18s,background .18s;
+    }
+    .support-cta:hover{background:#18b95d;transform:translateY(-1px)}
+    .support-cta svg{width:22px;height:22px;fill:currentColor;flex:none}
+    .footer{text-align:center;color:#8794a5;font-size:11px;margin-top:25px}
+    .whatsapp{
+      position:fixed;left:17px;bottom:17px;width:53px;height:53px;border-radius:50%;
+      background:#20bd66;color:#fff;display:grid;place-items:center;
+      box-shadow:0 7px 22px rgba(32,189,102,.28);z-index:5;text-decoration:none;
+    }
+    .whatsapp svg{width:29px;height:29px;fill:currentColor}
+    .toast{
+      position:fixed;left:50%;bottom:82px;transform:translateX(-50%);
+      width:max-content;max-width:calc(100% - 30px);padding:10px 14px;
+      background:#142238;color:#fff;border-radius:12px;font-size:12px;
+      text-align:center;display:none;z-index:10;box-shadow:var(--shadow)
+    }
+    .toast.show{display:block}
+    body.dark{
+      color-scheme:dark;--page:#111b2b;--surface:#1b2a40;--ink:#f1f6fc;
+      --muted:#a6b5c9;--line:#2b3d55;--blue:#55adff;--blue-soft:#233e5d;
+      --shadow:0 8px 22px rgba(0,0,0,.15);
+    }
+    body.dark .brand-logo{background:#fff}
+    body.dark .install{background:#203c59;color:#a9d7ff;border-color:#3d6286}
+    body.dark .theme-toggle{border:0;background:transparent;color:var(--muted)}
+    @media(min-width:760px){
+      body{display:flex;align-items:center;justify-content:center;padding:36px 24px;min-height:100vh}
+      .wrap{width:min(100%,900px)}
+      .hero{
+        min-height:112px;padding:20px 30px;text-align:right;
+        display:grid;grid-template-columns:76px minmax(0,1fr);
+        grid-template-rows:auto auto;column-gap:17px;justify-content:start;
+        align-items:center;border-radius:22px;
+      }
+      .brand-logo{grid-column:1;grid-row:1/3;width:70px;height:70px;margin:0;border-radius:17px}
+      .brand-title{grid-column:2;grid-row:1;align-self:end;font-size:23px;margin:0}
+      .brand-subtitle{grid-column:2;grid-row:2;align-self:start;font-size:12px}
+      .theme-toggle{top:16px;left:17px}
+      .links{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+      .portal{
+        min-height:220px;display:flex;flex-direction:column;align-items:flex-start;
+        justify-content:flex-start;gap:0;padding:22px 20px;border-radius:22px;
+      }
+      .portal-icon{width:52px;height:52px;border-radius:16px;margin-bottom:17px}
+      .portal-copy{width:100%;text-align:right}
+      .portal-title{font-size:18px;line-height:1.6}
+      .portal-desc{font-size:12px;line-height:1.8}
+      .arrow{margin-top:auto;align-self:flex-start;padding-top:18px}
+      .support-cta{max-width:320px;margin:20px auto 0}
+      .actions{margin-top:16px}
+      .footer{margin-top:20px}
+    }
+    @media(min-width:1100px){
+      .wrap{width:min(100%,980px)}
+      .links{gap:18px}
+      .portal{min-height:230px;padding:25px 23px}
+      .portal-title{font-size:19px}
+      .portal-desc{font-size:13px}
+    }
+    @media(max-width:759px){
+      .wrap{width:min(100%,560px)}
+      .hero{margin-top:0}
+    }
+    @media(max-width:380px){
+      .hero{min-height:195px;padding-top:21px}
+      .brand-logo{width:82px;height:82px}
+      .portal{grid-template-columns:42px minmax(0,1fr) 20px;gap:10px;padding:11px 12px}
+      .portal-title{font-size:15px}
+      .portal-desc{font-size:10.5px}
+    }
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="تفعيل الوضع الليلي" title="تغيير المظهر">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.7 8.7 0 1 0 20.5 14.2Z"/></svg>
+      </button>
+      <img class="brand-logo" src="./icons/icon-512.png" alt="شعار كونكت واي فاي">
+      <h1 class="brand-title">كونكت واي فاي</h1>
+      <p class="brand-subtitle">بوابة التحكم والخدمات الخاصة بالشبكة</p>
+    </header>
+
+    <nav class="links" aria-label="مناطق الدخول">
+      <a class="portal" href="http://136.244.112.67/users/" target="_blank" rel="noopener noreferrer">
+        <span class="portal-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.2"/><path d="M5.5 20v-1.3a6.5 6.5 0 0 1 13 0V20"/></svg></span>
+        <span class="portal-copy"><span class="portal-title">منطقة العميل</span><span class="portal-desc">متابعة الاشتراكات والرصيد والباقات</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></span>
+      </a>
+
+      <a class="portal" href="http://136.244.112.67/agent/" target="_blank" rel="noopener noreferrer">
+        <span class="portal-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="7.5" r="3"/><path d="M3.5 19v-1a5.5 5.5 0 0 1 11 0v1M16 8a2.7 2.7 0 1 0 0-5.4M17 14a4.8 4.8 0 0 1 3.5 4.6V19"/></svg></span>
+        <span class="portal-copy"><span class="portal-title">منطقة الموزعين</span><span class="portal-desc">إدارة المنظومة والعملاء التابعين</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></span>
+      </a>
+
+      <a class="portal" href="http://136.244.112.67/admin/" target="_blank" rel="noopener noreferrer">
+        <span class="portal-icon"><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="13" rx="1.8"/><path d="M8 21h8m-4-4v4"/></svg></span>
+        <span class="portal-copy"><span class="portal-title">منطقة المدير</span><span class="portal-desc">لوحة التحكم الكاملة للشبكة</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></span>
+      </a>
+    </nav>
+
+  <a class="support-cta" href="https://wa.me/201064225132?text=%D8%A3%D9%87%D9%84%D8%A7%20%D9%83%D9%88%D9%86%D9%83%D8%AA%D8%8C%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D8%B9%D9%84%D9%89%20%D8%A8%D8%A7%D9%82%D8%AA%D9%8A%20%D8%B9%D9%84%D9%89%20%D8%B1%D9%82%D9%85%3A%20" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.02 3C8.86 3 3.04 8.8 3.04 15.94c0 2.28.6 4.5 1.74 6.46L3 29l6.78-1.77a13 13 0 0 0 6.23 1.58h.01c7.15 0 12.97-5.81 12.98-12.96A12.9 12.9 0 0 0 16.02 3Zm0 23.6h-.01a10.8 10.8 0 0 1-5.5-1.5l-.4-.23-4.02 1.05 1.07-3.92-.26-.4a10.72 10.72 0 0 1-1.65-5.66c0-5.93 4.83-10.76 10.78-10.76 2.88 0 5.58 1.12 7.61 3.15a10.68 10.68 0 0 1 3.15 7.6c0 5.94-4.84 10.77-10.77 10.77Zm5.91-8.06c-.32-.16-1.9-.94-2.2-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.27-.19.21-.38.24-.7.08-.32-.16-1.36-.5-2.6-1.6-.96-.85-1.61-1.9-1.8-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.68s1.16 3.1 1.32 3.31c.16.21 2.28 3.48 5.52 4.88.77.33 1.37.53 1.84.68.77.24 1.47.21 2.02.13.62-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.61-.37Z"/></svg>
+    تواصل مع الدعم الفني مباشرة
+  </a>
+
+    <div class="actions">
+      <button class="install" id="installBtn" type="button">＋ تثبيت التطبيق</button>
+    </div>
+    <footer class="footer">© <span id="year"></span> كونكت واي فاي — اتصال أسهل وإدارة أبسط</footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    themeToggle.addEventListener('click', () => {
+      const dark = document.body.classList.toggle('dark');
+      themeToggle.setAttribute('aria-label', dark ? 'تفعيل الوضع النهاري' : 'تفعيل الوضع الليلي');
+      themeIcon.innerHTML = dark
+        ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>'
+        : '<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.7 8.7 0 1 0 20.5 14.2Z"/>';
+    });
+
+    const installBtn = document.getElementById('installBtn');
+    const toast = document.getElementById('toast');
+    let installPrompt = null;
+    function showToast(message) {
+      toast.textContent = message; toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 6000);
+    }
+    window.addEventListener('beforeinstallprompt', event => {
+      event.preventDefault(); installPrompt = event;
+    });
+    installBtn.addEventListener('click', async () => {
+      if (installPrompt) {
+        installPrompt.prompt();
+        await installPrompt.userChoice;
+        installPrompt = null;
+      } else if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+        showToast('على آيفون: اضغط مشاركة في Safari ثم «إضافة إلى الشاشة الرئيسية».');
+      } else if (/android/i.test(navigator.userAgent)) {
+        showToast('من قائمة Chrome ⋮ اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».');
+      } else {
+        showToast('من قائمة Chrome أو Edge اختر «تثبيت كونكت واي فاي».');
+      }
+    });
+    window.addEventListener('appinstalled', () => showToast('تم تثبيت كونكت واي فاي على جهازك.'));
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
+</body>
+</html>
