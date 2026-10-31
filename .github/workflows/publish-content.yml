@@ -1,0 +1,119 @@
+name: Publish Connect WiFi content
+
+on:
+  workflow_dispatch:
+    inputs:
+      content_type:
+        description: What do you want to publish?
+        type: choice
+        required: true
+        options:
+          - notification
+          - offer
+      title:
+        description: Title
+        type: string
+        required: true
+      message:
+        description: Message or offer details
+        type: string
+        required: true
+      category:
+        description: Notification type (news, alert, maintenance)
+        type: choice
+        required: false
+        default: news
+        options:
+          - news
+          - alert
+          - maintenance
+      image_url:
+        description: Optional full image URL (offers only)
+        type: string
+        required: false
+      action_url:
+        description: Optional details URL (offers only)
+        type: string
+        required: false
+      end_date:
+        description: Optional offer end date (YYYY-MM-DD)
+        type: string
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: connect-wifi-content-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Append content safely
+        env:
+          CONTENT_TYPE: ${{ inputs.content_type }}
+          TITLE: ${{ inputs.title }}
+          MESSAGE: ${{ inputs.message }}
+          CATEGORY: ${{ inputs.category }}
+          IMAGE_URL: ${{ inputs.image_url }}
+          ACTION_URL: ${{ inputs.action_url }}
+          END_DATE: ${{ inputs.end_date }}
+        run: |
+          python3 - <<'PY'
+          import json, os, uuid
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          kind = os.environ["CONTENT_TYPE"]
+          title = os.environ["TITLE"].strip()
+          message = os.environ["MESSAGE"].strip()
+          if not title or not message:
+              raise SystemExit("Title and message are required")
+
+          item = {
+              "id": str(uuid.uuid4()),
+              "title": title,
+              "message": message,
+              "date": datetime.now(timezone.utc).isoformat(),
+          }
+          if kind == "notification":
+              item["type"] = os.environ.get("CATEGORY", "news")
+              path = Path("notifications.json")
+          elif kind == "offer":
+              image = os.environ.get("IMAGE_URL", "").strip()
+              url = os.environ.get("ACTION_URL", "").strip()
+              end_date = os.environ.get("END_DATE", "").strip()
+              if image:
+                  item["image"] = image
+              if url:
+                  item["url"] = url
+              if end_date:
+                  datetime.strptime(end_date, "%Y-%m-%d")
+                  item["endDate"] = end_date
+              path = Path("offers.json")
+          else:
+              raise SystemExit("Unsupported content type")
+
+          data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"items": []}
+          items = data.get("items", [])
+          items.insert(0, item)
+          data["items"] = items[:100]
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add notifications.json offers.json
+          if git diff --cached --quiet; then
+            echo "No content changes to publish."
+            exit 0
+          fi
+          git commit -m "Publish Connect WiFi content"
+          git push
