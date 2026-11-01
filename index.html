@@ -1,0 +1,1507 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eff7ff">
+<meta name="description" content="تطبيق كونكت واي فاي لإدارة حسابك وخدمات الشبكة والدعم الفني.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>كونكت واي فاي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html{min-height:100%;scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:"Cairo",Tahoma,sans-serif;color:var(--text);background:var(--bg);padding-bottom:calc(22px + env(safe-area-inset-bottom));transition:background .25s,color .25s}
+:root{--bg:#eff7ff;--panel:#fff;--text:#142846;--muted:#687b94;--line:#dce8f2;--accent:#087fc7;--accent2:#39bce8;--support:#119b66;--shadow:0 8px 25px rgba(22,75,119,.08)}
+body[data-theme="sky"]{--bg:#eaf6ff;--panel:rgba(255,255,255,.94);--text:#102b52;--muted:#607b9e;--line:#cfe6f4;--accent:#0789d4;--accent2:#42c9f2;background:linear-gradient(160deg,#dff2ff,#f7fbff 55%,#e8f5ff)}
+body[data-theme="neon"]{--bg:#061326;--panel:rgba(7,25,48,.94);--text:#f3f9ff;--muted:#9db7d2;--line:rgba(40,180,255,.28);--accent:#00c8ff;--accent2:#7a64ff;--support:#08c98b;background:radial-gradient(ellipse at 50% 0%,#073d69,transparent 45%),#041022}
+body[data-theme="waves"]{--bg:#090e35;--panel:rgba(20,25,75,.94);--text:#fff;--muted:#c1c5e9;--line:rgba(130,115,255,.3);--accent:#ff5fc8;--accent2:#32d9ff;--support:#16c98b;background:radial-gradient(ellipse at 10% 80%,rgba(239,52,180,.22),transparent 38%),#080d31}
+body[data-theme="minimal"]{--bg:#f4f6fa;--panel:#fff;--text:#192b43;--muted:#718096;--line:#e4eaf1;--accent:#1769aa;--accent2:#36a8cf;--support:#16875e;background:#f4f6fa}
+body[data-theme="desert"]{--bg:#f9efe0;--panel:rgba(255,250,241,.96);--text:#422d21;--muted:#876b53;--line:rgba(133,83,43,.2);--accent:#c56a25;--accent2:#e7a34c;--support:#21865b;background:linear-gradient(160deg,#f5dfc1,#fff8ed 65%,#efd8b7)}
+body[data-theme="cyber"]{--bg:#10082d;--panel:rgba(28,15,67,.95);--text:#fff;--muted:#c6b8e8;--line:rgba(171,105,255,.32);--accent:#20d9ff;--accent2:#bd4cff;--support:#18d18b;background:radial-gradient(ellipse at 80% 0%,#42106a,transparent 40%),#0b0623}
+.bg-art{position:fixed;inset:0;z-index:-1;pointer-events:none;background-position:center top;background-size:cover;opacity:.19}
+body[data-theme="sky"] .bg-art{background-image:url("./backgrounds/sky.svg")}
+body[data-theme="neon"] .bg-art{background-image:url("./backgrounds/neon.svg");opacity:.35}
+body[data-theme="waves"] .bg-art{background-image:url("./backgrounds/waves.svg");opacity:.42}
+body[data-theme="minimal"] .bg-art{background-image:url("./backgrounds/minimal.svg");opacity:.28}
+body[data-theme="desert"] .bg-art{background-image:url("./backgrounds/desert.svg");opacity:.35}
+body[data-theme="cyber"] .bg-art{background-image:url("./backgrounds/cyber.svg");opacity:.4}
+.app{width:min(100% - 28px,540px);margin:0 auto;padding:calc(12px + env(safe-area-inset-top)) 0 10px}
+.topbar{height:54px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}.logo{width:43px;height:43px;object-fit:contain;background:#fff;border-radius:13px;border:1px solid var(--line);padding:2px}
+.brand-name{font-size:16px;font-weight:900;line-height:1.3}.brand-sub{font-size:9px;letter-spacing:.8px;color:var(--muted)}
+
+.top-actions{display:flex;align-items:center;gap:8px}
+.header-action svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.header-action{display:grid;place-items:center}
+.header-action:active{transform:scale(.94)}
+@media(max-width:420px){.top-actions{gap:6px}.header-action,.top-actions .round-btn{width:38px;height:38px;min-width:38px}}
+.top-actions{display:flex;gap:7px}.round-btn{width:38px;height:38px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:var(--text);display:grid;place-items:center;font-size:17px;cursor:pointer}
+/* V23: compact five-item navigation — all shortcuts visible without horizontal scrolling */
+.quick-nav{position:sticky;top:6px;z-index:15;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin:9px 0 14px;padding:6px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 5px 18px rgba(22,75,119,.06)}
+.quick-nav a{min-width:0;min-height:55px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:5px 1px;border-radius:11px;text-decoration:none;color:var(--text);background:transparent;border:1px solid transparent;font-size:clamp(7px,2.05vw,9px);font-weight:800;line-height:1.25;white-space:nowrap;text-align:center;transition:background .2s,border-color .2s,transform .2s}
+.quick-nav a:hover,.quick-nav a:focus-visible{background:color-mix(in srgb,var(--accent) 8%,var(--panel));border-color:color-mix(in srgb,var(--accent) 18%,var(--line));outline:none}
+.quick-nav a:active{transform:scale(.95)}.quick-nav .quick-icon{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:color-mix(in srgb,var(--accent) 10%,var(--panel));color:var(--accent)}
+.quick-nav .quick-icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
+#services,#notifications,#offers,#help-center,#support{scroll-margin-top:82px}
+@media(min-width:700px){.quick-nav{margin:10px 0 18px;gap:8px;padding:7px}.quick-nav a{min-height:58px;font-size:11px;gap:5px}.quick-nav .quick-icon{width:27px;height:27px}}
+@media(min-width:700px){.quick-nav{margin:10px 0 18px;justify-content:center}.quick-nav a{font-size:11px;padding:9px 14px}}
+.hero{position:relative;margin:17px 0 19px;padding:23px 19px 21px;border-radius:23px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+.hero:after{content:"";position:absolute;width:155px;height:155px;border-radius:50%;border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);left:-64px;top:-90px;box-shadow:0 0 0 17px color-mix(in srgb,var(--accent) 5%,transparent),0 0 0 36px color-mix(in srgb,var(--accent) 3%,transparent)}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-size:10px;font-weight:800}.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent2) 14%,transparent)}
+h1{font-size:clamp(26px,7vw,34px);font-weight:900;line-height:1.45;margin:9px 0 4px;letter-spacing:-.4px}
+h1 span{color:var(--accent)}.hero p{font-size:11px;line-height:1.9;color:var(--muted);margin:0;max-width:340px}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:0 2px 10px}.section-title h2{font-size:14px;font-weight:900;margin:0}.section-title span{font-size:9px;color:var(--muted)}
+.services{display:grid;grid-template-columns:1fr;gap:10px}
+.service{min-height:90px;display:flex;align-items:center;gap:13px;padding:13px 14px;border-radius:18px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);text-decoration:none;color:var(--text);transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
+.service:active{transform:scale(.985)}.service:hover{border-color:var(--accent)}
+.service-icon{width:53px;height:53px;flex:none;border-radius:16px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,var(--panel));color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 17%,transparent)}
+.service-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.service-copy{flex:1;min-width:0}.service h3{font-size:15px;font-weight:900;margin:0 0 2px;line-height:1.55}.service p{font-size:10px;line-height:1.7;color:var(--muted);margin:0}
+.go{width:34px;height:34px;flex:none;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 9%,var(--panel));color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 18%,var(--line));transition:transform .22s,background .22s,border-color .22s}.go svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.service:hover .go{transform:translateX(-3px);background:color-mix(in srgb,var(--accent) 16%,var(--panel));border-color:var(--accent)}.service:active .go{transform:scale(.92)}
+.service.agent .service-icon{--accent:#8265d8;color:#8265d8;background:color-mix(in srgb,#8265d8 12%,var(--panel))}
+.service.admin .service-icon{--accent:#e46b48;color:#e46b48;background:color-mix(in srgb,#e46b48 12%,var(--panel))}
+.support{margin-top:15px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border-radius:17px;background:color-mix(in srgb,var(--support) 9%,var(--panel));border:1px solid color-mix(in srgb,var(--support) 25%,var(--line))}
+.support-copy{display:flex;align-items:center;gap:9px;min-width:0}.wa{width:39px;height:39px;flex:none;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--support) 17%,var(--panel));color:var(--support);font-size:20px}
+.support h3{font-size:12px;margin:0;font-weight:900}.support p{font-size:9px;margin:1px 0 0;color:var(--muted)}
+.support-link{padding:9px 11px;border-radius:11px;background:var(--support);color:#fff;text-decoration:none;font-size:10px;font-weight:900;white-space:nowrap}
+.tools{display:flex;justify-content:center;gap:9px;margin:13px 0 0}.tool-btn{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:12px;padding:9px 12px;font:700 10px "Cairo",sans-serif;cursor:pointer}
+.tool-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.footer{text-align:center;font-size:9px;color:var(--muted);padding:17px 0 5px}
+.sheet-backdrop{position:fixed;inset:0;background:rgba(3,14,30,.48);z-index:20;opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet-backdrop.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:21;bottom:0;left:0;right:0;max-height:min(78vh,680px);overflow:auto;padding:12px 18px calc(20px + env(safe-area-inset-bottom));background:var(--panel);color:var(--text);border-radius:24px 24px 0 0;border:1px solid var(--line);box-shadow:0 -12px 45px rgba(0,0,0,.18);transform:translateY(105%);transition:transform .3s ease}
+.sheet.open{transform:translateY(0)}.handle{width:42px;height:4px;border-radius:5px;background:var(--muted);opacity:.35;margin:0 auto 14px}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.sheet-head h2{font-size:16px;margin:0}.close{border:0;background:transparent;color:var(--muted);font-size:24px}
+.theme-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.theme-option{border:2px solid var(--line);border-radius:13px;padding:6px;background:var(--panel);color:var(--text);text-align:right;cursor:pointer;min-width:0}
+.theme-option[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 12%,transparent)}
+.swatch{height:65px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:6px}
+.theme-option[data-theme-choice="sky"] .swatch{background-image:url("./backgrounds/sky.svg")}
+.theme-option[data-theme-choice="neon"] .swatch{background-image:url("./backgrounds/neon.svg")}
+.theme-option[data-theme-choice="waves"] .swatch{background-image:url("./backgrounds/waves.svg")}
+.theme-option[data-theme-choice="minimal"] .swatch{background-image:url("./backgrounds/minimal.svg")}
+.theme-option[data-theme-choice="desert"] .swatch{background-image:url("./backgrounds/desert.svg")}
+.theme-option[data-theme-choice="cyber"] .swatch{background-image:url("./backgrounds/cyber.svg")}
+.theme-option strong{font-size:10px;display:block}.theme-option small{font-size:8px;color:var(--muted)}
+.toast{position:fixed;z-index:30;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#15243b;color:#fff;border-radius:10px;padding:11px 15px;font-size:11px;transition:.25s;max-width:calc(100% - 28px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* V17: animated Arabic display headline + responsive support CTA */
+.hero-title{
+ font-family:"Alexandria","Cairo",sans-serif;
+ font-size:clamp(31px,8vw,43px);
+ font-weight:400;
+ line-height:1.35;
+ letter-spacing:.1px;
+ margin:8px 0 1px;
+ color:var(--text);
+ text-shadow:0 3px 16px color-mix(in srgb,var(--accent) 14%,transparent);
+}
+.type-line{
+ font-family:"Tajawal","Cairo",sans-serif;
+ font-weight:800;
+ min-height:42px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:4px;
+ direction:rtl;
+ color:var(--accent);
+ font-size:clamp(23px,6vw,31px);
+ line-height:1.55;
+ margin:0 0 7px;
+}
+.type-cursor{
+ display:inline-block;
+ width:2px;
+ height:1.05em;
+ border-radius:2px;
+ background:var(--accent2);
+ box-shadow:0 0 9px var(--accent2);
+ animation:cursorBlink .75s steps(2,start) infinite;
+}
+@keyframes cursorBlink{to{visibility:hidden}}
+.support-link{
+ position:relative;
+ isolation:isolate;
+ transform-origin:center;
+ animation:supportBounce 2.8s ease-in-out infinite;
+ box-shadow:0 7px 18px color-mix(in srgb,var(--support) 24%,transparent);
+}
+.support-link:before{
+ content:"";
+ position:absolute;
+ inset:-4px;
+ z-index:-1;
+ border:1px solid color-mix(in srgb,var(--support) 42%,transparent);
+ border-radius:14px;
+ opacity:0;
+ animation:supportRipple 2.8s ease-out infinite;
+}
+.support-link:active{transform:scale(.94);animation:none}
+.support-link:hover{animation-play-state:paused;filter:brightness(1.07)}
+@keyframes supportBounce{
+ 0%,72%,100%{transform:translateY(0) scale(1)}
+ 78%{transform:translateY(-4px) scale(1.025)}
+ 84%{transform:translateY(0) scale(.99)}
+ 90%{transform:translateY(-2px) scale(1.01)}
+}
+@keyframes supportRipple{
+ 0%,65%{transform:scale(.96);opacity:0}
+ 73%{opacity:.55}
+ 100%{transform:scale(1.16);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+ .support-link,.support-link:before,.type-cursor{animation:none!important}
+}
+
+
+/* V19: customer announcements and current offers */
+.content-hub{display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0 2px}
+.content-panel{min-width:0;padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}
+.content-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+.content-heading{display:flex;align-items:center;gap:8px;min-width:0}
+.content-symbol{width:34px;height:34px;flex:none;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 11%,var(--panel));color:var(--accent)}
+.content-symbol svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.content-heading h2{font-size:13px;font-weight:900;margin:0}
+.content-heading small{display:block;color:var(--muted);font-size:9px;margin-top:1px}
+.content-more{border:0;background:transparent;color:var(--accent);font:800 10px "Cairo",sans-serif;white-space:nowrap;cursor:pointer;padding:6px}
+.content-list{display:grid;gap:8px}
+.content-item{padding:10px 11px;border-radius:13px;background:color-mix(in srgb,var(--accent) 4%,var(--panel));border:1px solid color-mix(in srgb,var(--line) 80%,transparent);min-width:0}
+.content-item-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.content-item h3{font-size:11px;line-height:1.6;margin:0;font-weight:900;color:var(--text)}
+.content-date{font-size:8px;color:var(--muted);white-space:nowrap}
+.content-item p{font-size:10px;line-height:1.8;color:var(--muted);margin:0;overflow-wrap:anywhere}
+.content-tag{display:inline-flex;align-items:center;padding:3px 7px;border-radius:20px;font-size:8px;font-weight:800;background:color-mix(in srgb,var(--accent) 10%,var(--panel));color:var(--accent);margin-top:6px}
+.content-tag.alert{color:#b65a21;background:#fff0e4}.content-tag.maintenance{color:#8265d8;background:#f0ebff}
+.content-empty{padding:15px 9px;text-align:center;border:1px dashed var(--line);border-radius:13px;color:var(--muted);font-size:10px;line-height:1.8}
+.offer-item img{display:block;width:100%;max-height:135px;object-fit:cover;border-radius:10px;margin:0 0 8px;background:var(--line)}
+.offer-action{display:inline-flex;margin-top:8px;padding:7px 10px;border-radius:9px;background:var(--accent);color:white;text-decoration:none;font-size:9px;font-weight:900}
+.content-status{font-size:8px;color:var(--muted);margin-top:8px;text-align:left}
+@media(min-width:700px){.content-hub{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}.content-panel{padding:15px}.content-item{padding:11px}}
+
+@media(min-width:700px){body{padding-bottom:30px}.app{width:min(100% - 48px,760px);padding-top:25px}.hero{padding:35px 32px;margin:24px 0}.hero p{font-size:13px}.services{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.service{min-height:175px;align-items:flex-start;flex-direction:column;padding:18px}.service-icon{width:55px;height:55px}.service h3{font-size:16px}.service p{font-size:11px}.go{position:absolute;left:15px;bottom:15px}.support{padding:15px 18px}.sheet{width:min(100%,620px);left:50%;right:auto;transform:translate(-50%,105%);border-radius:24px 24px 0 0}.sheet.open{transform:translate(-50%,0)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* V21: customer help center */
+.help-center{margin-top:18px}
+.help-groups{display:grid;grid-template-columns:1fr;gap:12px}
+.help-group{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:var(--shadow);min-width:0}
+.help-group-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.help-group-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:color-mix(in srgb,var(--accent) 12%,var(--panel));color:var(--accent);font-size:17px}
+.help-group-head h3{font-size:13px;margin:0;font-weight:900}.help-group-head p{font-size:9px;color:var(--muted);margin:1px 0 0}
+.help-list{display:grid;grid-template-columns:1fr;gap:8px}
+.help-link{display:flex;align-items:center;gap:10px;padding:8px;border:1px solid var(--line);border-radius:13px;color:var(--text);text-decoration:none;min-width:0;transition:border-color .2s,transform .2s;background:color-mix(in srgb,var(--panel) 94%,var(--bg))}
+.help-link:hover{border-color:var(--accent)}.help-link:active{transform:scale(.99)}
+.help-thumb{width:82px;height:54px;flex:none;object-fit:cover;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,var(--panel))}
+.help-copy{flex:1;min-width:0}.help-copy strong{display:block;font-size:10px;line-height:1.6}.help-copy small{display:block;color:var(--muted);font-size:8px;margin-top:2px}
+.help-play{width:27px;height:27px;flex:none;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,#e53935 12%,var(--panel));color:#e53935;font-size:11px}
+.help-download{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:9px;padding:10px;border-radius:12px;background:color-mix(in srgb,var(--support) 10%,var(--panel));border:1px solid color-mix(in srgb,var(--support) 25%,var(--line));color:var(--support);font-size:10px;font-weight:900;text-decoration:none}
+@media(min-width:700px){.help-groups{grid-template-columns:repeat(2,minmax(0,1fr))}.help-group:first-child{grid-column:1/-1}.help-group:first-child .help-list{grid-template-columns:repeat(2,minmax(0,1fr))}.help-group:first-child .help-link:last-child{grid-column:1/-1}}
+
+
+/* V26: quiet update feedback and ambient audio control */
+.header-action.sound-on{color:var(--accent);background:color-mix(in srgb,var(--accent) 13%,var(--panel));position:relative}
+.header-action.sound-off{color:#dc2626;position:relative}
+.header-action.sound-off::after{content:"";position:absolute;width:21px;height:2.5px;background:#dc2626;border-radius:3px;transform:rotate(-45deg);box-shadow:0 0 0 1px var(--panel);pointer-events:none}
+.sound-indicator{position:absolute;width:6px;height:6px;border-radius:50%;background:#16a36a;right:4px;top:4px;box-shadow:0 0 0 2px var(--panel)}
+.header-action.is-updating{position:relative;opacity:.9}.header-action.is-updating svg{animation:none!important;opacity:.18}.header-action.is-updating::after{content:"";position:absolute;width:17px;height:17px;border:2px solid currentColor;border-left-color:transparent;border-radius:50%;animation:connect-spin .8s linear infinite}
+@keyframes connect-spin{to{transform:rotate(360deg)}}
+.header-action:disabled{opacity:.8;cursor:wait}
+.update-notice{position:fixed;z-index:100;top:14px;left:50%;transform:translate(-50%,-18px);width:min(92vw,430px);display:flex;align-items:center;gap:11px;padding:13px 16px;border:1px solid var(--line);border-radius:17px;background:var(--panel);color:var(--text);box-shadow:0 12px 34px #10294b25;font-size:13px;font-weight:800;line-height:1.7;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.update-notice.on{opacity:1;transform:translate(-50%,0)}
+.update-notice-icon{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 13%,var(--panel));color:var(--accent)}
+.update-notice.success .update-notice-icon{background:#dcfce7;color:#15803d}
+.update-notice.error .update-notice-icon{background:#fee2e2;color:#b91c1c}
+.update-notice.loading .update-notice-icon:before{content:"";width:15px;height:15px;border:2px solid currentColor;border-left-color:transparent;border-radius:50%;animation:connect-spin .8s linear infinite}
+.update-notice.success .update-notice-icon:before{content:"✓";font-size:19px}
+.update-notice.error .update-notice-icon:before{content:"!";font-size:18px}
+@media(max-width:420px){.top-actions{gap:5px}.header-action,.top-actions .round-btn{width:36px;height:36px;min-width:36px}}
+
+
+/* V32: refined premium hero identity */
+.hero-premium{
+ position:relative; isolation:isolate; display:flex; flex-direction:column; align-items:flex-start;
+ min-height:0; padding:25px 25px 23px; margin:17px 0 19px; text-align:right;
+ background:linear-gradient(125deg,color-mix(in srgb,var(--panel) 96%,white),var(--panel));
+ border:1px solid color-mix(in srgb,var(--accent) 15%,var(--line));
+ border-radius:22px; box-shadow:0 12px 34px rgba(24,83,130,.075);
+}
+.hero-premium:after{width:190px;height:190px;left:auto;right:-115px;top:-120px;border-color:color-mix(in srgb,var(--accent) 13%,transparent);box-shadow:0 0 0 18px color-mix(in srgb,var(--accent) 3%,transparent),0 0 0 38px color-mix(in srgb,var(--accent) 2%,transparent);z-index:-1}
+.hero-brandline{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.hero-mark{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:color-mix(in srgb,var(--accent) 10%,var(--panel));color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 18%,var(--line))}
+.hero-mark svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.hero-premium .eyebrow{font-size:10px;letter-spacing:0}
+.hero-premium .hero-title{font-family:"Alexandria","Cairo",sans-serif;font-size:clamp(27px,5.2vw,36px);font-weight:650;line-height:1.35;letter-spacing:-1px;margin:0 0 1px;color:var(--text);text-shadow:none}
+.hero-premium .hero-title span{color:var(--accent);font-weight:750}
+.hero-premium .type-line{justify-content:flex-start;min-height:0;font-size:clamp(17px,3.5vw,23px);font-weight:750;line-height:1.5;margin:0 0 7px;gap:3px}
+.hero-premium .type-cursor{height:.9em;width:2px}
+.hero-premium p{font-size:11px;line-height:1.8;max-width:none;margin:0;color:var(--muted)}
+.hero-accent{position:absolute;right:0;top:22px;bottom:22px;width:3px;border-radius:4px;background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent2) 55%,var(--accent)));opacity:.8}
+@media(min-width:700px){.hero-premium{padding:27px 30px 25px;min-height:195px;justify-content:center}.hero-premium .hero-title{font-size:38px}.hero-premium .type-line{font-size:23px}.hero-premium p{font-size:12px}}
+@media(max-width:420px){.hero-premium{padding:21px 19px 19px;border-radius:19px}.hero-premium .hero-title{font-size:29px}.hero-premium .type-line{font-size:18px}.hero-mark{width:29px;height:29px}}
+/* V33: balanced hero typography and centered content rhythm */
+.hero-premium{align-items:center;text-align:center;padding:30px 28px 28px;gap:0;min-height:0}
+.hero-brandline{justify-content:center;flex-wrap:wrap;margin:0 0 13px;gap:9px}
+.hero-premium .eyebrow{font-size:10px;line-height:1.7}
+.hero-premium .hero-title{font-size:clamp(27px,4.4vw,34px);line-height:1.45;letter-spacing:-.45px;margin:0 0 5px;font-weight:650}
+.hero-premium .type-line{justify-content:center;min-height:0;font-size:clamp(17px,2.7vw,21px);line-height:1.65;margin:0 0 10px;gap:4px}
+.hero-premium p{font-size:12px;line-height:1.9;max-width:100%;margin:0 auto;letter-spacing:0}
+.hero-accent{right:50%;top:auto;bottom:0;transform:translateX(50%);width:76px;height:3px}
+.hero-premium:after{right:-110px;left:auto;top:-130px}
+@media(min-width:700px){.hero-premium{padding:29px 38px 30px;min-height:190px}.hero-premium .hero-title{font-size:35px}.hero-premium .type-line{font-size:21px}.hero-premium p{font-size:12px}}
+@media(max-width:420px){.hero-premium{padding:24px 17px 23px;gap:0}.hero-brandline{margin-bottom:10px}.hero-premium .hero-title{font-size:27px;margin-bottom:5px}.hero-premium .type-line{font-size:17px;margin-bottom:8px}.hero-premium p{font-size:10px}.hero-accent{width:58px}}
+
+
+.update-notice.has-action{pointer-events:auto;flex-wrap:wrap;justify-content:flex-start}
+.update-notice.has-action #updateNoticeText{flex:1;min-width:150px}
+.apply-update{border:0;border-radius:10px;padding:9px 14px;background:var(--accent);color:#fff;font:inherit;font-weight:900;cursor:pointer;white-space:nowrap}
+.apply-update[hidden]{display:none}
+#refreshApp svg{width:18px;height:18px;stroke-width:2.2}
+#refreshApp{color:var(--text)}
+#refreshApp svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#refreshApp:not(.is-updating)::after{content:none}
+#refreshApp.is-updating svg{opacity:.25}
+
+/* V37: right-to-left alignment for the Connect WiFi brand title */
+.hero-premium .hero-title{
+ direction:rtl;
+ text-align:right;
+ align-self:stretch;
+ width:100%;
+ unicode-bidi:plaintext;
+}
+
+/* V38: restore prominent Connect WiFi hero title and enlarge desktop layout */
+@media(min-width:700px){
+ .app{width:min(100% - 56px,860px)}
+ .hero-premium{padding:34px 42px 32px;min-height:220px}
+ .hero-premium .hero-title{font-size:48px;line-height:1.4;font-weight:650;letter-spacing:-.7px;direction:rtl;text-align:right;align-self:stretch;width:100%}
+ .hero-premium .type-line{font-size:26px;line-height:1.6}
+ .hero-premium p{font-size:13px}
+ .hero-brandline{margin-bottom:15px}
+ .topbar{height:60px}
+ .brand-name{font-size:18px}
+ .brand-sub{font-size:10px}
+ .round-btn{width:44px;height:44px}
+ .quick-nav a{font-size:12px;min-height:62px}
+ .quick-nav .quick-icon{width:30px;height:30px}
+ .section-title h2{font-size:16px}
+ .section-title span{font-size:11px}
+ .service{min-height:190px;padding:20px}
+ .service h3{font-size:17px}
+ .service p{font-size:12px;line-height:1.9}
+}
+@media(max-width:699px){
+ .hero-premium .hero-title{direction:rtl;text-align:right;align-self:stretch;width:100%;font-size:clamp(30px,7vw,38px)}
+}
+
+/* V39: RTL alignment for hero eyebrow and supporting description */
+.hero-premium .hero-brandline{
+ direction:rtl;
+ justify-content:flex-start;
+ align-self:stretch;
+ width:100%;
+ text-align:right;
+}
+.hero-premium .eyebrow{
+ direction:rtl;
+ text-align:right;
+}
+.hero-premium > p{
+ direction:rtl;
+ text-align:right;
+ align-self:stretch;
+ width:100%;
+ margin-right:0;
+ margin-left:0;
+}
+
+/* V40: anchor the eyebrow line to the right edge in RTL */
+.hero-premium .hero-brandline{direction:rtl;justify-content:flex-start;text-align:right}
+.hero-premium .eyebrow{direction:rtl;text-align:right;unicode-bidi:plaintext}
+
+.install-guide{display:flex;align-items:center;gap:12px;margin:12px 0 14px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--accent) 25%,var(--line));border-radius:17px;background:var(--panel);box-shadow:var(--shadow);direction:rtl;text-align:right}
+.install-guide[hidden]{display:none}.install-guide-logo{width:48px;height:48px;flex:none;object-fit:contain;border-radius:13px;background:#fff;border:1px solid var(--line);padding:3px}
+.install-guide-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}.install-guide-copy strong{font-size:13px;font-weight:900;color:var(--text);line-height:1.5}.install-guide-copy span{font-size:11px;color:var(--muted);line-height:1.65}
+.install-guide-action{flex:none;border:0;border-radius:11px;background:var(--accent);color:#fff;padding:10px 13px;font:inherit;font-size:11px;font-weight:900;cursor:pointer}
+.install-guide.browser-warning{border-color:#f0b35b;background:color-mix(in srgb,#fff7e8 85%,var(--panel))}
+@media(max-width:480px){.install-guide{gap:9px;padding:10px}.install-guide-logo{width:42px;height:42px}.install-guide-copy strong{font-size:12px}.install-guide-copy span{font-size:10px}.install-guide-action{padding:9px 10px;font-size:10px}}
+
+.install-success{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;background:rgba(9,28,52,.48);backdrop-filter:blur(5px)}
+.install-success[hidden]{display:none}
+.install-success-card{width:min(100%,390px);padding:25px 22px;border-radius:24px;background:var(--panel);border:1px solid var(--line);box-shadow:0 22px 70px rgba(8,35,65,.24);text-align:center;direction:rtl}
+.install-success-logo{width:76px;height:76px;object-fit:contain;padding:5px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.install-success-card h2{font-size:19px;line-height:1.6;margin:14px 0 7px;color:var(--text)}
+.install-success-card p{font-size:13px;line-height:1.9;color:var(--muted);margin:0}
+.install-success-steps{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:17px 0;padding:12px;border-radius:14px;background:color-mix(in srgb,var(--accent) 8%,var(--panel));font-size:11px;font-weight:800;color:var(--text)}
+.install-success-steps span{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:white}
+.install-success-close{width:100%;border:0;border-radius:13px;padding:12px;background:var(--accent);color:#fff;font:inherit;font-weight:900;cursor:pointer}
+
+/* V44: animated Connect WiFi logo hero */
+.hero-logo-stage{position:relative;width:100%;display:flex;justify-content:center;align-items:center;min-height:174px;margin:2px 0 3px;perspective:700px}
+.hero-logo-stage:before{content:"";position:absolute;width:138px;height:16px;bottom:8px;border-radius:50%;background:color-mix(in srgb,var(--accent) 18%,transparent);filter:blur(10px);animation:logo-shadow 3.8s ease-in-out infinite}
+.hero-logo-animated{position:relative;z-index:1;width:clamp(118px,19vw,170px);height:auto;max-height:170px;object-fit:contain;filter:drop-shadow(0 9px 13px rgba(12,70,112,.13));transform-origin:50% 85%;animation:logo-pop-bounce 4.6s cubic-bezier(.22,.8,.25,1) infinite;cursor:pointer;transition:filter .25s}
+.hero-logo-animated:hover{filter:drop-shadow(0 14px 20px rgba(8,137,212,.27)) brightness(1.04)}
+.hero-logo-animated:active{transform:scale(.94)}
+@keyframes logo-pop-bounce{
+ 0%{opacity:0;transform:translateY(76px) scale(.68) rotate(-7deg)}
+ 9%{opacity:1;transform:translateY(-13px) scale(1.06) rotate(3deg)}
+ 15%{opacity:1;transform:translateY(5px) scale(.97) rotate(-1.5deg)}
+ 21%{opacity:1;transform:translateY(-5px) scale(1.02) rotate(1deg)}
+ 27%,66%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+ 75%{opacity:.9;transform:translateY(-9px) scale(1.02) rotate(0)}
+ 87%{opacity:0;transform:translateY(70px) scale(.72) rotate(5deg)}
+ 100%{opacity:0;transform:translateY(76px) scale(.68) rotate(5deg)}
+}
+@keyframes logo-shadow{0%,87%,100%{opacity:0;transform:scale(.55)}12%,66%{opacity:1;transform:scale(1)}}
+@media(max-width:699px){.hero-logo-stage{min-height:132px;margin:0}.hero-logo-animated{width:clamp(105px,32vw,132px);max-height:132px}}
+@media(prefers-reduced-motion:reduce){.hero-logo-animated,.hero-logo-stage:before{animation:none}.hero-logo-animated{opacity:1;transform:none}}
+
+/* V45: dedicated logo stage, isolated from the typewriter line */
+.hero-premium .hero-logo-stage{
+ position:relative;
+ display:grid;
+ place-items:center;
+ width:100%;
+ height:178px;
+ min-height:178px;
+ margin:2px 0 10px;
+ overflow:hidden;
+ background:transparent!important;
+ isolation:isolate;
+}
+.hero-premium .hero-logo-stage:before{
+ content:"";
+ position:absolute;
+ left:50%;
+ bottom:17px;
+ width:112px;
+ height:13px;
+ border-radius:50%;
+ background:radial-gradient(ellipse,rgba(17,83,130,.18),transparent 72%);
+ transform:translateX(-50%);
+ animation:heroLogoShadow 3.2s ease-in-out infinite;
+}
+.hero-premium .hero-logo-animated{
+ display:block;
+ position:relative;
+ z-index:1;
+ width:clamp(128px,20vw,166px);
+ height:clamp(128px,20vw,166px);
+ max-width:100%;
+ max-height:166px;
+ object-fit:contain;
+ background:transparent!important;
+ mix-blend-mode:multiply;
+ animation:heroLogoBounce 3.2s cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes heroLogoBounce{
+ 0%,100%{opacity:0;transform:translateY(48px) scale(.88)}
+ 12%{opacity:1;transform:translateY(0) scale(1)}
+ 23%{opacity:1;transform:translateY(-10px) scale(1.035)}
+ 34%{opacity:1;transform:translateY(0) scale(1)}
+ 72%{opacity:1;transform:translateY(0) scale(1)}
+ 88%{opacity:0;transform:translateY(-24px) scale(.94)}
+}
+@keyframes heroLogoShadow{
+ 0%,100%{opacity:0;transform:translateX(-50%) scale(.72)}
+ 18%,70%{opacity:1;transform:translateX(-50%) scale(1)}
+}
+.hero-premium .type-line{position:relative;z-index:2;min-height:1.7em;margin-top:0}
+@media(min-width:700px){.hero-premium .hero-logo-stage{height:190px;min-height:190px;margin:4px 0 12px}}
+@media(max-width:699px){.hero-premium .hero-logo-stage{height:148px;min-height:148px;margin:0 0 8px}.hero-premium .hero-logo-animated{width:clamp(116px,34vw,140px);height:140px}}
+@media(prefers-reduced-motion:reduce){
+ .hero-premium .hero-logo-animated,.hero-premium .hero-logo-stage:before{animation:none}
+ .hero-premium .hero-logo-animated{opacity:1;transform:none}
+}
+
+/* V46: dancing logo with persistent Arabic wordmark */
+.hero-premium .hero-logo-stage{height:205px;min-height:205px;gap:4px;align-content:center;overflow:hidden}
+.hero-premium .hero-logo-animated{
+ animation:heroLogoDance 2.4s ease-in-out infinite;
+}
+.hero-premium .hero-logo-wordmark{
+ position:relative;z-index:2;display:block;direction:rtl;text-align:center;
+ font-family:"Alexandria","Cairo",sans-serif;
+ font-size:clamp(20px,3.5vw,27px);font-weight:850;line-height:1.4;
+ color:var(--text);letter-spacing:-.4px;
+ animation:heroWordDance 2.4s ease-in-out infinite;
+}
+@keyframes heroLogoDance{
+ 0%,100%{transform:translateY(0) rotate(0deg) scale(1)}
+ 12%{transform:translateY(-9px) rotate(-5deg) scale(1.04)}
+ 25%{transform:translateY(0) rotate(5deg) scale(1)}
+ 38%{transform:translateY(-6px) rotate(-4deg) scale(1.03)}
+ 52%,78%{transform:translateY(0) rotate(0deg) scale(1)}
+ 88%{transform:translateY(-3px) rotate(3deg) scale(1.01)}
+}
+@keyframes heroWordDance{
+ 0%,100%{transform:translateY(0) scale(1)}
+ 12%,38%{transform:translateY(-2px) scale(1.025)}
+ 25%,52%,78%{transform:translateY(0) scale(1)}
+ 88%{transform:translateY(-1px) scale(1.01)}
+}
+@media(min-width:700px){.hero-premium .hero-logo-stage{height:225px;min-height:225px}.hero-premium .hero-logo-animated{width:150px;height:150px}}
+@media(max-width:699px){.hero-premium .hero-logo-stage{height:185px;min-height:185px}.hero-premium .hero-logo-animated{width:clamp(112px,30vw,130px);height:130px}.hero-premium .hero-logo-wordmark{font-size:21px}}
+@media(prefers-reduced-motion:reduce){
+ .hero-premium .hero-logo-animated,.hero-premium .hero-logo-wordmark{animation:none}
+}
+
+/* V48: customer-focused hero features and playful logo interaction */
+.hero-premium{padding-bottom:30px}
+.hero-premium .hero-feature-strip{
+ display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,34px);
+ width:min(100%,590px);margin:18px auto 0;padding:12px 14px;
+ border:1px solid color-mix(in srgb,var(--accent) 15%,var(--line));
+ border-radius:16px;background:color-mix(in srgb,var(--accent) 4%,var(--panel));
+}
+.hero-feature{display:flex;align-items:center;gap:7px;min-width:0;color:var(--text);font-size:11px;font-weight:800;white-space:nowrap}
+.hero-feature-icon{display:grid;place-items:center;width:29px;height:29px;flex:none;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,var(--panel));color:var(--accent)}
+.hero-feature-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hero-premium .hero-tap-feedback{min-height:18px;margin-top:9px;text-align:center;color:var(--muted);font-size:10px;font-weight:700;opacity:.85;transition:opacity .25s,transform .25s}
+.hero-premium .hero-tap-feedback.active{color:var(--accent);transform:translateY(-2px)}
+.hero-premium .hero-logo-stage{cursor:pointer;touch-action:manipulation}
+.hero-premium .hero-logo-stage.logo-tapped .hero-logo-animated{animation:heroLogoTap .72s cubic-bezier(.2,.8,.2,1) 1,heroLogoDance 2.4s ease-in-out infinite}
+.hero-premium .hero-logo-stage.logo-tapped .hero-logo-wordmark{animation:heroWordTap .72s ease-out 1,heroWordDance 2.4s ease-in-out infinite}
+@keyframes heroLogoTap{0%{transform:scale(1)}35%{transform:scale(1.18) rotate(-9deg)}70%{transform:scale(.94) rotate(7deg)}100%{transform:scale(1)}}
+@keyframes heroWordTap{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
+@media(max-width:699px){
+ .hero-premium .hero-feature-strip{gap:8px;padding:10px 7px;margin-top:13px}
+ .hero-feature{gap:4px;font-size:9px}
+ .hero-feature-icon{width:25px;height:25px}
+ .hero-premium .hero-tap-feedback{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-premium .hero-logo-stage.logo-tapped .hero-logo-animated,.hero-premium .hero-logo-stage.logo-tapped .hero-logo-wordmark{animation:none}
+}
+
+/* V49: six-second rocket fly-by carrying the greeting */
+.hero-premium .hero-tap-feedback{display:none!important}
+.rocket-message{
+ position:fixed;z-index:9999;top:34%;left:0;
+ display:flex;align-items:center;gap:12px;
+ direction:ltr;white-space:nowrap;pointer-events:none;
+ opacity:0;visibility:hidden;
+ filter:drop-shadow(0 8px 18px rgba(10,55,95,.16));
+}
+.rocket-message.is-flying{
+ visibility:visible;
+ animation:rocketFlyAcross 6s cubic-bezier(.22,.65,.25,1) forwards;
+}
+.rocket-message-text{
+ order:1;display:block;direction:rtl;text-align:center;
+ padding:13px 20px;border:1px solid rgba(0,145,220,.24);
+ border-radius:18px;background:rgba(255,255,255,.96);
+ color:#12345b;font-size:clamp(14px,2.3vw,20px);font-weight:900;
+ box-shadow:0 8px 28px rgba(10,75,125,.13);
+}
+.rocket-message-icon{
+ order:2;display:grid;place-items:center;flex:none;
+ width:58px;height:58px;border-radius:50%;
+ background:rgba(255,255,255,.92);border:1px solid rgba(0,145,220,.2);
+ font-size:36px;transform:rotate(-12deg);
+}
+@keyframes rocketFlyAcross{
+ 0%{transform:translateX(110vw) translateY(18px) scale(.72);opacity:0}
+ 8%{opacity:1}
+ 22%{transform:translateX(70vw) translateY(-10px) scale(1);opacity:1}
+ 48%{transform:translateX(28vw) translateY(8px) scale(1.02);opacity:1}
+ 78%{transform:translateX(-48vw) translateY(-8px) scale(.98);opacity:1}
+ 94%{opacity:1}
+ 100%{transform:translateX(-115vw) translateY(-18px) scale(.78);opacity:0}
+}
+@media(max-width:600px){
+ .rocket-message{top:31%;gap:8px}
+ .rocket-message-text{padding:11px 13px;border-radius:15px;font-size:13px}
+ .rocket-message-icon{width:46px;height:46px;font-size:29px}
+}
+@media(prefers-reduced-motion:reduce){
+ .rocket-message.is-flying{animation:none;opacity:1;visibility:visible;left:50%;top:35%;transform:translateX(-50%)}
+}
+
+/* V51: one large feature phrase sweeps around the logo at a time */
+.hero-premium .hero-logo-stage{overflow:visible!important;isolation:isolate}
+.hero-orbit-phrase{
+ position:absolute;z-index:5;left:50%;top:50%;
+ width:max-content;max-width:92%;
+ padding:9px 17px;border-radius:15px;
+ color:#078bd0;background:rgba(255,255,255,.94);
+ border:1px solid rgba(0,145,220,.18);
+ box-shadow:0 10px 26px rgba(10,65,110,.14);
+ font-size:clamp(19px,3.1vw,27px);font-weight:950;
+ line-height:1.45;text-align:center;direction:rtl;white-space:nowrap;
+ opacity:0;visibility:hidden;pointer-events:none;
+ transform-origin:center;
+}
+.hero-orbit-phrase.is-moving{visibility:visible;animation:phraseOrbitSweep 4.4s cubic-bezier(.22,.68,.25,1) both}
+@keyframes phraseOrbitSweep{
+ 0%{opacity:0;transform:translate(-50%,-50%) translate(145px,72px) rotate(28deg) rotateY(72deg) scale(.48);filter:blur(3px)}
+ 12%{opacity:1;transform:translate(-50%,-50%) translate(105px,20px) rotate(18deg) rotateY(28deg) scale(.78);filter:blur(0)}
+ 35%{opacity:1;transform:translate(-50%,-50%) translate(38px,-72px) rotate(-9deg) rotateY(0) scale(1.12)}
+ 55%{opacity:1;transform:translate(-50%,-50%) translate(-8px,-88px) rotate(-7deg) scale(1.15)}
+ 78%{opacity:1;transform:translate(-50%,-50%) translate(-100px,-18px) rotate(-20deg) rotateY(-25deg) scale(.9)}
+ 100%{opacity:0;transform:translate(-50%,-50%) translate(-150px,66px) rotate(-30deg) rotateY(-70deg) scale(.55);filter:blur(2px)}
+}
+@media(max-width:699px){
+ .hero-orbit-phrase{font-size:clamp(16px,4.4vw,21px);padding:7px 11px}
+ @keyframes phraseOrbitSweep{
+  0%{opacity:0;transform:translate(-50%,-50%) translate(100px,55px) rotate(26deg) rotateY(70deg) scale(.5);filter:blur(2px)}
+  12%{opacity:1;transform:translate(-50%,-50%) translate(70px,10px) rotate(16deg) scale(.78);filter:blur(0)}
+  35%{opacity:1;transform:translate(-50%,-50%) translate(25px,-58px) rotate(-9deg) scale(1.08)}
+  55%{opacity:1;transform:translate(-50%,-50%) translate(-4px,-69px) rotate(-7deg) scale(1.1)}
+  78%{opacity:1;transform:translate(-50%,-50%) translate(-68px,-12px) rotate(-18deg) scale(.9)}
+  100%{opacity:0;transform:translate(-50%,-50%) translate(-105px,52px) rotate(-28deg) scale(.55);filter:blur(2px)}
+ }
+}
+@media(prefers-reduced-motion:reduce){.hero-orbit-phrase{display:none}}
+
+/* V52: keep the animated phrase above the logo and fully legible */
+.hero-orbit-phrase{
+ z-index:6;
+ color:#078bd0;
+ background:rgba(255,255,255,.98);
+ text-shadow:none;
+ filter:none!important;
+}
+@keyframes phraseOrbitSweep{
+ 0%{opacity:0;transform:translate(-50%,-50%) translate(118px,-112px) rotate(24deg) scale(.72)}
+ 10%{opacity:1;transform:translate(-50%,-50%) translate(92px,-142px) rotate(16deg) scale(.92)}
+ 28%{opacity:1;transform:translate(-50%,-50%) translate(35px,-164px) rotate(7deg) scale(1.08)}
+ 48%{opacity:1;transform:translate(-50%,-50%) translate(-28px,-164px) rotate(-5deg) scale(1.12)}
+ 70%{opacity:1;transform:translate(-50%,-50%) translate(-92px,-140px) rotate(-15deg) scale(1)}
+ 90%{opacity:1;transform:translate(-50%,-50%) translate(-118px,-112px) rotate(-22deg) scale(.9)}
+ 100%{opacity:0;transform:translate(-50%,-50%) translate(-132px,-92px) rotate(-27deg) scale(.82)}
+}
+@media(max-width:699px){
+ @keyframes phraseOrbitSweep{
+  0%{opacity:0;transform:translate(-50%,-50%) translate(78px,-86px) rotate(23deg) scale(.7)}
+  10%{opacity:1;transform:translate(-50%,-50%) translate(60px,-108px) rotate(15deg) scale(.9)}
+  28%{opacity:1;transform:translate(-50%,-50%) translate(24px,-126px) rotate(7deg) scale(1.04)}
+  48%{opacity:1;transform:translate(-50%,-50%) translate(-20px,-126px) rotate(-5deg) scale(1.06)}
+  70%{opacity:1;transform:translate(-50%,-50%) translate(-60px,-108px) rotate(-15deg) scale(.98)}
+  90%{opacity:1;transform:translate(-50%,-50%) translate(-78px,-86px) rotate(-22deg) scale(.88)}
+  100%{opacity:0;transform:translate(-50%,-50%) translate(-86px,-70px) rotate(-27deg) scale(.8)}
+ }
+}
+
+/* V53: confine the orbiting phrase to the hero card, below the sticky navigation */
+.hero-premium{
+ position:relative;
+ overflow:hidden!important;
+ isolation:isolate;
+}
+.hero-premium .hero-logo-stage{overflow:visible!important}
+.hero-premium .hero-orbit-phrase{
+ z-index:4;
+ max-width:min(88%,420px);
+}
+.quick-nav{z-index:30}
+
+/* V54: protect the eyebrow from orbiting labels and restore the interaction hint */
+.hero-premium .hero-brandline{position:relative;z-index:7;margin-bottom:42px}
+.hero-premium .hero-logo-stage{z-index:2}
+.hero-premium .hero-orbit-phrase{z-index:5}
+.hero-premium .hero-tap-feedback{
+ display:block!important;
+ position:relative;z-index:3;
+ min-height:20px;margin-top:8px;
+ color:var(--muted);font-size:11px;font-weight:700;
+ text-align:center;opacity:.9;
+}
+@media(max-width:699px){
+ .hero-premium .hero-brandline{margin-bottom:34px}
+ .hero-premium .hero-tap-feedback{font-size:10px;margin-top:7px}
+}
+/* Rocket leads from the left; its message trails behind to the right */
+.rocket-message{direction:rtl}
+.rocket-message-icon{order:1;transform:rotate(45deg)}
+.rocket-message-text{order:2}
+@keyframes rocketFlyAcross{
+ 0%{transform:translateX(-115vw) translateY(18px) scale(.72);opacity:0}
+ 8%{opacity:1}
+ 22%{transform:translateX(-70vw) translateY(-10px) scale(1);opacity:1}
+ 48%{transform:translateX(-28vw) translateY(8px) scale(1.02);opacity:1}
+ 78%{transform:translateX(48vw) translateY(-8px) scale(.98);opacity:1}
+ 94%{opacity:1}
+ 100%{transform:translateX(115vw) translateY(-18px) scale(.78);opacity:0}
+}
+
+/* V55: distinct accent color for the logo interaction hint */
+.hero-premium .hero-tap-feedback{
+ color:#0796df!important;
+ font-weight:900!important;
+}
+.hero-premium .hero-tap-feedback:before{
+ content:"✦";
+ display:inline-block;
+ margin-left:6px;
+ color:#f2a928;
+ font-size:12px;
+ vertical-align:1px;
+}
+.hero-premium .hero-tap-feedback.active{
+ color:#e58a18!important;
+}
+
+/* V56: orbit card stays fully below the eyebrow line */
+.hero-premium .hero-brandline{position:relative;z-index:10;margin-bottom:50px}
+.hero-premium .hero-logo-stage{position:relative;z-index:2}
+.hero-premium .hero-orbit-phrase{z-index:6;top:50%;max-width:min(86%,390px)}
+@keyframes phraseOrbitSweep{
+ 0%{opacity:0;transform:translate(-50%,-50%) translate(118px,-42px) rotate(24deg) scale(.72)}
+ 10%{opacity:1;transform:translate(-50%,-50%) translate(92px,-64px) rotate(16deg) scale(.92)}
+ 28%{opacity:1;transform:translate(-50%,-50%) translate(35px,-82px) rotate(7deg) scale(1.08)}
+ 48%{opacity:1;transform:translate(-50%,-50%) translate(-28px,-82px) rotate(-5deg) scale(1.12)}
+ 70%{opacity:1;transform:translate(-50%,-50%) translate(-92px,-64px) rotate(-15deg) scale(1)}
+ 90%{opacity:1;transform:translate(-50%,-50%) translate(-118px,-42px) rotate(-22deg) scale(.9)}
+ 100%{opacity:0;transform:translate(-50%,-50%) translate(-132px,-28px) rotate(-27deg) scale(.82)}
+}
+@media(max-width:699px){
+ .hero-premium .hero-brandline{margin-bottom:44px}
+ .hero-premium .hero-orbit-phrase{max-width:88%;font-size:clamp(15px,4vw,20px)}
+ @keyframes phraseOrbitSweep{
+  0%{opacity:0;transform:translate(-50%,-50%) translate(78px,-32px) rotate(23deg) scale(.7)}
+  10%{opacity:1;transform:translate(-50%,-50%) translate(60px,-48px) rotate(15deg) scale(.9)}
+  28%{opacity:1;transform:translate(-50%,-50%) translate(24px,-63px) rotate(7deg) scale(1.04)}
+  48%{opacity:1;transform:translate(-50%,-50%) translate(-20px,-63px) rotate(-5deg) scale(1.06)}
+  70%{opacity:1;transform:translate(-50%,-50%) translate(-60px,-48px) rotate(-15deg) scale(.98)}
+  90%{opacity:1;transform:translate(-50%,-50%) translate(-78px,-32px) rotate(-22deg) scale(.88)}
+  100%{opacity:0;transform:translate(-50%,-50%) translate(-86px,-20px) rotate(-27deg) scale(.8)}
+ }
+}
+
+/* V57: independent feature lane; never cover the eyebrow, logo, or wordmark */
+.hero-premium .hero-brandline{margin-bottom:8px!important;z-index:10}
+.hero-premium .hero-phrase-lane{
+ position:relative;display:block;width:100%;height:78px;min-height:78px;
+ margin:0 auto 2px;overflow:hidden;isolation:isolate;z-index:3;
+}
+.hero-premium .hero-phrase-lane .hero-orbit-phrase{
+ position:absolute;left:50%;top:50%;z-index:1;
+ width:max-content;max-width:88%;white-space:nowrap;
+ transform-origin:center;pointer-events:none;
+}
+.hero-premium .hero-phrase-lane .hero-orbit-phrase.is-moving{
+ animation:phraseLaneTravel 4.4s cubic-bezier(.22,.68,.25,1) both;
+}
+@keyframes phraseLaneTravel{
+ 0%{opacity:0;transform:translate(-50%,-50%) translateX(95px) rotate(12deg) scale(.82)}
+ 12%{opacity:1;transform:translate(-50%,-50%) translateX(58px) rotate(8deg) scale(.94)}
+ 38%{opacity:1;transform:translate(-50%,-50%) translateX(12px) rotate(-3deg) scale(1.06)}
+ 68%{opacity:1;transform:translate(-50%,-50%) translateX(-42px) rotate(-8deg) scale(1.02)}
+ 88%{opacity:1;transform:translate(-50%,-50%) translateX(-75px) rotate(-12deg) scale(.94)}
+ 100%{opacity:0;transform:translate(-50%,-50%) translateX(-100px) rotate(-15deg) scale(.86)}
+}
+.hero-premium .hero-logo-stage{position:relative;z-index:2;overflow:visible!important}
+@media(max-width:699px){
+ .hero-premium .hero-phrase-lane{height:72px;min-height:72px;margin-bottom:0}
+ .hero-premium .hero-phrase-lane .hero-orbit-phrase{max-width:90%;font-size:clamp(15px,4vw,20px);padding:7px 11px}
+ @keyframes phraseLaneTravel{
+  0%{opacity:0;transform:translate(-50%,-50%) translateX(72px) rotate(12deg) scale(.8)}
+  12%{opacity:1;transform:translate(-50%,-50%) translateX(44px) rotate(8deg) scale(.92)}
+  38%{opacity:1;transform:translate(-50%,-50%) translateX(8px) rotate(-3deg) scale(1.04)}
+  68%{opacity:1;transform:translate(-50%,-50%) translateX(-32px) rotate(-8deg) scale(1)}
+  88%{opacity:1;transform:translate(-50%,-50%) translateX(-56px) rotate(-12deg) scale(.92)}
+  100%{opacity:0;transform:translate(-50%,-50%) translateX(-74px) rotate(-15deg) scale(.84)}
+ }
+}
+
+
+/* V63 — cards rise quickly, pause, then drop very quickly */
+.hero-premium .hero-logo-stage{position:relative;isolation:isolate;overflow:visible!important;z-index:4;min-height:190px}
+.hero-premium .hero-logo-animated{position:relative;z-index:5}
+.hero-premium .hero-logo-wordmark{position:relative;z-index:6}
+.logo-reel-layer{position:absolute;inset:0 0 auto;height:190px;z-index:7;pointer-events:none;overflow:visible}
+.logo-reel-layer .hero-orbit-phrase{position:absolute;left:50%;top:43%;z-index:7;width:max-content;max-width:min(82vw,390px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:11px 20px;border-radius:16px;background:rgba(255,255,255,.99);border:1px solid rgba(0,145,220,.25);box-shadow:0 10px 28px rgba(10,65,110,.18),0 0 0 4px rgba(76,190,255,.08);color:#078bd0;font-size:clamp(17px,2.8vw,25px);font-weight:950;direction:rtl;text-align:center;opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(22px) scale(.62);transform-origin:center;will-change:transform,opacity}
+.logo-reel-layer .hero-orbit-phrase.is-moving{animation:connectCardPop 4.2s linear both}
+@keyframes connectCardPop{
+ 0%,2%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(22px) scale(.62)}
+ 10%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-112px) scale(1)}
+ 68%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-112px) scale(1)}
+ 78%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(26px) scale(.68)}
+ 100%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(26px) scale(.62)}
+}
+@media(max-width:699px){
+ .hero-premium .hero-logo-stage{min-height:150px}
+ .logo-reel-layer{height:150px}
+ .logo-reel-layer .hero-orbit-phrase{max-width:84vw;padding:8px 12px;border-radius:12px;font-size:clamp(14px,3.7vw,18px)}
+ @keyframes connectCardPop{
+  0%,2%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(16px) scale(.62)}
+  10%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-88px) scale(1)}
+  68%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-88px) scale(1)}
+  78%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(20px) scale(.68)}
+  100%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(20px) scale(.62)}
+ }
+}
+@media(prefers-reduced-motion:reduce){.logo-reel-layer{display:none!important}}
+
+/* V65 — reserve an independent responsive row for the portal tagline */
+.hero-premium .hero-portal-label{
+ position:relative!important;z-index:20!important;
+ display:flex!important;align-items:center;justify-content:flex-start!important;
+ align-self:stretch!important;width:100%!important;min-height:42px;
+ box-sizing:border-box;margin:0 0 18px!important;padding:2px 0;
+ direction:rtl;flex-wrap:nowrap;gap:9px;
+}
+.hero-premium .hero-portal-label .eyebrow{
+ display:inline-flex;align-items:center;white-space:normal;
+ line-height:1.65;text-align:right;direction:rtl;
+}
+.hero-premium .hero-logo-stage{
+ position:relative;z-index:2;isolation:isolate;
+ margin-top:0!important;overflow:visible!important;
+}
+.hero-premium .logo-reel-layer{z-index:7}
+.hero-premium .logo-reel-layer .hero-orbit-phrase{top:55%}
+@keyframes connectCardPop{
+ 0%,2%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(22px) scale(.62)}
+ 10%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-80px) scale(1)}
+ 68%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-80px) scale(1)}
+ 78%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(26px) scale(.68)}
+ 100%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(26px) scale(.62)}
+}
+@media(max-width:699px){
+ .hero-premium .hero-portal-label{
+  min-height:40px;margin:0 0 13px!important;
+  padding-inline:2px;gap:7px
+ }
+ .hero-premium .hero-portal-label .hero-mark{flex:0 0 31px}
+ .hero-premium .hero-portal-label .eyebrow{
+  font-size:clamp(9px,2.6vw,11px);line-height:1.6
+ }
+ .hero-premium .hero-logo-stage{margin-top:0!important}
+ .hero-premium .logo-reel-layer .hero-orbit-phrase{top:55%}
+ @keyframes connectCardPop{
+  0%,2%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(16px) scale(.62)}
+  10%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-68px) scale(1)}
+  68%{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(-68px) scale(1)}
+  78%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(20px) scale(.68)}
+  100%{opacity:0;visibility:hidden;transform:translate(-50%,-50%) translateY(20px) scale(.62)}
+ }
+}
+
+
+
+/* V67 — restore the fixed horizontal feature strip shown in the reference */
+.hero-premium .hero-feature-strip{
+ display:flex!important;align-items:center;justify-content:center;
+ gap:clamp(12px,3vw,30px);width:min(100%,590px);
+ margin:18px auto 0;padding:11px 14px;box-sizing:border-box;
+ border:1px solid color-mix(in srgb,var(--accent) 18%,var(--line));
+ border-radius:16px;background:color-mix(in srgb,var(--accent) 4%,var(--panel));
+ position:relative;z-index:2;direction:rtl
+}
+.hero-premium .hero-feature{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.hero-premium .hero-tap-feedback{margin-top:9px}
+@media(max-width:699px){
+ .hero-premium .hero-feature-strip{gap:8px;padding:10px 7px;margin-top:13px}
+ .hero-premium .hero-feature{gap:4px;font-size:9px}
+ .hero-premium .hero-feature-icon{width:25px;height:25px}
+}
+
+
+
+
+/* V73 — restrained highlights: gentle border pulse, no sweeping shine */
+.services .service.customer,
+.services .service.agent{
+ position:relative;isolation:isolate;border-width:1.5px!important;
+}
+.services .service.customer{
+ --attention-rgb:0,145,220;
+ border-color:rgba(0,145,220,.62)!important;
+ background:linear-gradient(110deg,rgba(0,145,220,.055),var(--panel) 58%)!important;
+ animation:serviceSoftPulse 3.8s ease-in-out infinite!important;
+ box-shadow:0 0 0 1px rgba(0,145,220,.06),var(--shadow)!important;
+}
+.services .service.agent{
+ --attention-rgb:128,95,205;
+ border-color:rgba(128,95,205,.62)!important;
+ background:linear-gradient(110deg,rgba(128,95,205,.055),var(--panel) 58%)!important;
+ animation:serviceSoftPulse 3.8s ease-in-out infinite!important;
+ animation-delay:1.9s!important;
+ box-shadow:0 0 0 1px rgba(128,95,205,.06),var(--shadow)!important;
+}
+.services .service.customer::before,
+.services .service.agent::before{content:none!important;display:none!important}
+.services .service.customer>*,
+.services .service.agent>*{position:relative;z-index:1}
+.services .service.customer .service-icon,
+.services .service.agent .service-icon{
+ outline:0!important;
+ box-shadow:0 0 0 2px rgba(var(--attention-rgb),.09)!important;
+ animation:serviceSoftIcon 3.8s ease-in-out infinite!important;
+}
+.services .service.agent .service-icon{animation-delay:1.9s!important}
+@keyframes serviceSoftPulse{
+ 0%,100%{
+  border-color:rgba(var(--attention-rgb),.48);
+  box-shadow:0 0 0 1px rgba(var(--attention-rgb),.04),var(--shadow);
+ }
+ 50%{
+  border-color:rgba(var(--attention-rgb),.82);
+  box-shadow:0 0 0 3px rgba(var(--attention-rgb),.075),0 5px 15px rgba(var(--attention-rgb),.09);
+ }
+}
+@keyframes serviceSoftIcon{
+ 0%,100%{box-shadow:0 0 0 1px rgba(var(--attention-rgb),.06)!important}
+ 50%{box-shadow:0 0 0 3px rgba(var(--attention-rgb),.13)!important}
+}
+.services .service.admin{
+ animation:none!important;box-shadow:var(--shadow)!important;
+ border-color:var(--line)!important;background:var(--panel)!important;
+}
+.services .service.admin::before{display:none!important;content:none!important}
+.services .service.admin .service-icon{animation:none!important;outline:0!important;box-shadow:none!important}
+@media(prefers-reduced-motion:reduce){
+ .services .service.customer,.services .service.agent,
+ .services .service.customer .service-icon,.services .service.agent .service-icon{animation:none!important}
+ .services .service.customer{border-color:rgba(0,145,220,.62)!important}
+ .services .service.agent{border-color:rgba(128,95,205,.62)!important}
+}
+
+
+/* V74 — clear but elegant click feedback on the Connect logo */
+.hero-premium .hero-logo-stage{cursor:pointer;touch-action:manipulation;outline:none}
+.hero-premium .hero-logo-stage::after{
+ content:"";position:absolute;left:50%;top:46%;
+ width:118px;height:118px;border-radius:50%;
+ border:2px solid rgba(0,157,230,0);
+ transform:translate(-50%,-50%) scale(.72);
+ opacity:0;pointer-events:none;z-index:0
+}
+.hero-premium .hero-logo-stage.logo-tapped::after{
+ animation:connectLogoRipple .9s ease-out 1
+}
+.hero-premium .hero-logo-stage.logo-tapped .hero-logo-animated{
+ filter:drop-shadow(0 0 9px rgba(0,157,230,.55)) brightness(1.13)!important;
+}
+.hero-premium .hero-logo-stage:focus-visible{
+ outline:3px solid rgba(0,157,230,.55);outline-offset:5px;border-radius:22px
+}
+@keyframes connectLogoRipple{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.68);border-color:rgba(0,157,230,0)}
+ 18%{opacity:1;border-color:rgba(0,157,230,.62)}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(1.55);border-color:rgba(0,157,230,0)}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-premium .hero-logo-stage.logo-tapped::after{animation:none;opacity:0}
+}
+
+
+/* V75 — reliable logo click feedback and visible interaction prompt */
+.hero-premium .hero-tap-feedback{
+ display:inline-flex!important;align-items:center;justify-content:center;
+ min-height:30px;margin:10px auto 2px;padding:5px 13px;
+ border-radius:999px;color:var(--accent);font-weight:900;
+ font-size:12px;letter-spacing:.1px;
+ background:rgba(0,145,220,.07);
+ border:1px solid rgba(0,145,220,.14);
+ animation:logoHintBreathe 2.4s ease-in-out infinite;
+ transition:background .2s,transform .2s,color .2s;
+}
+.hero-premium .hero-tap-feedback.active{
+ color:#fff!important;background:var(--accent)!important;
+ transform:scale(1.04);animation:none;
+}
+.hero-premium .hero-logo-stage{
+ cursor:pointer!important;touch-action:manipulation;
+ -webkit-tap-highlight-color:transparent;user-select:none;
+}
+.hero-premium .hero-logo-stage.logo-pressed-v75 .hero-logo-animated{
+ animation:logoTapFeedbackV75 .68s cubic-bezier(.2,.8,.25,1) both!important;
+ filter:drop-shadow(0 0 12px rgba(0,145,220,.65)) brightness(1.16)!important;
+}
+.hero-premium .hero-logo-stage.logo-pressed-v75::after{
+ content:"";position:absolute;left:50%;top:45%;
+ width:110px;height:110px;border-radius:50%;
+ border:2px solid rgba(0,145,220,.55);
+ transform:translate(-50%,-50%) scale(.55);
+ pointer-events:none;z-index:3;
+ animation:logoRippleV75 .72s ease-out both;
+}
+@keyframes logoTapFeedbackV75{
+ 0%{transform:scale(1) rotate(0)}
+ 30%{transform:scale(1.17) rotate(-7deg)}
+ 58%{transform:scale(.92) rotate(5deg)}
+ 82%{transform:scale(1.06) rotate(-2deg)}
+ 100%{transform:scale(1) rotate(0)}
+}
+@keyframes logoRippleV75{
+ 0%{opacity:.85;transform:translate(-50%,-50%) scale(.55)}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(1.65)}
+}
+@keyframes logoHintBreathe{
+ 0%,100%{opacity:.72;box-shadow:0 0 0 0 rgba(0,145,220,0)}
+ 50%{opacity:1;box-shadow:0 0 0 4px rgba(0,145,220,.08)}
+}
+@media(max-width:699px){
+ .hero-premium .hero-tap-feedback{font-size:10px;min-height:28px;margin-top:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-premium .hero-tap-feedback{animation:none!important}
+ .hero-premium .hero-logo-stage.logo-pressed-v75 .hero-logo-animated{animation:none!important}
+ .hero-premium .hero-logo-stage.logo-pressed-v75::after{animation:none!important;opacity:0}
+}
+
+
+/* V76 — restore the role-confirmation dialog as a true viewport overlay */
+.role-confirm-backdrop[hidden]{display:none!important}
+.role-confirm-backdrop{
+ position:fixed!important;inset:0!important;z-index:2147483000!important;
+ display:grid!important;place-items:center!important;
+ padding:18px!important;box-sizing:border-box!important;
+ background:rgba(8,25,48,.56)!important;
+ -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+ overflow-y:auto!important;overscroll-behavior:contain;
+}
+.role-confirm-dialog{
+ position:relative!important;display:block!important;
+ width:min(100%,390px)!important;max-height:calc(100vh - 36px);
+ overflow:auto;box-sizing:border-box!important;margin:auto!important;
+ padding:30px 23px 22px!important;border-radius:24px!important;
+ border:1px solid rgba(0,145,220,.22)!important;
+ background:#fff!important;color:#102c50!important;
+ box-shadow:0 24px 75px rgba(0,25,65,.3)!important;
+ text-align:center!important;direction:rtl!important;
+}
+.role-confirm-close{
+ position:absolute!important;top:10px!important;left:11px!important;
+ width:34px!important;height:34px!important;border:0!important;
+ border-radius:11px!important;background:#eef5fa!important;
+ color:#526a82!important;font-size:24px!important;cursor:pointer!important;
+}
+.role-confirm-icon{
+ width:58px!important;height:58px!important;margin:0 auto 13px!important;
+ display:grid!important;place-items:center!important;border-radius:18px!important;
+ background:#eaf6fc!important;color:#078bd0!important;font-size:29px!important;font-weight:900!important;
+}
+.role-confirm-dialog h2{margin:0 0 8px!important;color:#102c50!important;font-size:22px!important;line-height:1.5!important;font-weight:950!important}
+.role-confirm-dialog p{margin:0 auto 21px!important;max-width:290px!important;color:#647b93!important;font-size:13px!important;line-height:1.9!important}
+.role-confirm-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+.role-confirm-actions button{
+ min-height:48px!important;padding:10px 12px!important;border-radius:13px!important;
+ font:inherit!important;font-size:14px!important;font-weight:900!important;cursor:pointer!important;
+}
+.role-confirm-yes{border:1px solid #078bd0!important;background:linear-gradient(135deg,#08a2e7,#087bc4)!important;color:#fff!important}
+.role-confirm-no{border:1px solid #d9e4ed!important;background:#f6f9fc!important;color:#193654!important}
+
+</style>
+</head>
+<body data-theme="sky">
+<div class="bg-art"></div>
+<main class="app">
+<div class="update-notice" id="updateNotice" role="status" aria-live="polite">
+ <span class="update-notice-icon" id="updateNoticeIcon"></span>
+ <span id="updateNoticeText"></span>
+ <button type="button" id="applyUpdate" class="apply-update" hidden>تحديث الآن</button>
+</div>
+<header class="topbar">
+ <div class="brand"><img class="logo" src="./icons/icon-192.png" alt="كونكت واي فاي"><div><div class="brand-name">كونكت واي فاي</div><div class="brand-sub">CONNECT WIFI</div></div></div>
+ <div class="top-actions">
+  <button class="round-btn header-action" id="refreshApp" type="button" aria-label="تحديث التطبيق" title="تحديث التطبيق"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.9-4L3 9"/><path d="M3 4v5h5"/><path d="M4 13a8 8 0 0 0 14.9 4L21 15"/><path d="M21 20v-5h-5"/></svg></button>
+  <button class="round-btn header-action" id="install" type="button" aria-label="تثبيت التطبيق" title="تثبيت التطبيق"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3h16v-3"/></svg></button>
+  <button class="round-btn header-action" id="ambientToggle" type="button" aria-label="تشغيل النشيد" title="النشيد"><svg viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6l-5 4H3Z"/><path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a8.5 8.5 0 0 1 0 11"/></svg></button>
+  <button class="round-btn" id="appearance" aria-label="تغيير شكل التطبيق" title="تغيير الشكل">◐</button>
+ </div>
+</header>
+<section id="installGuide" class="install-guide" hidden aria-live="polite">
+ <img src="./icons/icon-192.png" alt="شعار كونكت واي فاي" class="install-guide-logo">
+ <div class="install-guide-copy"><strong id="installGuideTitle">ثبّت تطبيق كونكت واي فاي</strong><span id="installGuideText">ثبّت التطبيق للوصول السريع لخدماتك.</span></div>
+ <button type="button" id="installGuideAction" class="install-guide-action">تثبيت التطبيق</button>
+</section>
+<div id="installSuccess" class="install-success" hidden role="dialog" aria-modal="true" aria-labelledby="installSuccessTitle">
+ <div class="install-success-card">
+  <img src="./icons/icon-192.png" alt="شعار كونكت واي فاي" class="install-success-logo">
+  <h2 id="installSuccessTitle">تم تثبيت كونكت واي فاي بنجاح</h2>
+  <p>أيقونة التطبيق أصبحت على جهازك. ارجع للشاشة الرئيسية وستجد «كونكت واي فاي»؛ اضغط عليها لفتح التطبيق مباشرة.</p>
+  <div class="install-success-steps"><span>١</span> ارجع للشاشة الرئيسية <span>٢</span> اضغط أيقونة كونكت واي فاي</div>
+  <button type="button" id="installSuccessClose" class="install-success-close">فهمت</button>
+ </div>
+</div>
+<nav class="quick-nav" aria-label="اختصارات سريعة">
+ <a href="#services" aria-label="الروابط والخدمات"><span class="quick-icon"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span><span>الخدمات</span></a>
+ <a href="#notifications" aria-label="الإشعارات"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><span>الإشعارات</span></a>
+ <a href="#offers" aria-label="العروض"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M20.5 13.5 13 21l-10-10V3h8l9.5 10.5Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></span><span>العروض</span></a>
+ <a href="#help-center" aria-label="الشروحات"><span class="quick-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4V8Z"/></svg></span><span>الشروحات</span></a>
+ <a href="#support" aria-label="الدعم الفني"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 13H3v4h4v-6H4M20 13h1v4h-4v-6h3M17 20c-1 1-2.5 1.5-5 1.5"/></svg></span><span>الدعم</span></a>
+</nav>
+<section class="hero hero-premium">
+ <div class="hero-brandline hero-portal-label"><span class="hero-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 8.8a13 13 0 0 1 17 0M6.8 12.1a8 8 0 0 1 10.4 0M10 15.3a3.2 3.2 0 0 1 4 0"/><circle cx="12" cy="18.5" r="1" fill="currentColor" stroke="none"/></svg></span><span class="eyebrow"><span class="live-dot"></span> بوابتك الرقمية لخدمات الإنترنت</span></div>
+ <div class="hero-logo-stage" aria-label="كونكت واي فاي">
+  <img class="hero-logo-animated" src="./icons/hero-logo-transparent.png" alt="شعار كونكت واي فاي" width="170" height="170">
+  <span class="hero-logo-wordmark">كونكت واي فاي</span>
+ </div>
+ <div class="type-line" aria-label="اتصال أسرع.. تجربة أسهل"><span id="typedText">اتصال أسرع.. تجربة أسهل</span><span class="type-cursor" aria-hidden="true"></span></div>
+ <p>خدماتك واشتراكك ودعمك الفني — في مكان واحد.</p>
+ <div class="hero-feature-strip" aria-label="مميزات كونكت">
+  <div class="hero-feature">
+   <span class="hero-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5.5 13h5l-.5 9L18.5 10h-5z"/></svg></span>
+   <span>اتصال أسهل</span>
+  </div>
+  <div class="hero-feature">
+   <span class="hero-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg></span>
+   <span>تحكم في حسابك</span>
+  </div>
+  <div class="hero-feature">
+   <span class="hero-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0v5l-2 3h16l-2-3zM10 20h4"/></svg></span>
+   <span>دعم فني مباشر</span>
+  </div>
+ </div>
+ <div class="hero-tap-feedback" id="heroTapFeedback" aria-live="polite">اضغط على الشعار وشوف التفاعل</div>
+ <div class="hero-accent" aria-hidden="true"></div>
+</section>
+<div id="rocketMessage" class="rocket-message" aria-live="polite" role="status">
+ <span class="rocket-message-text" id="rocketMessageText"></span>
+ <span class="rocket-message-icon" aria-hidden="true">🚀</span>
+</div>
+<div class="section-title"><h2>اختار الخدمة</h2><span>اضغط على الخدمة المطلوبة</span></div>
+<nav class="services" id="services" aria-label="الخدمات">
+ <a class="service customer" href="http://136.244.112.67/users/" target="_blank" rel="noopener noreferrer">
+  <span class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.2"/><path d="M5.5 20v-1.3a6.5 6.5 0 0 1 13 0V20"/></svg></span>
+  <span class="service-copy"><h3>منطقة العميل</h3><p>متابعة الاشتراك والرصيد والاستهلاك.</p></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></span>
+ </a>
+ <a class="service agent" href="http://136.244.112.67/agent/" target="_blank" rel="noopener noreferrer">
+  <span class="service-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="7.5" r="3"/><path d="M3.5 19v-1a5.5 5.5 0 0 1 11 0v1M16 8a2.7 2.7 0 1 0 0-5.4M17 14a4.8 4.8 0 0 1 3.5 4.6V19"/></svg></span>
+  <span class="service-copy"><h3>منطقة الموزعين</h3><p>إدارة العملاء وعمليات الشحن والتوزيع.</p></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></span>
+ </a>
+ <a class="service admin" href="http://136.244.112.67/admin/" target="_blank" rel="noopener noreferrer">
+  <span class="service-icon"><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="13" rx="1.8"/><path d="M8 21h8m-4-4v4M8 9h8m-8 3h5"/></svg></span>
+  <span class="service-copy"><h3>منطقة المدير</h3><p>لوحة التحكم الكاملة وإدارة الشبكة.</p></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></span>
+ </a>
+</nav>
+<section class="content-hub" aria-label="أخبار وعروض كونكت">
+ <section class="content-panel" id="notifications" aria-labelledby="notificationsTitle">
+  <div class="content-head">
+   <div class="content-heading"><span class="content-symbol"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><div><h2 id="notificationsTitle">آخر الإشعارات</h2><small>أخبار وتنبيهات كونكت</small></div></div>
+   <button class="content-more" id="allNotifications" type="button" hidden>عرض الكل</button>
+  </div>
+  <div class="content-list" id="notificationsList"><div class="content-empty">جاري تحميل آخر الإشعارات…</div></div>
+  <div class="content-status" id="notificationsStatus" aria-live="polite"></div>
+ </section>
+ <section class="content-panel" id="offers" aria-labelledby="offersTitle">
+  <div class="content-head">
+   <div class="content-heading"><span class="content-symbol"><svg viewBox="0 0 24 24"><path d="M20.5 13.5 13 21l-10-10V3h8l9.5 10.5Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></span><div><h2 id="offersTitle">أحدث العروض</h2><small>العروض المتاحة لعملائنا</small></div></div>
+   <button class="content-more" id="allOffers" type="button" hidden>عرض الكل</button>
+  </div>
+  <div class="content-list" id="offersList"><div class="content-empty">جاري تحميل أحدث العروض…</div></div>
+  <div class="content-status" id="offersStatus" aria-live="polite"></div>
+ </section>
+</section>
+
+<section class="help-center" id="help-center" aria-labelledby="helpCenterTitle">
+ <div class="section-title"><h2 id="helpCenterTitle">مركز الشروحات والدعم الفني</h2><span>فيديوهات تساعدك خطوة بخطوة</span></div>
+ <div class="help-groups">
+  <section class="help-group" aria-labelledby="customerGuidesTitle">
+   <div class="help-group-head"><span class="help-group-icon">▶</span><div><h3 id="customerGuidesTitle">شروحات لوحة العميل الجديدة</h3><p>كل ما تحتاجه لإدارة حسابك وباقتك</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtube.com/shorts/NyQc1QyXaLM?si=3YMdJwFKSEoXnpuY" target="_blank" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/NyQc1QyXaLM/hqdefault.jpg" alt=""><span class="help-copy"><strong>كيفية تثبيت تطبيق كونكت واي فاي</strong><small>فيديو قصير · تثبيت التطبيق</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://youtu.be/9XDRLK3f8m0" target="_blank" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/9XDRLK3f8m0/hqdefault.jpg" alt=""><span class="help-copy"><strong>شرح سريع للوحة العميل الجديدة</strong><small>التعرف على أقسام اللوحة</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://youtube.com/shorts/kMZaMkU9tp4?feature=share" target="_blank" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/kMZaMkU9tp4/hqdefault.jpg" alt=""><span class="help-copy"><strong>تغيير الرقم السري لحساب العميل</strong><small>تأمين حسابك وتحديث كلمة المرور</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://www.youtube.com/shorts/FQ1B7VURuuM" target="_blank" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/FQ1B7VURuuM/hqdefault.jpg" alt=""><span class="help-copy"><strong>شراء جيجات إضافية من لوحة العميل</strong><small>إضافة سعة إنترنت لحسابك</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://youtube.com/shorts/CiCwQqufMVc?feature=share" target="_blank" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/CiCwQqufMVc/hqdefault.jpg" alt=""><span class="help-copy"><strong>شحن باقات لجميع المشتركين في كونكت</strong><small>شرح خاص بعملية شحن الباقات</small></span><span class="help-play">▶</span></a>
+   </div>
+  </section>
+  <section class="help-group" aria-labelledby="speedTestTitle">
+   <div class="help-group-head"><span class="help-group-icon">⚡</span><div><h3 id="speedTestTitle">اختبار سرعة الإنترنت</h3><p>اعرف إزاي تقيس سرعة اتصالك</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtube.com/shorts/TbiPP9H7a0g?feature=share" target="_blank" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/TbiPP9H7a0g/hqdefault.jpg" alt=""><span class="help-copy"><strong>شرح عمل Speed Test</strong><small>طريقة اختبار سرعة الإنترنت</small></span><span class="help-play">▶</span></a>
+   </div>
+   <a class="help-download" href="https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest" target="_blank" rel="noopener noreferrer">تحميل تطبيق Speedtest من Google Play ↗</a>
+  </section>
+  <section class="help-group" aria-labelledby="whatsappGuideTitle">
+   <div class="help-group-head"><span class="help-group-icon">⌖</span><div><h3 id="whatsappGuideTitle">شروحات واتساب</h3><p>مشاركة موقعك مع الدعم الفني</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtube.com/shorts/JPUACV3Hx-I?feature=share" target="_blank" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/JPUACV3Hx-I/hqdefault.jpg" alt=""><span class="help-copy"><strong>كيفية إرسال اللوكيشن من واتساب</strong><small>إرسال موقعك الحالي بسهولة</small></span><span class="help-play">▶</span></a>
+   </div>
+  </section>
+ </div>
+</section>
+
+<section class="support" id="support">
+ <div class="support-copy"><span class="wa">◉</span><div><h3>الدعم الفني متاح لمساعدتك</h3><p>تواصل معنا مباشرة عبر واتساب.</p></div></div>
+ <a class="support-link" href="https://wa.me/201064225132?text=%D8%A3%D9%87%D9%84%D8%A7%20%D9%83%D9%88%D9%86%D9%83%D8%AA%D8%8C%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D8%B9%D9%84%D9%89%20%D8%A8%D8%A7%D9%82%D8%AA%D9%8A%20%D8%B9%D9%84%D9%89%20%D8%B1%D9%82%D9%85%3A%20" target="_blank" rel="noopener noreferrer">واتساب ←</a>
+</section>
+<div class="tools">
+ <button class="tool-btn" id="themes"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-1-.8-1.8-1.8-1.8h-1.7a1.5 1.5 0 0 1-1.4-2A3.5 3.5 0 0 0 12 3Z"/><circle cx="7.5" cy="10" r="1"/><circle cx="11" cy="6.5" r="1"/><circle cx="16" cy="7.5" r="1"/></svg> شكل التطبيق</button>
+</div>
+<footer class="footer">© <span id="year"></span> كونكت واي فاي — جميع الحقوق محفوظة</footer>
+</main>
+<div class="sheet-backdrop" id="backdrop"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+ <div class="handle"></div><div class="sheet-head"><h2 id="sheetTitle">اختار شكل التطبيق</h2><button class="close" id="closeSheet" aria-label="إغلاق">×</button></div>
+ <div class="theme-grid">
+  <button class="theme-option" data-theme-choice="sky" aria-pressed="true"><div class="swatch"></div><strong>السماء والشبكات</strong><small>فاتح وسماوي</small></button>
+  <button class="theme-option" data-theme-choice="neon" aria-pressed="false"><div class="swatch"></div><strong>نيون تقني</strong><small>داكن وأزرق مضيء</small></button>
+  <button class="theme-option" data-theme-choice="waves" aria-pressed="false"><div class="swatch"></div><strong>موجات متدرجة</strong><small>بنفسجي وسماوي</small></button>
+  <button class="theme-option" data-theme-choice="minimal" aria-pressed="false"><div class="swatch"></div><strong>بسيط واحترافي</strong><small>أبيض وهادئ</small></button>
+  <button class="theme-option" data-theme-choice="desert" aria-pressed="false"><div class="swatch"></div><strong>طابع الوادي</strong><small>ألوان رملية</small></button>
+  <button class="theme-option" data-theme-choice="cyber" aria-pressed="false"><div class="swatch"></div><strong>سايبر مستقبلي</strong><small>نيون بنفسجي</small></button>
+ </div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./theme-config.js"></script>
+<script>
+function showUpdateNotice(message,state,withAction=false){
+ const box=document.getElementById("updateNotice");
+ if(!box)return;
+ if(window.__connectUpdateNoticeTimer)clearTimeout(window.__connectUpdateNoticeTimer);
+ box.className="update-notice on "+state+(withAction?" has-action":"");
+ document.getElementById("updateNoticeText").textContent=message;
+ document.getElementById("updateNoticeIcon").textContent="";
+ const action=document.getElementById("applyUpdate");
+ if(action)action.hidden=!withAction;
+ // Keep an actionable new-version prompt visible until the customer responds.
+ if(!withAction){
+  window.__connectUpdateNoticeTimer=setTimeout(()=>{
+   box.classList.remove("on");
+   box.classList.remove("has-action");
+  },6500);
+ }
+}
+(()=>{
+ const button=document.getElementById("ambientToggle");
+ if(!button)return;
+ const nasheed=new Audio("./connect-nasheed.mp3");
+ nasheed.preload="none";
+ nasheed.loop=false;
+ nasheed.volume=.85;
+ nasheed.playsInline=true;
+ function renderSoundButton(on){
+  button.classList.toggle("sound-on",on);
+  button.classList.toggle("sound-off",!on);
+  button.setAttribute("aria-label",on?"إيقاف النشيد":"تشغيل النشيد");
+  button.title=on?"إيقاف النشيد":"تشغيل النشيد";
+ }
+ async function startNasheed(){
+  try{await nasheed.play();renderSoundButton(true);return true;}
+  catch(error){renderSoundButton(false);return false;}
+ }
+ renderSoundButton(false);
+ button.addEventListener("click",async(event)=>{
+  event.stopPropagation();
+  if(!nasheed.paused){
+   nasheed.pause();nasheed.currentTime=0;renderSoundButton(false);notify("تم إيقاف النشيد.");
+  }else if(await startNasheed()){
+   notify("تم تشغيل النشيد.");
+  }else{
+   notify("تعذر تشغيل النشيد. حاول مرة أخرى.");
+  }
+ });
+ nasheed.addEventListener("ended",()=>renderSoundButton(false));
+ nasheed.addEventListener("error",()=>renderSoundButton(false));
+})();;
+
+</script>
+<script>
+function showUpdateNotice(message,state,withAction=false){
+ const box=document.getElementById("updateNotice");
+ if(!box)return;
+ if(window.__connectUpdateNoticeTimer)clearTimeout(window.__connectUpdateNoticeTimer);
+ box.className="update-notice on "+state+(withAction?" has-action":"");
+ document.getElementById("updateNoticeText").textContent=message;
+ document.getElementById("updateNoticeIcon").textContent="";
+ const action=document.getElementById("applyUpdate");
+ if(action)action.hidden=!withAction;
+ // Keep an actionable new-version prompt visible until the customer responds.
+ if(!withAction){
+  window.__connectUpdateNoticeTimer=setTimeout(()=>{
+   box.classList.remove("on");
+   box.classList.remove("has-action");
+  },6500);
+ }
+}
+const CONFIG=window.CONNECT_THEME_CONFIG||{defaultTheme:"sky",lockTheme:false,allowCustomerChoice:true};
+const valid=["sky","neon","waves","minimal","desert","cyber"],body=document.body;
+const params=new URLSearchParams(location.search),owner=params.get("owner")==="1";
+let saved=null;try{saved=localStorage.getItem("connectWifiTheme")}catch(e){}
+let active=(CONFIG.lockTheme||!CONFIG.allowCustomerChoice)?CONFIG.defaultTheme:(saved||CONFIG.defaultTheme);
+function apply(t,save=true){if(!valid.includes(t))t="sky";active=t;body.dataset.theme=t;document.querySelectorAll("[data-theme-choice]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.themeChoice===t)));if(save){try{localStorage.setItem("connectWifiTheme",t)}catch(e){}}}
+apply(active,false);
+const sheet=document.getElementById("sheet"),backdrop=document.getElementById("backdrop");
+function openSheet(){sheet.classList.add("open");backdrop.classList.add("open")}
+function closeSheet(){sheet.classList.remove("open");backdrop.classList.remove("open")}
+document.getElementById("themes").onclick=openSheet;document.getElementById("appearance").onclick=openSheet;
+document.getElementById("closeSheet").onclick=closeSheet;backdrop.onclick=closeSheet;
+document.querySelectorAll("[data-theme-choice]").forEach(b=>b.onclick=()=>{if(CONFIG.lockTheme&&!owner){notify("تم تثبيت شكل موحد للتطبيق.");return}if(!CONFIG.allowCustomerChoice&&!owner){notify("اختيار الشكل غير متاح حاليًا.");return}apply(b.dataset.themeChoice);});
+let toastTimer;function notify(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("on");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("on"),3500)}
+
+const typed=document.getElementById("typedText");
+const phrases=["واي فاي في كل مكان","اتصال أسرع.. تجربة أسهل","كونكت دايمًا معاك"];
+const reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(typed&&!reduceMotion){
+ let phraseIndex=0,letterIndex=Array.from(phrases[0]).length,deleting=true;
+ const tick=()=>{
+  const chars=Array.from(phrases[phraseIndex]);
+  if(deleting){
+   letterIndex=Math.max(0,letterIndex-1);
+   typed.textContent=chars.slice(0,letterIndex).join("");
+   if(letterIndex===0){deleting=false;phraseIndex=(phraseIndex+1)%phrases.length;setTimeout(tick,420);return}
+   setTimeout(tick,95);
+  }else{
+   const next=Array.from(phrases[phraseIndex]);
+   letterIndex=Math.min(next.length,letterIndex+1);
+   typed.textContent=next.slice(0,letterIndex).join("");
+   if(letterIndex===next.length){deleting=true;setTimeout(tick,4000);return}
+   setTimeout(tick,125);
+  }
+ };
+ setTimeout(tick,1800);
+}
+
+
+/* V61 — phrase reels out from behind the Connect logo; no character or mascot */
+/* V67 — static feature strip; no floating card animation */
+const heroLogoStage=document.querySelector(".hero-logo-stage");
+const heroTapFeedback=document.getElementById("heroTapFeedback");
+const rocketMessage=document.getElementById("rocketMessage");
+const rocketMessageText=document.getElementById("rocketMessageText");
+if(heroLogoStage&&rocketMessage&&rocketMessageText){
+ const tapMessages=["كونكت دايمًا معاك ❤️","راحتك ورضاك أولويتنا","خدماتك كلها في مكان واحد"];
+ let tapMessageIndex=0,rocketTimer=null;
+ const playLogoTap=()=>{
+  heroLogoStage.classList.remove("logo-tapped");
+  void heroLogoStage.offsetWidth;
+  heroLogoStage.classList.add("logo-tapped");
+  rocketMessageText.textContent=tapMessages[tapMessageIndex%tapMessages.length];
+  tapMessageIndex++;
+  rocketMessage.classList.remove("is-flying");
+  void rocketMessage.offsetWidth;
+  rocketMessage.classList.add("is-flying");
+  clearTimeout(rocketTimer);
+  rocketTimer=setTimeout(()=>{
+   rocketMessage.classList.remove("is-flying");
+   heroLogoStage.classList.remove("logo-tapped");
+  },6000);
+ };
+ heroLogoStage.addEventListener("click",playLogoTap);
+ heroLogoStage.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();playLogoTap()}});
+ heroLogoStage.setAttribute("role","button");
+ heroLogoStage.setAttribute("tabindex","0");
+ heroLogoStage.setAttribute("aria-label","تفاعل مع شعار كونكت واي فاي");
+}
+
+// V19: load public announcements and offers from GitHub Pages JSON files.
+const contentState={notifications:[],offers:[],showAllNotifications:false,showAllOffers:false};
+const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+const arabicDate=value=>{if(!value)return "";const d=new Date(value);return Number.isNaN(d.getTime())?"":new Intl.DateTimeFormat("ar-EG",{day:"numeric",month:"short",year:"numeric"}).format(d)};
+const categoryNames={news:"خبر",alert:"تنبيه",maintenance:"صيانة"};
+function renderNotifications(){
+ const list=document.getElementById("notificationsList"),btn=document.getElementById("allNotifications");
+ const items=contentState.notifications,visible=contentState.showAllNotifications?items:items.slice(0,3);
+ btn.hidden=items.length<=3;btn.textContent=contentState.showAllNotifications?"عرض الأقل":"عرض الكل";
+ if(!items.length){list.innerHTML='<div class="content-empty">لا توجد إشعارات منشورة حاليًا.<br>تابعنا لمعرفة آخر أخبار وخدمات كونكت.</div>';return}
+ list.innerHTML=visible.map(item=>{const type=categoryNames[item.type]||"خبر";const cls=item.type==="alert"?"alert":item.type==="maintenance"?"maintenance":"";return `<article class="content-item"><div class="content-item-top"><h3>${escapeHTML(item.title||"إشعار من كونكت")}</h3><time class="content-date">${escapeHTML(arabicDate(item.date))}</time></div><p>${escapeHTML(item.message||"")}</p><span class="content-tag ${cls}">${type}</span></article>`}).join("");
+}
+function renderOffers(){
+ const list=document.getElementById("offersList"),btn=document.getElementById("allOffers");
+ const today=new Date();today.setHours(0,0,0,0);
+ const items=contentState.offers.filter(item=>{if(!item.endDate)return true;const end=new Date(item.endDate+"T23:59:59");return !Number.isNaN(end.getTime())&&end>=today});
+ const visible=contentState.showAllOffers?items:items.slice(0,3);
+ btn.hidden=items.length<=3;btn.textContent=contentState.showAllOffers?"عرض الأقل":"عرض الكل";
+ if(!items.length){list.innerHTML='<div class="content-empty">لا توجد عروض متاحة حاليًا.<br>سنعلن هنا عن أحدث عروض كونكت.</div>';return}
+ list.innerHTML=visible.map(item=>{const image=item.image?`<img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.title||"عرض كونكت")}" loading="lazy">`:"";const action=item.url?`<a class="offer-action" href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer">تفاصيل العرض</a>`:"";const expiry=item.endDate?`<span class="content-tag">ساري حتى ${escapeHTML(arabicDate(item.endDate))}</span>`:"";return `<article class="content-item offer-item">${image}<div class="content-item-top"><h3>${escapeHTML(item.title||"عرض من كونكت")}</h3><time class="content-date">${escapeHTML(arabicDate(item.date))}</time></div><p>${escapeHTML(item.message||"")}</p>${expiry}${action}</article>`}).join("");
+}
+async function loadPublicContent(){
+ const stamp=Date.now();
+ try{
+  const [n,o]=await Promise.all([fetch(`./notifications.json?v=${stamp}`,{cache:"no-store"}),fetch(`./offers.json?v=${stamp}`,{cache:"no-store"})]);
+  if(!n.ok||!o.ok)throw new Error("تعذر تحميل المحتوى");
+  const nd=await n.json(),od=await o.json();
+  contentState.notifications=Array.isArray(nd)?nd:(Array.isArray(nd.items)?nd.items:[]);
+  contentState.offers=Array.isArray(od)?od:(Array.isArray(od.items)?od.items:[]);
+  renderNotifications();renderOffers();
+  document.getElementById("notificationsStatus").textContent="يتم تحديث المحتوى تلقائيًا عند فتح الصفحة.";
+ }catch(error){
+  document.getElementById("notificationsList").innerHTML='<div class="content-empty">تعذر تحميل الإشعارات الآن. حاول تحديث الصفحة.</div>';
+  document.getElementById("offersList").innerHTML='<div class="content-empty">تعذر تحميل العروض الآن. حاول تحديث الصفحة.</div>';
+ }
+}
+document.getElementById("allNotifications").addEventListener("click",()=>{contentState.showAllNotifications=!contentState.showAllNotifications;renderNotifications()});
+document.getElementById("allOffers").addEventListener("click",()=>{contentState.showAllOffers=!contentState.showAllOffers;renderOffers()});
+loadPublicContent();
+let contentRefreshTimer=setInterval(()=>{if(document.visibilityState==="visible")loadPublicContent()},300000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadPublicContent()});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+let deferred=null;
+const guide=document.getElementById("installGuide"),guideTitle=document.getElementById("installGuideTitle"),guideText=document.getElementById("installGuideText"),guideAction=document.getElementById("installGuideAction");
+const isStandalone=()=>window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isChrome=/CriOS|Chrome/i.test(navigator.userAgent)&&!/Edg|OPR|SamsungBrowser|YaBrowser|DuckDuckGo|Brave/i.test(navigator.userAgent);
+function updateInstallGuide(){
+ if(isStandalone()){guide.hidden=true;return}
+ guide.hidden=false;
+ guide.classList.toggle("browser-warning",!isChrome&&!isIOS);
+ if(isIOS){guideTitle.textContent="ثبّت كونكت واي فاي على جهازك";guideText.textContent="على iPhone أو iPad افتح الصفحة في Safari ثم مشاركة ← إضافة إلى الشاشة الرئيسية.";guideAction.textContent="طريقة التثبيت";}
+ else if(!isChrome){guideTitle.textContent="افتح كونكت واي فاي باستخدام Google Chrome";guideText.textContent="لأفضل تجربة وتثبيت التطبيق، افتح هذه الصفحة في Google Chrome.";guideAction.textContent="طريقة الفتح";}
+ else{guideTitle.textContent="ثبّت تطبيق كونكت واي فاي";guideText.textContent="ثبّت التطبيق على جهازك للوصول السريع إلى خدماتك.";guideAction.textContent="تثبيت التطبيق";}
+}
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;updateInstallGuide()});
+window.addEventListener("appinstalled",()=>{
+ deferred=null;
+ guide.hidden=true;
+ const success=document.getElementById("installSuccess");
+ if(success)success.hidden=false;
+});
+document.getElementById("installSuccessClose").addEventListener("click",()=>{
+ document.getElementById("installSuccess").hidden=true;
+});
+async function promptInstall(){
+ if(deferred){deferred.prompt();const choice=await deferred.userChoice;deferred=null;if(choice&&choice.outcome==="accepted")guide.hidden=true;else updateInstallGuide();}
+ else if(isIOS){notify("على iPhone: افتح الصفحة في Safari ثم اضغط مشاركة واختر إضافة إلى الشاشة الرئيسية.");}
+ else if(isChrome){notify("من قائمة Chrome ⋮ اختر تثبيت التطبيق أو إضافة إلى الشاشة الرئيسية.");}
+ else{notify("افتح الصفحة أولًا باستخدام Google Chrome، ثم اختر تثبيت التطبيق من القائمة.");}
+}
+document.getElementById("install").onclick=promptInstall;
+guideAction.addEventListener("click",promptInstall);
+updateInstallGuide();
+let appSwRegistration=null;
+let updateReloading=false;
+function promptForAppUpdate(){
+ showUpdateNotice("يتوفر تحديث جديد لكونكت واي فاي. اضغط لتثبيته.","success",true);
+}
+function activateWaitingWorker(){
+ const waiting=appSwRegistration&&appSwRegistration.waiting;
+ if(waiting)waiting.postMessage({type:"SKIP_WAITING"});
+}
+if("serviceWorker"in navigator&&location.protocol==="https:"){
+ navigator.serviceWorker.addEventListener("controllerchange",()=>{
+  if(updateReloading)return;
+  updateReloading=true;
+  window.location.reload();
+ });
+ window.addEventListener("load",async()=>{
+  try{
+   appSwRegistration=await navigator.serviceWorker.register("./sw.js");
+   if(appSwRegistration.waiting&&navigator.serviceWorker.controller)promptForAppUpdate();
+   appSwRegistration.addEventListener("updatefound",()=>{
+    const installing=appSwRegistration.installing;
+    if(!installing)return;
+    installing.addEventListener("statechange",()=>{
+     if(installing.state==="installed"&&navigator.serviceWorker.controller)promptForAppUpdate();
+    });
+   });
+   appSwRegistration.update().catch(()=>{});
+  }catch(error){console.warn("Service worker registration failed",error)}
+ });
+}
+document.getElementById("applyUpdate").addEventListener("click",()=>{
+ const action=document.getElementById("applyUpdate");
+ action.disabled=true;
+ action.textContent="جاري التحديث…";
+ activateWaitingWorker();
+});
+document.getElementById("refreshApp").addEventListener("click",async()=>{
+ const button=document.getElementById("refreshApp");
+ if(button.dataset.busy==="1")return;
+ button.dataset.busy="1";button.disabled=true;button.classList.add("is-updating");
+ showUpdateNotice("جاري البحث عن تحديث جديد…","loading");
+ try{
+  if(!("serviceWorker"in navigator))throw new Error("unsupported");
+  appSwRegistration=appSwRegistration||await navigator.serviceWorker.getRegistration();
+  if(!appSwRegistration)appSwRegistration=await navigator.serviceWorker.register("./sw.js");
+  await appSwRegistration.update();
+  if(appSwRegistration.waiting){
+   promptForAppUpdate();
+  }else if(appSwRegistration.installing){
+   showUpdateNotice("تم العثور على تحديث. جارٍ تنزيله…","loading");
+   const worker=appSwRegistration.installing;
+   worker.addEventListener("statechange",()=>{
+    if(worker.state==="installed"&&appSwRegistration.waiting)promptForAppUpdate();
+   });
+  }else{
+   showUpdateNotice("أنت تستخدم أحدث إصدار من كونكت واي فاي.","success");
+  }
+ }catch(error){
+  showUpdateNotice("تعذر فحص التحديث الآن. تحقق من اتصال الإنترنت وحاول مرة أخرى.","error");
+ }finally{
+  button.classList.remove("is-updating");button.disabled=false;button.dataset.busy="0";
+ }
+});
+
+// V75: role confirmation handler is initialized after modal markup.
+
+</script>
+
+<div class="role-confirm-backdrop" id="roleConfirmBackdrop" hidden>
+ <section class="role-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="roleConfirmTitle" aria-describedby="roleConfirmDescription">
+  <button class="role-confirm-close" id="roleConfirmClose" type="button" aria-label="إغلاق">×</button>
+  <div class="role-confirm-icon" id="roleConfirmIcon" aria-hidden="true">♙</div>
+  <h2 id="roleConfirmTitle">هل أنت موزع؟</h2>
+  <p id="roleConfirmDescription">هذه المنطقة مخصصة لموزعي كونكت.</p>
+  <div class="role-confirm-actions">
+   <button class="role-confirm-yes" id="roleConfirmYes" type="button">أيوه، أنا موزع</button>
+   <button class="role-confirm-no" id="roleConfirmNo" type="button">لا</button>
+  </div>
+ </section>
+</div>
+
+
+<script>
+/* V76 — robust delegated role confirmation; navigation only after explicit Yes */
+(()=>{
+ const initRoleConfirmation=()=>{
+  const backdrop=document.getElementById("roleConfirmBackdrop");
+  const title=document.getElementById("roleConfirmTitle");
+  const description=document.getElementById("roleConfirmDescription");
+  const icon=document.getElementById("roleConfirmIcon");
+  const yes=document.getElementById("roleConfirmYes");
+  const no=document.getElementById("roleConfirmNo");
+  const close=document.getElementById("roleConfirmClose");
+  if(!backdrop||!title||!description||!icon||!yes||!no||!close)return;
+
+  let destination="";
+  const hide=()=>{
+   backdrop.hidden=true;
+   destination="";
+   document.body.classList.remove("role-confirm-open");
+  };
+  const show=(kind,url)=>{
+   const agent=kind==="agent";
+   destination=url;
+   title.textContent=agent?"هل أنت موزع؟":"هل أنت مدير؟";
+   description.textContent=agent
+    ?"هذه المنطقة مخصصة لموزعي كونكت. هل تريد المتابعة؟"
+    :"هذه المنطقة مخصصة لإدارة كونكت. هل تريد المتابعة؟";
+   icon.textContent=agent?"♙":"⚙";
+   yes.textContent=agent?"نعم، أنا موزع":"نعم، أنا المدير";
+   backdrop.hidden=false;
+   document.body.classList.add("role-confirm-open");
+  };
+
+  // Capture at document level so card/link handlers cannot navigate first.
+  document.addEventListener("click",event=>{
+   const target=event.target instanceof Element?event.target:null;
+   const link=target?.closest(".services a.service.agent,.services a.service.admin");
+   if(!link)return;
+   event.preventDefault();
+   event.stopPropagation();
+   event.stopImmediatePropagation();
+   show(link.classList.contains("agent")?"agent":"admin",link.href);
+  },true);
+
+  yes.addEventListener("click",()=>{
+   if(!destination)return;
+   const url=destination;
+   hide();
+   window.location.assign(url);
+  });
+  no.addEventListener("click",hide);
+  close.addEventListener("click",hide);
+  backdrop.addEventListener("click",event=>{if(event.target===backdrop)hide()});
+  document.addEventListener("keydown",event=>{
+   if(event.key==="Escape"&&!backdrop.hidden)hide();
+  });
+  backdrop.hidden=true;
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initRoleConfirmation,{once:true});
+ else initRoleConfirmation();
+})();
+</script>
+
+</body></html>
