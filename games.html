@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#139b83"><title>ألعاب كونكت بدون إنترنت</title><style>
+:root{--bg:#f4f8fb;--panel:#fff;--text:#1b2b3a;--muted:#687b8b;--line:#e0e9ef;--accent:#139b83;--accent2:#7564ce;--shadow:0 8px 28px #18344d12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;direction:rtl}
+a{color:inherit}.page{max-width:850px;margin:auto;padding:18px 14px 42px}.top{display:flex;align-items:center;gap:12px;margin-bottom:18px}.back{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line);border-radius:14px;background:var(--panel);text-decoration:none;color:var(--accent);font-size:21px}.brand{font-size:12px;color:var(--muted)}.brand strong{display:block;color:var(--text);font-size:16px}.hero{padding:22px;border:1px solid var(--line);border-radius:23px;background:linear-gradient(135deg,#e7f7f2,#fff 65%);box-shadow:var(--shadow);margin-bottom:16px}.hero small{color:var(--accent);font-weight:900}.hero h1{font-size:25px;margin:7px 0}.hero p{font-size:13px;color:var(--muted);line-height:1.8;margin:0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;align-items:stretch;gap:13px}.card{background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:15px;box-shadow:var(--shadow);min-width:0}.card h2,.card h3{margin:0 0 7px}.muted{color:var(--muted);font-size:12px;line-height:1.7}.btn{border:0;border-radius:12px;padding:11px 15px;background:var(--accent);color:#fff;font:inherit;font-weight:800;cursor:pointer}.btn.alt{background:#eef4f6;color:var(--text);border:1px solid var(--line)}button:disabled{opacity:.5}.foot{font-size:11px;color:var(--muted);text-align:center;margin-top:18px}@media(max-width:720px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:460px){.page{padding:12px 11px 30px}.hero{padding:18px}.hero h1{font-size:22px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:12px}.card h2{font-size:15px}}
+
+.game{display:flex;flex-direction:column;gap:12px;height:100%;min-height:100%}.board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.memory-tile{aspect-ratio:1;border:0;border-radius:13px;background:#e8f2f5;color:#1b5960;font-size:26px;font-weight:900;cursor:pointer}.memory-tile.open,.memory-tile.done{background:#dcf6eb}.memory-tile.done{opacity:.55}.stats{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}.ttt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:12px auto}.ttt button{aspect-ratio:1;border:1px solid var(--line);border-radius:14px;background:#f2f7f8;color:var(--accent2);font-size:34px;font-weight:900}.reaction-box{height:125px;display:grid;place-items:center;border-radius:15px;background:#e9f0f3;color:#4d6574;font-weight:900;text-align:center;padding:12px;cursor:pointer;user-select:none}.reaction-box.ready{background:#c9f3dc;color:#08794f}.reaction-box.wait{background:#ffe8e5;color:#a33c32}
+
+.home-return-link{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ min-height:42px;padding:8px 14px;border:1px solid var(--line);
+ border-radius:13px;background:var(--panel);color:var(--accent);
+ text-decoration:none;font-size:13px;font-weight:800;
+ box-shadow:0 4px 14px #18344d0c;
+ white-space:nowrap;
+}
+.home-return-link svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.home-return-link:active{transform:scale(.97)}
+
+
+/* V92 — premium sticky page header */
+.top{
+ position:sticky;top:0;z-index:100;
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ margin:0 -14px 18px;padding:11px 14px;
+ min-height:68px;
+ background:rgba(255,255,255,.91);
+ border:1px solid rgba(207,224,234,.9);
+ border-top:0;border-radius:0 0 19px 19px;
+ box-shadow:0 7px 22px rgba(24,52,77,.09);
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+.top .brand{margin-inline-start:auto;line-height:1.5}
+.top .brand strong{font-size:15px;letter-spacing:-.2px}
+.home-return-link{
+ flex:none;min-height:43px;padding:9px 13px;gap:9px;
+ border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line));
+ border-radius:13px;
+ background:linear-gradient(135deg,#fff,#f2faf8);
+ color:var(--accent);font-size:12px;font-weight:900;
+ box-shadow:0 3px 10px rgba(19,155,131,.08);
+}
+.home-return-link svg{width:20px;height:20px}
+@media(max-width:620px){
+ .top{margin:0 -11px 15px;padding:9px 11px;min-height:62px;border-radius:0 0 16px 16px}
+ .top .brand strong{font-size:14px}
+ .home-return-link{min-height:41px;padding:8px 11px;font-size:11px}
+}
+
+</style></head><body><main class="page">
+<header class="top"><a class="home-return-link" href="./index.html" aria-label="الرجوع إلى الرئيسية" title="الرجوع إلى الرئيسية"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9M9 21v-7h6v7"/></svg><span>الرجوع إلى الرئيسية</span></a><div class="brand"><strong>كونكت واي فاي</strong>منطقة الترفيه بدون إنترنت</div></header>
+<section class="hero"><small>🎮 ألعاب خفيفة</small><h1>وقت ممتع حتى لو النت فاصل</h1><p>ثلاث ألعاب بسيطة تعمل على الموبايل والكمبيوتر. افتح الصفحة مرة وهي متصلة بالإنترنت، وبعدها تقدر ترجع لها دون اتصال طالما ملفاتها اتحملت.</p></section>
+<div class="grid">
+<section class="card game"><h2>🧠 لعبة الذاكرة</h2><p class="muted">اكشف البطاقات وابحث عن الأزواج المتشابهة بأقل عدد من المحاولات.</p><div class="stats"><span>المحاولات: <b id="moves">0</b></span><span>الأزواج: <b id="pairs">0/8</b></span></div><div class="board" id="memoryBoard"></div><button class="btn" id="memoryReset">لعبة جديدة</button><p class="muted" id="memoryStatus" aria-live="polite">ابدأ واختبر ذاكرتك.</p></section>
+<section class="card game"><h2>⭕ إكس أو</h2><p class="muted">العب ضد صديقك على نفس الجهاز. X يبدأ أولًا.</p><div class="ttt" id="tttBoard"></div><p class="muted" id="tttStatus" aria-live="polite">دور اللاعب X</p><button class="btn" id="tttReset">إعادة اللعبة</button></section>
+<section class="card game"><h2>⚡ اختبار سرعة الاستجابة</h2><p class="muted">اضغط على المساحة بمجرد ما تتحول للأخضر. ما تضغطش بدري!</p><div class="reaction-box" id="reactionBox">اضغط «ابدأ» وانتظر اللون الأخضر</div><button class="btn" id="reactionStart">ابدأ الاختبار</button><p class="muted" id="reactionStatus" aria-live="polite">أفضل نتيجة: <b id="reactionBest">—</b></p></section>
+<section class="card game"><h2>📿 ارجع للسبحة</h2><p class="muted">كمّل تسبيحك وعدّك محفوظ على جهازك في الصفحة الرئيسية.</p><a class="btn" style="display:block;text-align:center;text-decoration:none" href="./index.html#daily-fun">فتح الاستراحة والسبحة</a></section>
+
+<section class="card game"><h2>🔢 خمن الرقم</h2><p class="muted">اختر رقمًا من 1 إلى 50 وحاول اكتشاف الرقم السري.</p><input id="guessInput" type="number" min="1" max="50" inputmode="numeric" placeholder="اكتب رقمًا" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;font:inherit"><button class="btn" id="guessTry">تحقق</button><p class="muted" id="guessStatus" aria-live="polite">لديك 7 محاولات.</p><button class="btn alt" id="guessNew">رقم جديد</button></section>
+<section class="card game"><h2>✊ حجر ورقة مقص</h2><p class="muted">اختار حركتك والعب ضد الكمبيوتر.</p><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="btn alt rps" data-pick="حجر">✊ حجر</button><button class="btn alt rps" data-pick="ورقة">✋ ورقة</button><button class="btn alt rps" data-pick="مقص">✌️ مقص</button></div><p class="muted" id="rpsStatus" aria-live="polite">مستعد؟</p><p class="muted">فوزك: <b id="rpsWins">0</b> | الكمبيوتر: <b id="rpsLosses">0</b></p></section>
+<section class="card game"><h2>➕ تحدي الحساب</h2><p class="muted">حل أكبر عدد من المسائل خلال 30 ثانية.</p><div style="font-size:26px;font-weight:900;text-align:center;padding:8px" id="mathQuestion">ابدأ التحدي</div><input id="mathAnswer" type="number" inputmode="numeric" placeholder="الإجابة" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;font:inherit" disabled><button class="btn" id="mathStart">ابدأ 30 ثانية</button><p class="muted" id="mathStatus" aria-live="polite">النقاط: 0 | الوقت: 30</p></section>
+</div><p class="foot">الألعاب للتسلية الخفيفة، ولا تحتاج إلى حساب أو اتصال بالخادم.</p></main>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+let deck=[],first=null,lock=false,moves=0,pairs=0;
+const symbols=["🍎","🚀","⭐","🐱","🎈","🍀","⚽","🌙"];
+function newMemory(){deck=[...symbols,...symbols].sort(()=>Math.random()-.5);first=null;lock=false;moves=0;pairs=0;$("moves").textContent=0;$("pairs").textContent="0/8";$("memoryStatus").textContent="ابدأ واختبر ذاكرتك.";$("memoryBoard").innerHTML="";deck.forEach((v,i)=>{const b=document.createElement("button");b.className="memory-tile";b.textContent="؟";b.setAttribute("aria-label","بطاقة مخفية");b.onclick=()=>{if(lock||b.classList.contains("done")||b.classList.contains("open"))return;b.classList.add("open");b.textContent=v;if(first===null){first={b,v};return;}moves++;$("moves").textContent=moves;if(first.v===v){b.classList.add("done");first.b.classList.add("done");first=null;pairs++;$("pairs").textContent=pairs+"/8";if(pairs===8)$("memoryStatus").textContent="ممتاز! أكملت اللعبة في "+moves+" محاولة.";}else{lock=true;const prev=first;first=null;setTimeout(()=>{b.classList.remove("open");b.textContent="؟";prev.b.classList.remove("open");prev.b.textContent="؟";lock=false;},650);}};$("memoryBoard").appendChild(b);});}
+$("memoryReset").onclick=newMemory;newMemory();
+let cells=Array(9).fill(""),turn="X",ended=false;
+function drawTtt(){const board=$("tttBoard");board.innerHTML="";cells.forEach((v,i)=>{const b=document.createElement("button");b.textContent=v;b.disabled=!!v||ended;b.onclick=()=>{if(ended||cells[i])return;cells[i]=turn;if(check(turn)){ended=true;$("tttStatus").textContent="اللاعب "+turn+" فاز!";}else if(cells.every(Boolean)){ended=true;$("tttStatus").textContent="تعادل!";}else{turn=turn==="X"?"O":"X";$("tttStatus").textContent="دور اللاعب "+turn;}drawTtt();};board.appendChild(b);});}
+function check(p){return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(a=>a.every(i=>cells[i]===p));}
+$("tttReset").onclick=()=>{cells=Array(9).fill("");turn="X";ended=false;$("tttStatus").textContent="دور اللاعب X";drawTtt();};drawTtt();
+let phase="idle",readyAt=0,delay=null;let best=Number(localStorage.getItem("connect_reaction_best")||0);$("reactionBest").textContent=best?best+" ms":"—";
+$("reactionStart").onclick=()=>{clearTimeout(delay);phase="wait";$("reactionBox").className="reaction-box wait";$("reactionBox").textContent="استنى اللون الأخضر…";$("reactionStatus").textContent="ركز كويس!";$("reactionStart").disabled=true;delay=setTimeout(()=>{phase="ready";readyAt=performance.now();$("reactionBox").className="reaction-box ready";$("reactionBox").textContent="اضغط الآن!";},1200+Math.random()*2600);};
+$("reactionBox").onclick=()=>{if(phase==="wait"){clearTimeout(delay);phase="idle";$("reactionBox").className="reaction-box";$("reactionBox").textContent="ضغطت بدري! حاول تاني";$("reactionStatus").textContent="استنى اللون الأخضر قبل الضغط.";$("reactionStart").disabled=false;}else if(phase==="ready"){const ms=Math.round(performance.now()-readyAt);phase="idle";$("reactionBox").className="reaction-box";$("reactionBox").textContent="زمنك "+ms+" مللي ثانية";if(!best||ms<best){best=ms;localStorage.setItem("connect_reaction_best",best);$("reactionBest").textContent=best+" ms";}$("reactionStatus").textContent="نتيجتك: "+ms+" ms — جرّب تحسّنها.";$("reactionStart").disabled=false;}};
+let secret=Math.floor(Math.random()*50)+1,tries=7;
+function newGuess(){secret=Math.floor(Math.random()*50)+1;tries=7;$("guessInput").value="";$("guessInput").disabled=false;$("guessTry").disabled=false;$("guessStatus").textContent="لديك 7 محاولات.";}
+$("guessNew").onclick=newGuess;$("guessTry").onclick=()=>{const v=Number($("guessInput").value);if(!Number.isInteger(v)||v<1||v>50){$("guessStatus").textContent="اكتب رقمًا من 1 إلى 50.";return;}tries--;if(v===secret){$("guessStatus").textContent="صحيح! أحسنت."; $("guessInput").disabled=true;$("guessTry").disabled=true;}else if(!tries){$("guessStatus").textContent="انتهت المحاولات. الرقم كان "+secret;$("guessInput").disabled=true;$("guessTry").disabled=true;}else $("guessStatus").textContent=(v<secret?"أكبر من كده. ":"أقل من كده. ")+"باقي "+tries+" محاولات.";};newGuess();
+let wins=0,losses=0;
+document.querySelectorAll(".rps").forEach(b=>b.onclick=()=>{const opts=["حجر","ورقة","مقص"],cpu=opts[Math.floor(Math.random()*3)],u=b.dataset.pick;let result=u===cpu?"تعادل":((u==="حجر"&&cpu==="مقص")||(u==="ورقة"&&cpu==="حجر")||(u==="مقص"&&cpu==="ورقة"))?"فزت!":"الكمبيوتر فاز";if(result==="فزت!")wins++;if(result==="الكمبيوتر فاز")losses++;$("rpsStatus").textContent="أنت: "+u+" — الكمبيوتر: "+cpu+" — "+result;$("rpsWins").textContent=wins;$("rpsLosses").textContent=losses;});
+let mathTimer=null,mathRunning=false,mathScore=0,mathSeconds=30,mathValue=0;
+function nextMath(){const x=2+Math.floor(Math.random()*18),y=2+Math.floor(Math.random()*18);mathValue=x+y;$("mathQuestion").textContent=x+" + "+y+" = ؟";$("mathAnswer").value="";}
+$("mathStart").onclick=()=>{clearInterval(mathTimer);mathRunning=true;mathScore=0;mathSeconds=30;$("mathAnswer").disabled=false;$("mathStart").disabled=true;nextMath();$("mathStatus").textContent="النقاط: 0 | الوقت: 30";mathTimer=setInterval(()=>{mathSeconds--;$("mathStatus").textContent="النقاط: "+mathScore+" | الوقت: "+mathSeconds;if(mathSeconds<=0){clearInterval(mathTimer);mathRunning=false;$("mathAnswer").disabled=true;$("mathStart").disabled=false;$("mathQuestion").textContent="انتهى الوقت!";$("mathStatus").textContent="نتيجتك: "+mathScore+" إجابة صحيحة."; }},1000);};
+$("mathAnswer").addEventListener("input",()=>{if(mathRunning&&$("mathAnswer").value!==""&&Number($("mathAnswer").value)===mathValue){mathScore++;$("mathStatus").textContent="النقاط: "+mathScore+" | الوقت: "+mathSeconds;nextMath();}});
+
+})();
+</script>
+<script>
+(()=>{
+ const init=()=>{
+  let ctx=null;
+  const play=()=>{
+   try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!ctx)ctx=new AC();
+    const start=()=>{
+     const t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain(),f=ctx.createBiquadFilter();
+     f.type="lowpass";f.frequency.setValueAtTime(2400,t);o.type="sine";o.frequency.setValueAtTime(920,t);o.frequency.exponentialRampToValueAtTime(610,t+.055);
+     g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.075,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+.095);
+     o.connect(f);f.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.10);
+    };
+    if(ctx.state==="suspended")ctx.resume().then(start).catch(()=>{});else start();
+   }catch(e){}
+  };
+  document.addEventListener("pointerdown",e=>{if(e.target.closest("button,.reaction-box,.memory-tile"))play();},{capture:true,passive:true});
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script>
+
+</body></html>
