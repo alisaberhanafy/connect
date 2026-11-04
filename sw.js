@@ -1,5 +1,5 @@
-const CACHE='connect-wifi-v101-hotspot-confirmation';
-const CORE=["./", "./index.html", "./games.html", "./adhkar.html", "./manifest.webmanifest", "./ambient-nature.wav", "./connect-nasheed.mp3", "./salawat-once.mp3", "./theme-config.js", "./icons/icon-192.png", "./icons/icon-512.png", "./backgrounds/sky.svg", "./backgrounds/neon.svg", "./backgrounds/waves.svg", "./backgrounds/minimal.svg", "./backgrounds/desert.svg", "./backgrounds/cyber.svg"];
+const CACHE='connect-wifi-v105-support-redirect';
+const CORE=["./", "./index.html", "./support.html", "./games.html", "./adhkar.html", "./manifest.webmanifest", "./ambient-nature.wav", "./connect-nasheed.mp3", "./salawat-once.mp3", "./theme-config.js", "./icons/icon-192.png", "./icons/icon-512.png", "./backgrounds/sky.svg", "./backgrounds/neon.svg", "./backgrounds/waves.svg", "./backgrounds/minimal.svg", "./backgrounds/desert.svg", "./backgrounds/cyber.svg"];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting();});
