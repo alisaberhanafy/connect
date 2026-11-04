@@ -1,12 +1,12 @@
 {
-  "id": "/connect/",
+  "id": "./",
   "name": "كونكت واي فاي",
   "short_name": "كونكت",
   "description": "تطبيق كونكت واي فاي لإدارة حسابك وخدمات الشبكة والدعم الفني.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "/connect/",
-  "scope": "/connect/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "display_override": [
     "standalone",
@@ -17,17 +17,16 @@
   "theme_color": "#eff7ff",
   "icons": [
     {
-      "src": "/connect/icons/icon-192.png",
+      "src": "./icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/connect/icons/icon-512.png",
+      "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
-  ],
-  "prefer_related_applications": false
+  ]
 }

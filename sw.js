@@ -1,4 +1,4 @@
-const CACHE='connect-wifi-v117-pwa-install-fix';
+const CACHE='connect-wifi-v118-restore-pwa-install';
 const CORE=["./", "./index.html", "./support.html", "./games.html", "./adhkar.html", "./manifest.webmanifest", "./ambient-nature.wav", "./connect-nasheed.mp3", "./salawat-once.mp3", "./theme-config.js", "./icons/icon-192.png", "./icons/icon-512.png", "./backgrounds/sky.svg", "./backgrounds/neon.svg", "./backgrounds/waves.svg", "./backgrounds/minimal.svg", "./backgrounds/desert.svg", "./backgrounds/cyber.svg"];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
