@@ -1662,7 +1662,7 @@ const isStandalone=()=>window.matchMedia("(display-mode: standalone)").matches||
 const installUA=navigator.userAgent||"";
 const isIOS=/iphone|ipad|ipod/i.test(installUA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const isAndroid=/Android/i.test(installUA);
-const isChrome=isAndroid&&/Chrome\\/\\d+/i.test(installUA)&&!/EdgA|OPR|SamsungBrowser|YaBrowser|DuckDuckGo|Brave|;\\s*wv\\)/i.test(installUA);
+const isChrome=/Chrome\/\d+/i.test(installUA)&&!/EdgA|OPR|SamsungBrowser|YaBrowser|DuckDuckGo|Brave|;\s*wv\)/i.test(installUA);
 function updateInstallGuide(){
  if(isStandalone()){guide.hidden=true;return}
  guide.hidden=false;
@@ -1692,12 +1692,37 @@ guideAction.addEventListener("click",promptInstall);
 updateInstallGuide();
 let appSwRegistration=null;
 let updateReloading=false;
+let updateCheckBusy=false;
 function promptForAppUpdate(){
  showUpdateNotice("يتوفر تحديث جديد لكونكت واي فاي. اضغط لتثبيته.","success",true);
 }
 function activateWaitingWorker(){
  const waiting=appSwRegistration&&appSwRegistration.waiting;
  if(waiting)waiting.postMessage({type:"SKIP_WAITING"});
+}
+async function checkForAppUpdate(showCurrent=false){
+ if(updateCheckBusy||!("serviceWorker"in navigator)||!navigator.onLine)return;
+ updateCheckBusy=true;
+ try{
+  appSwRegistration=appSwRegistration||await navigator.serviceWorker.getRegistration();
+  if(!appSwRegistration)appSwRegistration=await navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"});
+  await appSwRegistration.update();
+  if(appSwRegistration.waiting&&navigator.serviceWorker.controller){
+   promptForAppUpdate();
+  }else if(appSwRegistration.installing&&navigator.serviceWorker.controller){
+   const worker=appSwRegistration.installing;
+   worker.addEventListener("statechange",()=>{
+    if(worker.state==="installed"&&appSwRegistration.waiting)promptForAppUpdate();
+   });
+  }else if(showCurrent){
+   showUpdateNotice("أنت تستخدم أحدث إصدار من كونكت واي فاي.","success");
+  }
+ }catch(error){
+  if(showCurrent)showUpdateNotice("تعذر فحص التحديث الآن. تحقق من اتصال الإنترنت وحاول مرة أخرى.","error");
+  console.warn("App update check failed",error);
+ }finally{
+  updateCheckBusy=false;
+ }
 }
 if("serviceWorker"in navigator&&location.protocol==="https:"){
  navigator.serviceWorker.addEventListener("controllerchange",()=>{
@@ -1707,16 +1732,21 @@ if("serviceWorker"in navigator&&location.protocol==="https:"){
  });
  window.addEventListener("load",async()=>{
   try{
-   appSwRegistration=await navigator.serviceWorker.register("./sw.js");
+   appSwRegistration=await navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"});
    if(appSwRegistration.waiting&&navigator.serviceWorker.controller)promptForAppUpdate();
    appSwRegistration.addEventListener("updatefound",()=>{
     const installing=appSwRegistration.installing;
     if(!installing)return;
     installing.addEventListener("statechange",()=>{
-     if(installing.state==="installed"&&navigator.serviceWorker.controller)promptForAppUpdate();
+     if(installing.state==="installed"&&navigator.serviceWorker.controller&&appSwRegistration.waiting)promptForAppUpdate();
     });
    });
-   appSwRegistration.update().catch(()=>{});
+   await checkForAppUpdate(false);
+   setInterval(()=>{if(document.visibilityState==="visible")checkForAppUpdate(false)},180000);
+   document.addEventListener("visibilitychange",()=>{
+    if(document.visibilityState==="visible")checkForAppUpdate(false);
+   });
+   window.addEventListener("focus",()=>checkForAppUpdate(false));
   }catch(error){console.warn("Service worker registration failed",error)}
  });
 }
@@ -1731,27 +1761,8 @@ document.getElementById("refreshApp").addEventListener("click",async()=>{
  if(button.dataset.busy==="1")return;
  button.dataset.busy="1";button.disabled=true;button.classList.add("is-updating");
  showUpdateNotice("جاري البحث عن تحديث جديد…","loading");
- try{
-  if(!("serviceWorker"in navigator))throw new Error("unsupported");
-  appSwRegistration=appSwRegistration||await navigator.serviceWorker.getRegistration();
-  if(!appSwRegistration)appSwRegistration=await navigator.serviceWorker.register("./sw.js");
-  await appSwRegistration.update();
-  if(appSwRegistration.waiting){
-   promptForAppUpdate();
-  }else if(appSwRegistration.installing){
-   showUpdateNotice("تم العثور على تحديث. جارٍ تنزيله…","loading");
-   const worker=appSwRegistration.installing;
-   worker.addEventListener("statechange",()=>{
-    if(worker.state==="installed"&&appSwRegistration.waiting)promptForAppUpdate();
-   });
-  }else{
-   showUpdateNotice("أنت تستخدم أحدث إصدار من كونكت واي فاي.","success");
-  }
- }catch(error){
-  showUpdateNotice("تعذر فحص التحديث الآن. تحقق من اتصال الإنترنت وحاول مرة أخرى.","error");
- }finally{
-  button.classList.remove("is-updating");button.disabled=false;button.dataset.busy="0";
- }
+ await checkForAppUpdate(true);
+ button.classList.remove("is-updating");button.disabled=false;button.dataset.busy="0";
 });
 
 // V75: role confirmation handler is initialized after modal markup.
