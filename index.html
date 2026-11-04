@@ -1196,9 +1196,48 @@ h1 span{color:var(--accent)}.hero p{font-size:11px;line-height:1.9;color:var(--m
  background:#f3f7f9!important;border-color:#dce7ec!important;color:#375166!important;
 }
 
+
+html.connect-needs-chrome body > :not(#chromeRequired){display:none!important}
+#chromeRequired{display:none}
+html.connect-needs-chrome #chromeRequired{display:flex!important}
+.chrome-required{position:fixed;inset:0;z-index:2147483000;background:linear-gradient(145deg,#f7fffb,#e8f7f1);align-items:center;justify-content:center;padding:24px;font-family:inherit;direction:rtl}
+.chrome-required-card{width:min(100%,420px);background:#fff;border:1px solid #d8eee4;border-radius:24px;padding:28px 22px;text-align:center;box-shadow:0 18px 55px rgba(16,92,65,.13)}
+.chrome-required-logo{width:76px;height:76px;object-fit:contain;margin:0 auto 14px}
+.chrome-required-card h1{font-size:22px;color:#174b38;margin:0 0 10px}
+.chrome-required-card p{font-size:14px;line-height:1.9;color:#52675e;margin:0 0 20px}
+.chrome-required-action{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px 16px;border:0;border-radius:14px;background:#16834a;color:white;font-size:16px;font-weight:800;text-decoration:none;cursor:pointer}
+.chrome-required-note{display:block;margin-top:14px;color:#718178;font-size:11px;line-height:1.7}
+.chrome-required-card .chrome-store-action{margin-top:10px;background:#f1f7f3;color:#17613d;border:1px solid #cfe5d8}
 </style>
+<script>
+(function(){
+ var ua=navigator.userAgent||"";
+ var android=/Android/i.test(ua);
+ var ios=/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+ var chrome=/Chrome\/\d+/i.test(ua)&&/Android/i.test(ua)&&!/EdgA|OPR|SamsungBrowser|YaBrowser|DuckDuckGo|Brave|;\s*wv\)/i.test(ua);
+ if(android&&!chrome){
+   document.documentElement.classList.add("connect-needs-chrome");
+ }
+ if(ios) document.documentElement.classList.add("connect-ios");
+})();
+</script>
 </head>
 <body data-theme="sky">
+<div id="chromeRequired" class="chrome-required" role="dialog" aria-modal="true" aria-labelledby="chromeRequiredTitle">
+ <div class="chrome-required-card">
+  <img class="chrome-required-logo" src="./icons/icon-192.png" alt="كونكت واي فاي">
+  <h1 id="chromeRequiredTitle">افتح كونكت باستخدام Google Chrome</h1>
+  <p>لاستخدام كونكت وتثبيت التطبيق، اضغط على الزر التالي لفتح الصفحة في متصفح Google Chrome.</p>
+  <a class="chrome-required-action" id="openChromeAction" href="intent://alisaberhanafy.github.io/connect/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Falisaberhanafy.github.io%2Fconnect%2F;end">
+   <span aria-hidden="true">🌐</span> فتح باستخدام Google Chrome
+  </a>
+  <a class="chrome-required-action chrome-store-action" href="https://play.google.com/store/apps/details?id=com.android.chrome" target="_self" rel="noopener">
+   <span aria-hidden="true">▶</span> تحميل Google Chrome من Google Play
+  </a>
+  <small class="chrome-required-note">لو Chrome مش موجود على جهازك، حمّله من المتجر ثم ارجع للرابط وافتحه به.</small>
+ </div>
+</div>
+
 <div class="bg-art"></div>
 <main class="app">
 <div class="update-notice" id="updateNotice" role="status" aria-live="polite">
@@ -1623,13 +1662,15 @@ document.getElementById("year").textContent=new Date().getFullYear();
 let deferred=null;
 const guide=document.getElementById("installGuide"),guideTitle=document.getElementById("installGuideTitle"),guideText=document.getElementById("installGuideText"),guideAction=document.getElementById("installGuideAction");
 const isStandalone=()=>window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
-const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-const isChrome=/CriOS|Chrome/i.test(navigator.userAgent)&&!/Edg|OPR|SamsungBrowser|YaBrowser|DuckDuckGo|Brave/i.test(navigator.userAgent);
+const installUA=navigator.userAgent||"";
+const isIOS=/iphone|ipad|ipod/i.test(installUA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const isAndroid=/Android/i.test(installUA);
+const isChrome=isAndroid&&/Chrome\\/\\d+/i.test(installUA)&&!/EdgA|OPR|SamsungBrowser|YaBrowser|DuckDuckGo|Brave|;\\s*wv\\)/i.test(installUA);
 function updateInstallGuide(){
  if(isStandalone()){guide.hidden=true;return}
  guide.hidden=false;
  guide.classList.toggle("browser-warning",!isChrome&&!isIOS);
- if(isIOS){guideTitle.textContent="ثبّت كونكت واي فاي على جهازك";guideText.textContent="على iPhone أو iPad افتح الصفحة في Safari ثم مشاركة ← إضافة إلى الشاشة الرئيسية.";guideAction.textContent="طريقة التثبيت";}
+ if(isIOS){guideTitle.textContent="ثبّت كونكت واي فاي على جهازك";guideText.textContent="لإضافة كونكت للشاشة الرئيسية على iPhone، افتح الصفحة في Safari ثم مشاركة ← إضافة إلى الشاشة الرئيسية.";guideAction.textContent="شرح التثبيت على iPhone";}
  else if(!isChrome){guideTitle.textContent="افتح كونكت واي فاي باستخدام Google Chrome";guideText.textContent="لأفضل تجربة وتثبيت التطبيق، افتح هذه الصفحة في Google Chrome.";guideAction.textContent="طريقة الفتح";}
  else{guideTitle.textContent="ثبّت تطبيق كونكت واي فاي";guideText.textContent="ثبّت التطبيق على جهازك للوصول السريع إلى خدماتك.";guideAction.textContent="تثبيت التطبيق";}
 }
@@ -1645,7 +1686,7 @@ document.getElementById("installSuccessClose").addEventListener("click",()=>{
 });
 async function promptInstall(){
  if(deferred){deferred.prompt();const choice=await deferred.userChoice;deferred=null;if(choice&&choice.outcome==="accepted")guide.hidden=true;else updateInstallGuide();}
- else if(isIOS){notify("على iPhone: افتح الصفحة في Safari ثم اضغط مشاركة واختر إضافة إلى الشاشة الرئيسية.");}
+ else if(isIOS){notify("على iPhone: افتح الصفحة في Safari، واضغط زر مشاركة، ثم اختر إضافة إلى الشاشة الرئيسية.");}
  else if(isChrome){notify("من قائمة Chrome ⋮ اختر تثبيت التطبيق أو إضافة إلى الشاشة الرئيسية.");}
  else{notify("افتح الصفحة أولًا باستخدام Google Chrome، ثم اختر تثبيت التطبيق من القائمة.");}
 }
