@@ -1,6 +1,13 @@
-const CACHE='connect-wifi-v121-exact-original-restore';
+const CACHE='connect-wifi-v122-install-audio-fix';
 const CORE=["./", "./index.html", "./support.html", "./games.html", "./adhkar.html", "./manifest.webmanifest", "./ambient-nature.wav", "./connect-nasheed.mp3", "./salawat-once.mp3", "./theme-config.js", "./icons/icon-192.png", "./icons/icon-512.png", "./backgrounds/sky.svg", "./backgrounds/neon.svg", "./backgrounds/waves.svg", "./backgrounds/minimal.svg", "./backgrounds/desert.svg", "./backgrounds/cyber.svg"];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE))));
+const REQUIRED=["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png"];
+const OPTIONAL=CORE.filter(path=>!REQUIRED.includes(path));
+self.addEventListener('install',event=>event.waitUntil((async()=>{
+ const cache=await caches.open(CACHE);
+ // A missing optional sound/page/theme asset must not cancel Service Worker installation.
+ await cache.addAll(REQUIRED);
+ await Promise.allSettled(OPTIONAL.map(path=>cache.add(path)));
+})()));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting();});
 self.addEventListener('fetch',event=>{

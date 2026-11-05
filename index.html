@@ -1509,11 +1509,17 @@ function showUpdateNotice(message,state,withAction=false){
  // The speaker itself is handled by its click action to avoid double playback.
  document.addEventListener("pointerdown",async(event)=>{
   if(firstTouchHandled)return;
-  if(event.target===button||button.contains(event.target)||event.target.closest("#quranRadioPlayer"))return;
-  firstTouchHandled=true;
-  await playFromStart();
-  try{localStorage.setItem("connectSalawatAutoPlayed","1");}catch(e){}
- },{capture:true,passive:true,once:true});
+  const target=event.target;
+  if(target===button||button.contains(target)||(target.closest&&target.closest("#quranRadioPlayer")))return;
+  // Mark the first gesture as consumed only after the browser confirms playback.
+  // If Chrome blocks the first attempt in a captive-portal/shortcut context,
+  // the next genuine tap gets another chance without requiring the speaker button.
+  const played=await playFromStart();
+  if(played){
+   firstTouchHandled=true;
+   try{localStorage.setItem("connectSalawatAutoPlayed","1");}catch(e){}
+  }
+ },{capture:true,passive:true});
  // Every deliberate press on the speaker replays the short clip from second 1.
  button.addEventListener("click",async(event)=>{
   event.preventDefault();
