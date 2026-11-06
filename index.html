@@ -9,9 +9,7 @@
 <link rel="icon" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <title>كونكت واي فاي</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/fonts/fonts.css">
 <style>
 *{box-sizing:border-box}html{min-height:100%;scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:"Cairo",Tahoma,sans-serif;color:var(--text);background:var(--bg);padding-bottom:calc(22px + env(safe-area-inset-bottom));transition:background .25s,color .25s}
 :root{--bg:#eff7ff;--panel:#fff;--text:#142846;--muted:#687b94;--line:#dce8f2;--accent:#087fc7;--accent2:#39bce8;--support:#119b66;--shadow:0 8px 25px rgba(22,75,119,.08)}
@@ -1668,6 +1666,18 @@ document.getElementById("year").textContent=new Date().getFullYear();
 let deferred=null;
 const guide=document.getElementById("installGuide"),guideTitle=document.getElementById("installGuideTitle"),guideText=document.getElementById("installGuideText"),guideAction=document.getElementById("installGuideAction");
 const isStandalone=()=>window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
+let installedWebAppDetected=false;
+async function detectInstalledWebApp(){
+ if(isStandalone())return true;
+ if(typeof navigator.getInstalledRelatedApps!=="function")return false;
+ try{
+  const apps=await navigator.getInstalledRelatedApps();
+  const appId="https://alisaberhanafy.github.io/connect/";
+  return Array.isArray(apps)&&apps.some(app=>
+   app.platform==="webapp"&&(app.id===appId||app.url==="https://alisaberhanafy.github.io/connect/manifest.webmanifest")
+  );
+ }catch(error){return false}
+}
 const installUA=navigator.userAgent||"";
 const isIOS=/iphone|ipad|ipod/i.test(installUA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const isAndroid=/Android/i.test(installUA);
@@ -1676,9 +1686,18 @@ function updateInstallGuide(){
  if(isStandalone()){guide.hidden=true;return}
  guide.hidden=false;
  guide.classList.toggle("browser-warning",!isChrome&&!isIOS);
- if(isIOS){guideTitle.textContent="ثبّت كونكت واي فاي على جهازك";guideText.textContent="لإضافة كونكت للشاشة الرئيسية على iPhone، افتح الصفحة في Safari ثم مشاركة ← إضافة إلى الشاشة الرئيسية.";guideAction.textContent="شرح التثبيت على iPhone";}
- else if(!isChrome){guideTitle.textContent="افتح كونكت واي فاي باستخدام Google Chrome";guideText.textContent="لأفضل تجربة وتثبيت التطبيق، افتح هذه الصفحة في Google Chrome.";guideAction.textContent="طريقة الفتح";}
- else{guideTitle.textContent="ثبّت تطبيق كونكت واي فاي";guideText.textContent="ثبّت التطبيق على جهازك للوصول السريع إلى خدماتك.";guideAction.textContent="تثبيت التطبيق";}
+ if(installedWebAppDetected){
+  guideTitle.textContent="تطبيق كونكت واي فاي مثبت بالفعل";
+  guideText.textContent="لفتح التطبيق المستقل، اضغط على «Open in app» بجوار شريط العنوان في Chrome.";
+  guideAction.textContent="طريقة فتح التطبيق";
+  guideAction.onclick=()=>notify("اضغط على Open in app بجوار شريط العنوان لفتح تطبيق كونكت واي فاي المثبت.");
+ }
+ else{
+  guideAction.onclick=promptInstall;
+  if(isIOS){guideTitle.textContent="ثبّت كونكت واي فاي على جهازك";guideText.textContent="لإضافة كونكت للشاشة الرئيسية على iPhone، افتح الصفحة في Safari ثم مشاركة ← إضافة إلى الشاشة الرئيسية.";guideAction.textContent="شرح التثبيت على iPhone";}
+  else if(!isChrome){guideTitle.textContent="افتح كونكت واي فاي باستخدام Google Chrome";guideText.textContent="لأفضل تجربة وتثبيت التطبيق، افتح هذه الصفحة في Google Chrome.";guideAction.textContent="طريقة الفتح";}
+  else{guideTitle.textContent="ثبّت تطبيق كونكت واي فاي";guideText.textContent="ثبّت التطبيق على جهازك للوصول السريع إلى خدماتك.";guideAction.textContent="تثبيت التطبيق";}
+ }
 }
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;updateInstallGuide()});
 window.addEventListener("appinstalled",()=>{
@@ -1697,8 +1716,12 @@ async function promptInstall(){
  else{notify("افتح الصفحة أولًا باستخدام Google Chrome، ثم اختر تثبيت التطبيق من القائمة.");}
 }
 document.getElementById("install").onclick=promptInstall;
-guideAction.addEventListener("click",promptInstall);
+
 updateInstallGuide();
+detectInstalledWebApp().then(installed=>{
+ installedWebAppDetected=installed;
+ updateInstallGuide();
+});
 let appSwRegistration=null;
 let updateReloading=false;
 let updateCheckBusy=false;
