@@ -1665,6 +1665,9 @@ document.addEventListener("visibilitychange",()=>{if(document.visibilityState===
 document.getElementById("year").textContent=new Date().getFullYear();
 let deferred=null;
 const guide=document.getElementById("installGuide"),guideTitle=document.getElementById("installGuideTitle"),guideText=document.getElementById("installGuideText"),guideAction=document.getElementById("installGuideAction");
+const APP_ORIGIN="https://alisaberhanafy.github.io";
+const APP_PATH="/connect/";
+const APP_MANIFEST=APP_ORIGIN+APP_PATH+"manifest.webmanifest";
 const isStandalone=()=>window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
 let installedWebAppDetected=false;
 async function detectInstalledWebApp(){
@@ -1672,16 +1675,25 @@ async function detectInstalledWebApp(){
  if(typeof navigator.getInstalledRelatedApps!=="function")return false;
  try{
   const apps=await navigator.getInstalledRelatedApps();
-  const appId="https://alisaberhanafy.github.io/connect/";
-  return Array.isArray(apps)&&apps.some(app=>
-   app.platform==="webapp"&&(app.id===appId||app.url==="https://alisaberhanafy.github.io/connect/manifest.webmanifest")
-  );
+  if(!Array.isArray(apps))return false;
+  return apps.some(app=>{
+   if(app.platform!=="webapp")return false;
+   const candidates=[app.id,app.url].filter(Boolean).map(value=>{
+    const text=String(value);
+    return text.endsWith("/")?text.slice(0,-1):text;
+   });
+   return candidates.some(value=>
+    value===APP_ORIGIN+APP_PATH.slice(0,-1)||
+    value===APP_MANIFEST
+   );
+  });
  }catch(error){return false}
 }
 const installUA=navigator.userAgent||"";
 const isIOS=/iphone|ipad|ipod/i.test(installUA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const isAndroid=/Android/i.test(installUA);
 const isChrome=/Chrome\/\d+/i.test(installUA)&&!/EdgA|OPR|SamsungBrowser|YaBrowser|DuckDuckGo|Brave|;\s*wv\)/i.test(installUA);
+
 function updateInstallGuide(){
  if(isStandalone()){guide.hidden=true;return}
  guide.hidden=false;
