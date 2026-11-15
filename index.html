@@ -1256,7 +1256,21 @@ html.connect-needs-chrome #chromeRequired{display:flex!important}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="كونكت واي فاي">
-</head>
+<style>
+.quiet-session-entry{padding-top:8px;padding-bottom:8px}
+.quiet-entry-link{display:flex;align-items:center;gap:14px;padding:17px 19px;border-radius:20px;text-decoration:none;color:inherit;background:linear-gradient(115deg,rgba(22,163,110,.13),rgba(255,255,255,.96));border:1px solid rgba(22,163,110,.22);box-shadow:0 8px 24px rgba(20,80,60,.07)}
+.quiet-entry-icon{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border-radius:16px;background:rgba(22,163,110,.13);font-size:25px}
+.quiet-entry-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
+.quiet-entry-copy strong{font-size:17px;font-weight:800}
+.quiet-entry-copy small{font-size:12px;opacity:.75;line-height:1.6}
+.quiet-entry-arrow{font-size:24px;font-weight:800;color:#15976b}
+</style><style>
+.offers-cta-panel{display:flex;flex-direction:column;gap:13px;padding:17px;border:1px solid rgba(22,130,220,.25);border-radius:18px;background:linear-gradient(120deg,rgba(17,83,176,.09),rgba(19,190,190,.10));margin:14px 0}
+.offers-cta-copy{display:flex;flex-direction:column;gap:4px}
+.offers-cta-copy strong{font-size:17px;font-weight:850}
+.offers-cta-copy span{font-size:12px;opacity:.78}
+.offers-cta-button{display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 15px;border-radius:13px;background:linear-gradient(100deg,#0755b8,#078cbd);color:#fff;text-decoration:none;font-size:14px;font-weight:850;box-shadow:0 6px 16px rgba(5,80,160,.2)}
+</style></head>
 <body data-theme="sky">
 <div id="chromeRequired" class="chrome-required" role="dialog" aria-modal="true" aria-labelledby="chromeRequiredTitle">
  <div class="chrome-required-card">
@@ -1383,42 +1397,12 @@ html.connect-needs-chrome #chromeRequired{display:flex!important}
  </nav>
 </section>
 
-<section class="daily-fun" id="daily-fun" aria-labelledby="dailyFunTitle">
- <div class="daily-fun-heading">
-  <div><span class="daily-fun-kicker">استراحة صغيرة من كونكت</span><h2 id="dailyFunTitle">وقت لطيف ومفيد</h2><p>لعبة خفيفة وسبحة إلكترونية، ويشتغلوا حتى لو الإنترنت فاصل.</p></div>
-  <span class="daily-fun-badge" aria-hidden="true">♡</span>
- </div>
- <div class="daily-fun-shortcuts">
- <a href="./adhkar.html" class="daily-shortcut"><span>🌙</span><span><strong>الأذكار اليومية</strong><small>الصباح والمساء وأذكار أخرى</small></span><b>←</b></a>
- <a href="./games.html" class="daily-shortcut"><span>🎮</span><span><strong>ألعاب إضافية</strong><small>ألعاب خفيفة بدون إنترنت</small></span><b>←</b></a>
-</div>
-<div class="daily-fun-grid">
-  <section class="fun-card tasbeeh-card" aria-labelledby="tasbeehTitle">
-   <div class="fun-card-title"><span class="fun-emoji" aria-hidden="true">📿</span><div><h3 id="tasbeehTitle">السبحة الإلكترونية</h3><p>عداد بسيط يحفظ عدد تسبيحاتك على جهازك.</p></div></div>
-   <div class="tasbeeh-phrase" id="tasbeehPhrase">سبحان الله</div>
-   <div class="tasbeeh-count" id="tasbeehCount" aria-live="polite">0</div>
-   <div class="tasbeeh-progress" aria-hidden="true"><span id="tasbeehProgress"></span></div>
-   <div class="tasbeeh-targets" role="group" aria-label="اختيار هدف التسبيح">
-    <button type="button" class="tasbeeh-target-choice is-selected" data-target="33">33</button>
-    <button type="button" class="tasbeeh-target-choice" data-target="100">100</button>
-    <button type="button" class="tasbeeh-target-choice" data-target="300">300</button>
-    <button type="button" class="tasbeeh-target-choice" data-target="0">بدون هدف</button>
-   </div>
-   <button type="button" class="tasbeeh-add" id="tasbeehAdd">سبّح +1</button>
-   <div class="tasbeeh-bottom"><button type="button" class="tasbeeh-change" id="tasbeehChange">تغيير الذكر</button><button type="button" class="tasbeeh-reset" id="tasbeehReset">تصفير العداد</button></div>
-   <p class="fun-footnote" id="tasbeehStatus" aria-live="polite">عدادك محفوظ على نفس الجهاز.</p>
-  </section>
-  <section class="fun-card game-card" aria-labelledby="quickGameTitle">
-   <div class="fun-card-title"><span class="fun-emoji" aria-hidden="true">🎯</span><div><h3 id="quickGameTitle">تحدي سرعة التركيز</h3><p>اضغط على الهدف كل ما يظهر، واجمع أكبر عدد خلال 20 ثانية.</p></div></div>
-   <div class="game-stats"><span>النقاط <strong id="gameScore">0</strong></span><span>الوقت <strong id="gameTime">20</strong> ث</span><span>أفضل نتيجة <strong id="gameBest">0</strong></span></div>
-   <div class="game-arena" id="gameArena">
-    <span class="game-instruction" id="gameInstruction">جاهز للتحدي؟ اضغط ابدأ</span>
-    <button type="button" class="game-target" id="gameTarget" aria-label="الهدف" hidden>●</button>
-   </div>
-   <div class="game-actions"><button type="button" class="fun-primary" id="gameStart">ابدأ اللعب</button><button type="button" class="fun-secondary" id="gameReset" disabled>إعادة</button></div>
-   <p class="fun-footnote" id="gameStatus" aria-live="polite">لعبة بسيطة تعمل بدون إنترنت.</p>
-  </section>
- </div>
+<section class="daily-fun quiet-session-entry" id="daily-fun" aria-labelledby="dailyFunTitle">
+ <a class="quiet-entry-link" href="./quiet.html">
+  <span class="quiet-entry-icon" aria-hidden="true">🌿</span>
+  <span class="quiet-entry-copy"><strong id="dailyFunTitle">جلسة الهدوء</strong><small>السبحة والأذكار والألعاب وأدوات بسيطة في مكان واحد</small></span>
+  <span class="quiet-entry-arrow" aria-hidden="true">←</span>
+ </a>
 </section>
 
 <section class="content-hub" aria-label="أخبار وعروض كونكت">
@@ -1430,19 +1414,23 @@ html.connect-needs-chrome #chromeRequired{display:flex!important}
   <div class="content-list" id="notificationsList"><div class="content-empty">جاري تحميل آخر الإشعارات…</div></div>
   <div class="content-status" id="notificationsStatus" aria-live="polite"></div>
  </section>
- <section class="content-panel" id="offers" aria-labelledby="offersTitle">
-  <div class="content-head">
-   <div class="content-heading"><span class="content-symbol"><svg viewBox="0 0 24 24"><path d="M20.5 13.5 13 21l-10-10V3h8l9.5 10.5Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></span><div><h2 id="offersTitle">أحدث العروض</h2><small>العروض المتاحة لعملائنا</small></div></div>
-   <button class="content-more" id="allOffers" type="button" hidden>عرض الكل</button>
-  </div>
-  <div class="content-list" id="offersList"><div class="content-empty">جاري تحميل أحدث العروض…</div></div>
-  <div class="content-status" id="offersStatus" aria-live="polite"></div>
+ <section class="offers-cta-panel" id="offers" aria-labelledby="offersTitle">
+  <div class="offers-cta-copy"><strong id="offersTitle">📡 أحدث عروض كونكت</strong><span>شوف أحدث أنظمة التوصيل والأسعار المتاحة</span></div>
+  <a class="offers-cta-button" href="./offers.html">اضغط هنا لرؤية أحدث عروض كونكت <span aria-hidden="true">←</span></a>
  </section>
+ <!-- عناصر توافق مخفية لتجنب تعطيل سكربت تحديث الإشعارات والعروض القديم -->
+ <div hidden aria-hidden="true"><button id="allOffers" type="button"></button><div id="offersList"></div><div id="offersStatus"></div></div>
 </section>
 
 <section class="help-center" id="help-center" aria-labelledby="helpCenterTitle">
  <div class="section-title"><h2 id="helpCenterTitle">مركز الشروحات والدعم الفني</h2><span>فيديوهات تساعدك خطوة بخطوة</span></div>
  <div class="help-groups">
+  <section class="help-group" aria-labelledby="savingDataTitle">
+   <div class="help-group-head"><span class="help-group-icon">📉</span><div><h3 id="savingDataTitle">التوفير في استهلاك الباقة</h3><p>خطوات لتقليل استهلاك الإنترنت ومنع التحميلات التلقائية</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtu.be/I4NZAv-mJ44?feature=shared" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/I4NZAv-mJ44/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;>▶</span>'"><span class="help-copy"><strong>الحفاظ على الباقة من التحميلات التلقائية</strong><small>شاهد الفيديو واتبع الخطوات لتقليل استهلاك الباقة</small></span><span class="help-play">▶</span></a>
+   </div>
+  </section>
   <section class="help-group" aria-labelledby="customerGuidesTitle">
    <div class="help-group-head"><span class="help-group-icon">▶</span><div><h3 id="customerGuidesTitle">شروحات لوحة العميل الجديدة</h3><p>كل ما تحتاجه لإدارة حسابك وباقتك</p></div></div>
    <div class="help-list">
@@ -1985,107 +1973,11 @@ document.getElementById("refreshApp").addEventListener("click",async()=>{
 </script>
 
 
-<script>
-/* V81 — offline mini game + local tasbeeh counter */
-(()=>{
- const init=()=>{
-  const $=id=>document.getElementById(id);
-  const arena=$("gameArena"),target=$("gameTarget"),start=$("gameStart"),reset=$("gameReset");
-  if(!arena||!target||window.__connectOfflineFunV81)return;
-  window.__connectOfflineFunV81=true;
-  let score=0,seconds=20,timer=null,running=false;
-  const bestKey="connect_fun_game_best_v1";
-  let best=Number(localStorage.getItem(bestKey)||0);
-  $("gameBest").textContent=best;
-  const updateGame=()=>{$("gameScore").textContent=score;$("gameTime").textContent=seconds;};
-  const moveTarget=()=>{
-   const maxX=Math.max(0,arena.clientWidth-48),maxY=Math.max(0,arena.clientHeight-48);
-   target.style.left=(8+Math.random()*Math.max(0,maxX-16))+"px";
-   target.style.top=(8+Math.random()*Math.max(0,maxY-16))+"px";
-  };
-  const finish=()=>{
-   running=false;clearInterval(timer);target.hidden=true;start.disabled=false;start.textContent="العب مرة تانية";
-   $("gameInstruction").hidden=false;
-   $("gameInstruction").textContent="انتهى الوقت! نتيجتك "+score+" نقطة";
-   $("gameStatus").textContent=score>best?"رقم جديد! أحسنت، دي أفضل نتيجة ليك.":"جرّب تاني وحاول تحسّن نتيجتك.";
-   if(score>best){best=score;localStorage.setItem(bestKey,String(best));$("gameBest").textContent=best;}
-  };
-  start.addEventListener("click",()=>{
-   if(running)return;
-   score=0;seconds=20;running=true;start.disabled=true;start.textContent="اللعب مستمر…";
-   $("gameInstruction").hidden=true;target.hidden=false;reset.disabled=false;
-   $("gameStatus").textContent="اضغط على الدائرة الخضراء بسرعة!";
-   updateGame();moveTarget();
-   clearInterval(timer);timer=setInterval(()=>{seconds--;updateGame();if(seconds<=0)finish();},1000);
-  });
-  target.addEventListener("click",()=>{
-   if(!running)return;
-   score++;updateGame();moveTarget();
-   if(navigator.vibrate)navigator.vibrate(12);
-  });
-  reset.addEventListener("click",()=>{
-   clearInterval(timer);running=false;score=0;seconds=20;updateGame();target.hidden=true;
-   start.disabled=false;start.textContent="ابدأ اللعب";reset.disabled=true;
-   $("gameInstruction").hidden=false;$("gameInstruction").textContent="جاهز للتحدي؟ اضغط ابدأ";
-   $("gameStatus").textContent="تمت إعادة اللعبة.";
-  });
-
-  const phrases=["سبحان الله","الحمد لله","الله أكبر","أستغفر الله","لا إله إلا الله","اللهم صلِّ وسلم على نبينا محمد","سبحان الله وبحمده","سبحان الله العظيم","لا حول ولا قوة إلا بالله","حسبي الله ونعم الوكيل","اللهم اغفر لي","رب اغفر لي وتب عليّ","اللهم أعني على ذكرك وشكرك وحسن عبادتك","اللهم إنك عفو تحب العفو فاعف عني"];
-  const stateKey="connect_tasbeeh_state_v1";
-  let saved={count:0,target:33,phrase:0};
-  try{saved={...saved,...JSON.parse(localStorage.getItem(stateKey)||"{}")};}catch(e){}
-  let count=Math.max(0,Number(saved.count)||0),goal=[0,33,100,300].includes(Number(saved.target))?Number(saved.target):33,phrase=((Number(saved.phrase)||0)%phrases.length+phrases.length)%phrases.length;
-  const persist=()=>{try{localStorage.setItem(stateKey,JSON.stringify({count,target:goal,phrase}));}catch(e){}};
-  const render=()=>{
-   $("tasbeehCount").textContent=count.toLocaleString("en-US");
-   $("tasbeehPhrase").textContent=phrases[phrase];
-   $("tasbeehProgress").style.width=goal?Math.min(100,count/goal*100)+"%":"0%";
-   document.querySelectorAll(".tasbeeh-target-choice").forEach(b=>b.classList.toggle("is-selected",Number(b.dataset.target)===goal));
-   const encouragement=count===0?"ابدأ بخطوة بسيطة؛ أحب الأعمال إلى الله أدومها وإن قلّ.":count%100===0?"ما شاء الله! أتممت "+count+" ذكرًا، استمر على وردك.":count%33===0?"أحسنت! وصلت إلى "+count+" تسبيحة، تقبّل الله منك.":goal&&count>=goal?"اكتمل هدفك، تقبّل الله منك واجعل لك وردًا ثابتًا.":goal?"باقي "+(goal-count)+" للوصول لهدفك، خذها بهدوء.":"استمر براحتك؛ كل ذكر خير، ولا تجعل العدد يشغلك عن حضور القلب.";
-   $("tasbeehStatus").textContent=encouragement;
-  };
-  $("tasbeehAdd").addEventListener("click",()=>{count++;persist();render();if(navigator.vibrate)navigator.vibrate(8);});
-  document.querySelectorAll(".tasbeeh-target-choice").forEach(b=>b.addEventListener("click",()=>{goal=Number(b.dataset.target);persist();render();}));
-  $("tasbeehChange").addEventListener("click",()=>{phrase=(phrase+1)%phrases.length;persist();render();});
-  $("tasbeehReset").addEventListener("click",()=>{
-   if(!window.confirm("هل تريد تصفير عداد التسبيح؟"))return;
-   count=0;persist();render();
-  });
-  render();
- };
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
-})();
-</script>
 
 
 
-<script>
-/* V83 — portal-matched click sound, triggered directly by the user's tap */
-(()=>{
- const init=()=>{
-  const controls=[document.getElementById("tasbeehAdd"),document.getElementById("gameTarget")].filter(Boolean);
-  if(!controls.length||window.__connectFunTapAudioV83)return;
-  window.__connectFunTapAudioV83=true;
-  let ctx=null;
-  const play=()=>{
-   try{
-    const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
-    if(!ctx)ctx=new AC();
-    const start=()=>{
-     const t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain(),f=ctx.createBiquadFilter();
-     f.type="lowpass";f.frequency.setValueAtTime(2400,t);
-     o.type="sine";o.frequency.setValueAtTime(920,t);o.frequency.exponentialRampToValueAtTime(610,t+.055);
-     g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.075,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+.095);
-     o.connect(f);f.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.10);
-    };
-    if(ctx.state==="suspended")ctx.resume().then(start).catch(()=>{});else start();
-   }catch(e){}
-  };
-  controls.forEach(el=>el.addEventListener("pointerdown",play,{capture:true,passive:true}));
- };
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
-})();
-</script>
+
+
 
 
 
