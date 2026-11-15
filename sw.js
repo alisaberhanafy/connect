@@ -1,4 +1,4 @@
-const CACHE='connect-wifi-v127-resilient-cache';
+const CACHE='connect-wifi-v131-nav-order';
 
 // الملفات الأساسية فقط هي التي يوقف فشلها تثبيت Service Worker.
 const REQUIRED=[
@@ -18,6 +18,8 @@ const OPTIONAL=[
   './quick-game.html',
   './calculator.html',
   './offers.html',
+  './help.html',
+  './notifications.html',
   './assets/offers/home-installation-5g.png',
   './assets/fonts/fonts.css',
   './assets/fonts/Cairo-400.ttf',

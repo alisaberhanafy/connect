@@ -1240,7 +1240,29 @@ html.connect-needs-chrome #chromeRequired{display:flex!important}
   margin:0 !important;
   transform:none !important;
 }
-\n</style>
+\n
+
+/* V141 — quiet session section heading and quick-nav anchor */
+.quiet-group{margin-top:18px;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:22px}
+.quiet-group .service-group-heading{margin-bottom:13px}
+.quiet-group-icon{background:linear-gradient(145deg,#e0f7ed,#f1fbf6);color:#15966f}
+.quiet-entry-link{display:flex;align-items:center;gap:15px;min-height:112px;padding:18px 20px;border:1px solid rgba(16,155,132,.25);border-radius:20px;background:linear-gradient(115deg,rgba(16,155,132,.13),rgba(255,255,255,.96));color:var(--text);text-decoration:none;box-shadow:0 8px 22px rgba(16,100,90,.06);transition:transform .2s,box-shadow .2s,border-color .2s}
+.quiet-entry-link:hover{transform:translateY(-2px);border-color:rgba(16,155,132,.5);box-shadow:0 13px 28px rgba(16,100,90,.12)}
+.quiet-entry-icon{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:17px;background:#e1f5ec;font-size:30px}
+.quiet-entry-copy{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}
+.quiet-entry-copy strong{font-size:19px;font-weight:950}
+.quiet-entry-copy small{font-size:12px;line-height:1.7;color:var(--muted)}
+.quiet-entry-arrow{font-size:25px;font-weight:900;color:#15966f}
+.quick-nav a.quick-fun-link .quick-icon{color:var(--accent)}
+@media(max-width:600px){
+ .quiet-group{padding:14px;border-radius:20px}
+ .quiet-entry-link{min-height:94px;padding:14px;border-radius:17px;gap:12px}
+ .quiet-entry-icon{width:49px;height:49px;flex-basis:49px;border-radius:14px;font-size:25px}
+ .quiet-entry-copy strong{font-size:16px}
+ .quiet-entry-copy small{font-size:11px}
+}
+
+</style>
 <script>
 (function(){
  var ua=navigator.userAgent||"";
@@ -1315,11 +1337,11 @@ html.connect-needs-chrome #chromeRequired{display:flex!important}
  </div>
 </div>
 <nav class="quick-nav" aria-label="اختصارات سريعة">
- <a class="quick-fun-link" href="#daily-fun" aria-label="الاستراحة"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M6.5 9h11a4 4 0 0 1 3.8 5.2l-.8 2.5a2 2 0 0 1-3.2.9L14.5 15h-5l-2.8 2.6a2 2 0 0 1-3.2-.9l-.8-2.5A4 4 0 0 1 6.5 9Z"/><path d="M8 11v4m-2-2h4m5-1h.01M17 14h.01"/></svg></span><span>الاستراحة</span></a>
  <a href="#services-heading" aria-label="الروابط والخدمات"><span class="quick-icon"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span><span>الخدمات</span></a>
- <a href="#notifications" aria-label="الإشعارات"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><span>الإشعارات</span></a>
- <a href="#offers" aria-label="العروض"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M20.5 13.5 13 21l-10-10V3h8l9.5 10.5Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></span><span>العروض</span></a>
- <a href="#help-center" aria-label="الشروحات"><span class="quick-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4V8Z"/></svg></span><span>الشروحات</span></a>
+ <a href="./offers.html" aria-label="العروض"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M20.5 13.5 13 21l-10-10V3h8l9.5 10.5Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></span><span>العروض</span></a>
+ <a href="./help.html" aria-label="الشروحات"><span class="quick-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4V8Z"/></svg></span><span>الشروحات</span></a>
+ <a class="quick-fun-link" href="#quiet-session" aria-label="جلسة الهدوء"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M6.5 9h11a4 4 0 0 1 3.8 5.2l-.8 2.5a2 2 0 0 1-3.2.9L14.5 15h-5l-2.8 2.6a2 2 0 0 1-3.2-.9l-.8-2.5A4 4 0 0 1 6.5 9Z"/><path d="M8 11v4m-2-2h4m5-1h.01M17 14h.01"/></svg></span><span>الهدوء</span></a>
+ <a href="./notifications.html" aria-label="الإشعارات"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><span>الإشعارات</span></a>
  <a href="#support" aria-label="الدعم الفني"><span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 13H3v4h4v-6H4M20 13h1v4h-4v-6h3M17 20c-1 1-2.5 1.5-5 1.5"/></svg></span><span>الدعم</span></a>
 </nav>
 <section class="hero hero-premium">
@@ -1397,64 +1419,16 @@ html.connect-needs-chrome #chromeRequired{display:flex!important}
  </nav>
 </section>
 
-<section class="daily-fun quiet-session-entry" id="daily-fun" aria-labelledby="dailyFunTitle">
- <a class="quiet-entry-link" href="./quiet.html">
+<section class="service-group quiet-group" id="quiet-session" aria-labelledby="quietSessionTitle">
+ <div class="service-group-heading">
+  <span class="service-group-icon quiet-group-icon" aria-hidden="true">🌿</span>
+  <div><h2 id="quietSessionTitle">جلسة الهدوء</h2><p>السبحة والأذكار والألعاب وأدوات بسيطة في مكان واحد</p></div>
+ </div>
+ <a class="quiet-entry-link" href="./quiet.html" aria-label="افتح جلسة الهدوء">
   <span class="quiet-entry-icon" aria-hidden="true">🌿</span>
-  <span class="quiet-entry-copy"><strong id="dailyFunTitle">جلسة الهدوء</strong><small>السبحة والأذكار والألعاب وأدوات بسيطة في مكان واحد</small></span>
+  <span class="quiet-entry-copy"><strong>ادخل جلسة الهدوء</strong><small>اضغط هنا لاستكشاف الأدوات</small></span>
   <span class="quiet-entry-arrow" aria-hidden="true">←</span>
  </a>
-</section>
-
-<section class="content-hub" aria-label="أخبار وعروض كونكت">
- <section class="content-panel" id="notifications" aria-labelledby="notificationsTitle">
-  <div class="content-head">
-   <div class="content-heading"><span class="content-symbol"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><div><h2 id="notificationsTitle">آخر الإشعارات</h2><small>أخبار وتنبيهات كونكت</small></div></div>
-   <button class="content-more" id="allNotifications" type="button" hidden>عرض الكل</button>
-  </div>
-  <div class="content-list" id="notificationsList"><div class="content-empty">جاري تحميل آخر الإشعارات…</div></div>
-  <div class="content-status" id="notificationsStatus" aria-live="polite"></div>
- </section>
- <section class="offers-cta-panel" id="offers" aria-labelledby="offersTitle">
-  <div class="offers-cta-copy"><strong id="offersTitle">📡 أحدث عروض كونكت</strong><span>شوف أحدث أنظمة التوصيل والأسعار المتاحة</span></div>
-  <a class="offers-cta-button" href="./offers.html">اضغط هنا لرؤية أحدث عروض كونكت <span aria-hidden="true">←</span></a>
- </section>
- <!-- عناصر توافق مخفية لتجنب تعطيل سكربت تحديث الإشعارات والعروض القديم -->
- <div hidden aria-hidden="true"><button id="allOffers" type="button"></button><div id="offersList"></div><div id="offersStatus"></div></div>
-</section>
-
-<section class="help-center" id="help-center" aria-labelledby="helpCenterTitle">
- <div class="section-title"><h2 id="helpCenterTitle">مركز الشروحات والدعم الفني</h2><span>فيديوهات تساعدك خطوة بخطوة</span></div>
- <div class="help-groups">
-  <section class="help-group" aria-labelledby="savingDataTitle">
-   <div class="help-group-head"><span class="help-group-icon">📉</span><div><h3 id="savingDataTitle">التوفير في استهلاك الباقة</h3><p>خطوات لتقليل استهلاك الإنترنت ومنع التحميلات التلقائية</p></div></div>
-   <div class="help-list">
-    <a class="help-link" href="https://youtu.be/I4NZAv-mJ44?feature=shared" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/I4NZAv-mJ44/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;>▶</span>'"><span class="help-copy"><strong>الحفاظ على الباقة من التحميلات التلقائية</strong><small>شاهد الفيديو واتبع الخطوات لتقليل استهلاك الباقة</small></span><span class="help-play">▶</span></a>
-   </div>
-  </section>
-  <section class="help-group" aria-labelledby="customerGuidesTitle">
-   <div class="help-group-head"><span class="help-group-icon">▶</span><div><h3 id="customerGuidesTitle">شروحات لوحة العميل الجديدة</h3><p>كل ما تحتاجه لإدارة حسابك وباقتك</p></div></div>
-   <div class="help-list">
-    <a class="help-link" href="https://youtube.com/shorts/NyQc1QyXaLM?si=3YMdJwFKSEoXnpuY" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/NyQc1QyXaLM/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>كيفية تثبيت تطبيق كونكت واي فاي</strong><small>فيديو قصير · تثبيت التطبيق</small></span><span class="help-play">▶</span></a>
-    <a class="help-link" href="https://youtu.be/9XDRLK3f8m0" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/9XDRLK3f8m0/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شرح سريع للوحة العميل الجديدة</strong><small>التعرف على أقسام اللوحة</small></span><span class="help-play">▶</span></a>
-    <a class="help-link" href="https://youtube.com/shorts/kMZaMkU9tp4?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/kMZaMkU9tp4/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>تغيير الرقم السري لحساب العميل</strong><small>تأمين حسابك وتحديث كلمة المرور</small></span><span class="help-play">▶</span></a>
-    <a class="help-link" href="https://www.youtube.com/shorts/FQ1B7VURuuM" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/FQ1B7VURuuM/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شراء جيجات إضافية من لوحة العميل</strong><small>إضافة سعة إنترنت لحسابك</small></span><span class="help-play">▶</span></a>
-    <a class="help-link" href="https://youtube.com/shorts/CiCwQqufMVc?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/CiCwQqufMVc/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شحن باقات لجميع المشتركين في كونكت</strong><small>شرح خاص بعملية شحن الباقات</small></span><span class="help-play">▶</span></a>
-   </div>
-  </section>
-  <section class="help-group" aria-labelledby="speedTestTitle">
-   <div class="help-group-head"><span class="help-group-icon">⚡</span><div><h3 id="speedTestTitle">اختبار سرعة الإنترنت</h3><p>اعرف إزاي تقيس سرعة اتصالك</p></div></div>
-   <div class="help-list">
-    <a class="help-link" href="https://youtube.com/shorts/TbiPP9H7a0g?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/TbiPP9H7a0g/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شرح عمل Speed Test</strong><small>طريقة اختبار سرعة الإنترنت</small></span><span class="help-play">▶</span></a>
-   </div>
-   <a class="help-download" href="https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest" target="_self" rel="noopener noreferrer">تحميل تطبيق Speedtest من Google Play ↗</a>
-  </section>
-  <section class="help-group" aria-labelledby="whatsappGuideTitle">
-   <div class="help-group-head"><span class="help-group-icon">⌖</span><div><h3 id="whatsappGuideTitle">شروحات واتساب</h3><p>مشاركة موقعك مع الدعم الفني</p></div></div>
-   <div class="help-list">
-    <a class="help-link" href="https://youtube.com/shorts/JPUACV3Hx-I?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/JPUACV3Hx-I/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>كيفية إرسال اللوكيشن من واتساب</strong><small>إرسال موقعك الحالي بسهولة</small></span><span class="help-play">▶</span></a>
-   </div>
-  </section>
- </div>
 </section>
 
 <section class="support" id="support">
@@ -1643,47 +1617,6 @@ if(heroLogoStage&&rocketMessage&&rocketMessageText){
 }
 
 // V19: load public announcements and offers from GitHub Pages JSON files.
-const contentState={notifications:[],offers:[],showAllNotifications:false,showAllOffers:false};
-const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-const arabicDate=value=>{if(!value)return "";const d=new Date(value);return Number.isNaN(d.getTime())?"":new Intl.DateTimeFormat("ar-EG",{day:"numeric",month:"short",year:"numeric"}).format(d)};
-const categoryNames={news:"خبر",alert:"تنبيه",maintenance:"صيانة"};
-function renderNotifications(){
- const list=document.getElementById("notificationsList"),btn=document.getElementById("allNotifications");
- const items=contentState.notifications,visible=contentState.showAllNotifications?items:items.slice(0,3);
- btn.hidden=items.length<=3;btn.textContent=contentState.showAllNotifications?"عرض الأقل":"عرض الكل";
- if(!items.length){list.innerHTML='<div class="content-empty">لا توجد إشعارات منشورة حاليًا.<br>تابعنا لمعرفة آخر أخبار وخدمات كونكت.</div>';return}
- list.innerHTML=visible.map(item=>{const type=categoryNames[item.type]||"خبر";const cls=item.type==="alert"?"alert":item.type==="maintenance"?"maintenance":"";return `<article class="content-item"><div class="content-item-top"><h3>${escapeHTML(item.title||"إشعار من كونكت")}</h3><time class="content-date">${escapeHTML(arabicDate(item.date))}</time></div><p>${escapeHTML(item.message||"")}</p><span class="content-tag ${cls}">${type}</span></article>`}).join("");
-}
-function renderOffers(){
- const list=document.getElementById("offersList"),btn=document.getElementById("allOffers");
- const today=new Date();today.setHours(0,0,0,0);
- const items=contentState.offers.filter(item=>{if(!item.endDate)return true;const end=new Date(item.endDate+"T23:59:59");return !Number.isNaN(end.getTime())&&end>=today});
- const visible=contentState.showAllOffers?items:items.slice(0,3);
- btn.hidden=items.length<=3;btn.textContent=contentState.showAllOffers?"عرض الأقل":"عرض الكل";
- if(!items.length){list.innerHTML='<div class="content-empty">لا توجد عروض متاحة حاليًا.<br>سنعلن هنا عن أحدث عروض كونكت.</div>';return}
- list.innerHTML=visible.map(item=>{const image=item.image?`<img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.title||"عرض كونكت")}" loading="lazy">`:"";const action=item.url?`<a class="offer-action" href="${escapeHTML(item.url)}" target="_self" rel="noopener noreferrer">تفاصيل العرض</a>`:"";const expiry=item.endDate?`<span class="content-tag">ساري حتى ${escapeHTML(arabicDate(item.endDate))}</span>`:"";return `<article class="content-item offer-item">${image}<div class="content-item-top"><h3>${escapeHTML(item.title||"عرض من كونكت")}</h3><time class="content-date">${escapeHTML(arabicDate(item.date))}</time></div><p>${escapeHTML(item.message||"")}</p>${expiry}${action}</article>`}).join("");
-}
-async function loadPublicContent(){
- const stamp=Date.now();
- try{
-  const [n,o]=await Promise.all([fetch(`./notifications.json?v=${stamp}`,{cache:"no-store"}),fetch(`./offers.json?v=${stamp}`,{cache:"no-store"})]);
-  if(!n.ok||!o.ok)throw new Error("تعذر تحميل المحتوى");
-  const nd=await n.json(),od=await o.json();
-  contentState.notifications=Array.isArray(nd)?nd:(Array.isArray(nd.items)?nd.items:[]);
-  contentState.offers=Array.isArray(od)?od:(Array.isArray(od.items)?od.items:[]);
-  renderNotifications();renderOffers();
-  document.getElementById("notificationsStatus").textContent="يتم تحديث المحتوى تلقائيًا عند فتح الصفحة.";
- }catch(error){
-  document.getElementById("notificationsList").innerHTML='<div class="content-empty">تعذر تحميل الإشعارات الآن. حاول تحديث الصفحة.</div>';
-  document.getElementById("offersList").innerHTML='<div class="content-empty">تعذر تحميل العروض الآن. حاول تحديث الصفحة.</div>';
- }
-}
-document.getElementById("allNotifications").addEventListener("click",()=>{contentState.showAllNotifications=!contentState.showAllNotifications;renderNotifications()});
-document.getElementById("allOffers").addEventListener("click",()=>{contentState.showAllOffers=!contentState.showAllOffers;renderOffers()});
-loadPublicContent();
-let contentRefreshTimer=setInterval(()=>{if(document.visibilityState==="visible")loadPublicContent()},300000);
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadPublicContent()});
-
 document.getElementById("year").textContent=new Date().getFullYear();
 let deferred=null;
 const guide=document.getElementById("installGuide"),guideTitle=document.getElementById("installGuideTitle"),guideText=document.getElementById("installGuideText"),guideAction=document.getElementById("installGuideAction");
@@ -1759,20 +1692,78 @@ detectInstalledWebApp().then(installed=>{
 let appSwRegistration=null;
 let updateReloading=false;
 let updateCheckBusy=false;
+let updateNoticeTimer=null;
+const UPDATE_SUCCESS_KEY="connect_app_update_success_v1";
+function showUpdateNotice(message,type="success",action=false){
+ const notice=document.getElementById("updateNotice");
+ const text=document.getElementById("updateNoticeText");
+ const icon=document.getElementById("updateNoticeIcon");
+ const apply=document.getElementById("applyUpdate");
+ if(!notice||!text||!icon||!apply)return;
+ clearTimeout(updateNoticeTimer);
+ text.textContent=message;
+ notice.classList.remove("success","error","loading");
+ notice.classList.add(type);
+ icon.textContent=type==="loading"?"↻":type==="error"?"!":"✓";
+ apply.hidden=!action;
+ apply.disabled=false;
+ apply.textContent="تحديث الآن";
+ notice.hidden=false;
+ if(!action&&type!=="loading"){
+  updateNoticeTimer=setTimeout(()=>{notice.hidden=true},6500);
+ }
+}
 function promptForAppUpdate(){
- showUpdateNotice("يتوفر تحديث جديد لكونكت واي فاي. اضغط لتثبيته.","success",true);
+ showUpdateNotice("يتوفر إصدار جديد من كونكت واي فاي. اضغط «تحديث الآن» لتثبيته.","success",true);
 }
 function activateWaitingWorker(){
  const waiting=appSwRegistration&&appSwRegistration.waiting;
- if(waiting)waiting.postMessage({type:"SKIP_WAITING"});
+ if(waiting){
+  try{sessionStorage.setItem(UPDATE_SUCCESS_KEY,"1")}catch(e){}
+  waiting.postMessage({type:"SKIP_WAITING"});
+ }
+}
+function watchServiceWorkerRegistration(registration){
+ if(!registration)return;
+ appSwRegistration=registration;
+ const checkWaiting=()=>{
+  if(appSwRegistration&&appSwRegistration.waiting&&navigator.serviceWorker.controller){
+   promptForAppUpdate();
+  }
+ };
+ checkWaiting();
+ registration.addEventListener("updatefound",()=>{
+  const installing=registration.installing;
+  if(!installing)return;
+  showUpdateNotice("تم العثور على تحديث جديد. جاري تجهيز الملفات…","loading");
+  installing.addEventListener("statechange",()=>{
+   if(installing.state==="installed"){
+    if(navigator.serviceWorker.controller&&registration.waiting){
+     promptForAppUpdate();
+    }else if(!navigator.serviceWorker.controller){
+     // أول تثبيت للتطبيق: لا نعرضه كتحديث جديد.
+     const n=document.getElementById("updateNotice");if(n)n.hidden=true;
+    }
+   }else if(installing.state==="redundant"){
+    const n=document.getElementById("updateNotice");if(n)n.hidden=true;
+   }
+  });
+ });
 }
 async function checkForAppUpdate(showCurrent=false){
- if(updateCheckBusy||!("serviceWorker"in navigator)||!navigator.onLine)return;
+ if(updateCheckBusy||!("serviceWorker"in navigator)||!navigator.onLine){
+  if(showCurrent&&!navigator.onLine)showUpdateNotice("لا يوجد اتصال بالإنترنت لفحص التحديثات.","error");
+  return;
+ }
  updateCheckBusy=true;
  try{
   appSwRegistration=appSwRegistration||await navigator.serviceWorker.getRegistration();
-  if(!appSwRegistration)appSwRegistration=await navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"});
+  if(!appSwRegistration){
+   appSwRegistration=await navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"});
+  }
+  watchServiceWorkerRegistration(appSwRegistration);
   await appSwRegistration.update();
+  // فحص حالة العامل بعد اكتمال طلب التحديث، لأن updatefound قد يبدأ أثناء الانتظار.
   if(appSwRegistration.waiting&&navigator.serviceWorker.controller){
    promptForAppUpdate();
   }else if(appSwRegistration.installing&&navigator.serviceWorker.controller){
@@ -1781,7 +1772,7 @@ async function checkForAppUpdate(showCurrent=false){
     if(worker.state==="installed"&&appSwRegistration.waiting)promptForAppUpdate();
    });
   }else if(showCurrent){
-   showUpdateNotice("أنت تستخدم أحدث إصدار من كونكت واي فاي.","success");
+   showUpdateNotice("التطبيق محدث بالفعل. لا يوجد إصدار أحدث حاليًا.","success");
   }
  }catch(error){
   if(showCurrent)showUpdateNotice("تعذر فحص التحديث الآن. تحقق من اتصال الإنترنت وحاول مرة أخرى.","error");
@@ -1794,25 +1785,34 @@ if("serviceWorker"in navigator&&location.protocol==="https:"){
  navigator.serviceWorker.addEventListener("controllerchange",()=>{
   if(updateReloading)return;
   updateReloading=true;
+  try{
+   if(sessionStorage.getItem(UPDATE_SUCCESS_KEY)==="1"){
+    sessionStorage.removeItem(UPDATE_SUCCESS_KEY);
+   }
+  }catch(e){}
   window.location.reload();
  });
  window.addEventListener("load",async()=>{
   try{
+   try{
+    if(sessionStorage.getItem(UPDATE_SUCCESS_KEY)==="1"){
+     sessionStorage.removeItem(UPDATE_SUCCESS_KEY);
+     showUpdateNotice("تم تحديث تطبيق كونكت واي فاي بنجاح.","success");
+    }
+   }catch(e){}
    appSwRegistration=await navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"});
-   if(appSwRegistration.waiting&&navigator.serviceWorker.controller)promptForAppUpdate();
-   appSwRegistration.addEventListener("updatefound",()=>{
-    const installing=appSwRegistration.installing;
-    if(!installing)return;
-    installing.addEventListener("statechange",()=>{
-     if(installing.state==="installed"&&navigator.serviceWorker.controller&&appSwRegistration.waiting)promptForAppUpdate();
-    });
-   });
+   watchServiceWorkerRegistration(appSwRegistration);
+   // فحص مباشر عند فتح التطبيق، ثم إعادة الفحص تلقائيًا دوريًا وعند عودة المستخدم.
    await checkForAppUpdate(false);
-   setInterval(()=>{if(document.visibilityState==="visible")checkForAppUpdate(false)},180000);
+   setTimeout(()=>checkForAppUpdate(false),12000);
+   setInterval(()=>{
+    if(document.visibilityState==="visible"&&navigator.onLine)checkForAppUpdate(false);
+   },120000);
    document.addEventListener("visibilitychange",()=>{
     if(document.visibilityState==="visible")checkForAppUpdate(false);
    });
    window.addEventListener("focus",()=>checkForAppUpdate(false));
+   window.addEventListener("online",()=>checkForAppUpdate(false));
   }catch(error){console.warn("Service worker registration failed",error)}
  });
 }
@@ -1820,6 +1820,7 @@ document.getElementById("applyUpdate").addEventListener("click",()=>{
  const action=document.getElementById("applyUpdate");
  action.disabled=true;
  action.textContent="جاري التحديث…";
+ showUpdateNotice("جاري تثبيت التحديث، انتظر لحظات…","loading");
  activateWaitingWorker();
 });
 document.getElementById("refreshApp").addEventListener("click",async()=>{
@@ -1831,7 +1832,7 @@ document.getElementById("refreshApp").addEventListener("click",async()=>{
  button.classList.remove("is-updating");button.disabled=false;button.dataset.busy="0";
 });
 
-// V75: role confirmation handler is initialized after modal markup.
+//// V75: role confirmation handler is initialized after modal markup.
 
 </script>
 

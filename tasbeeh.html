@@ -1238,7 +1238,73 @@ html.connect-needs-chrome #chromeRequired{display:flex!important}
   margin:0 !important;
   transform:none !important;
 }
-\n</style>
+\n
+/* V143 — tactile, large-area electronic tasbeeh */
+:root{--quiet-green:#118b68;--quiet-ink:#173c32;--quiet-soft:#eef9f4}
+body{background:radial-gradient(ellipse at 50% 0%,#d9f4e8 0,transparent 38%),linear-gradient(180deg,#effaf5,#f7fcf9 65%,#edf8f2);color:var(--quiet-ink)}
+.quiet-wrap{width:min(760px,calc(100% - 32px));padding:24px 0 50px}
+.quiet-top{margin-bottom:22px}
+.quiet-top h1{font-size:clamp(23px,3vw,30px);font-weight:950;letter-spacing:-.3px}
+.quiet-back{padding:12px 17px;border-radius:15px;font-size:14px;font-weight:850;box-shadow:0 5px 16px rgba(15,85,60,.06)}
+.quiet-intro{font-size:16px;line-height:2;color:#496d5f;margin-bottom:22px}
+.tasbeeh-main-card{position:relative;overflow:hidden;padding:clamp(20px,4vw,34px);margin:0;border:1px solid #d6ebe0;border-radius:28px;background:linear-gradient(155deg,#fff 0%,#fbfffd 65%,#f0faf5 100%);box-shadow:0 18px 48px rgba(24,91,65,.09);text-align:center}
+.tasbeeh-main-card:before{content:"";position:absolute;width:220px;height:220px;left:-110px;top:-130px;border:1px solid #cdeadd;border-radius:50%;box-shadow:0 0 0 22px #e8f6ee,0 0 0 48px #f1faf5;pointer-events:none}
+.tasbeeh-card-head{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;color:#477765;font-size:13px;font-weight:900}
+.tasbeeh-live-dot{width:9px;height:9px;border-radius:50%;background:#12a477;box-shadow:0 0 0 5px #e0f5eb}
+.tasbeeh-save{position:absolute;left:0;padding:6px 10px;border-radius:20px;background:#edf8f2;color:#42836a;font-size:10px}
+.tasbeeh-phrase{position:relative;margin:20px 0 16px;font-size:clamp(22px,4vw,30px);line-height:1.6;font-weight:950;color:#173f32}
+.tasbeeh-touch-zone{position:relative;isolation:isolate;display:grid;place-items:center;width:min(76vw,290px);height:min(76vw,290px);min-width:230px;min-height:230px;margin:0 auto 23px;padding:15px;border:0;border-radius:50%;cursor:pointer;color:#fff;background:radial-gradient(circle at 35% 25%,#35c99b 0,#159b73 48%,#087451 100%);box-shadow:0 13px 0 #086448,0 22px 36px rgba(9,119,82,.25),inset 0 3px 8px #ffffff50;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .08s,box-shadow .08s}
+.tasbeeh-touch-zone:before{content:"";position:absolute;inset:11px;border:2px solid #ffffff55;border-radius:50%;pointer-events:none}
+.tasbeeh-touch-zone:after{content:"";position:absolute;inset:22px;border:1px solid #ffffff38;border-radius:50%;pointer-events:none}
+.tasbeeh-touch-zone:active{transform:translateY(7px) scale(.985);box-shadow:0 5px 0 #086448,0 11px 20px rgba(9,119,82,.2),inset 0 3px 8px #ffffff50}
+.tasbeeh-touch-halo{position:absolute;inset:-10px;border:1px solid #159b7330;border-radius:50%;pointer-events:none}
+.tasbeeh-touch-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-shadow:0 2px 5px #005b3b45}
+.tasbeeh-touch-inner #tasbeehCount{font-size:clamp(66px,15vw,92px);font-weight:950;line-height:1.05;font-variant-numeric:tabular-nums}
+.tasbeeh-touch-inner small{font-size:16px;font-weight:850;letter-spacing:.1px}
+.tasbeeh-progress-wrap{max-width:460px;margin:0 auto 23px;text-align:right}
+.tasbeeh-progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;color:#668777;font-size:12px;font-weight:800}
+.tasbeeh-progress-meta strong{color:#12865f;font-size:13px}
+.tasbeeh-progress-track{height:11px;overflow:hidden;border-radius:30px;background:#e7f2eb;box-shadow:inset 0 1px 3px #164b3010}
+.tasbeeh-progress-track span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#0b8b62,#39c69a);transition:width .25s ease}
+.tasbeeh-target-block{margin:0 auto 18px}
+.tasbeeh-label{display:block;margin-bottom:10px;color:#577866;font-size:13px;font-weight:900}
+.tasbeeh-targets{display:flex;justify-content:center;flex-wrap:wrap;gap:9px}
+.tasbeeh-target-choice{min-width:66px;min-height:46px;padding:9px 16px;border:1px solid #d7e9df;border-radius:15px;background:#f5fbf7;color:#426d59;font:800 14px "Cairo",sans-serif;cursor:pointer;transition:.18s}
+.tasbeeh-target-choice.is-selected{background:#e1f5ea;border:2px solid #15976b;color:#08714e;box-shadow:0 4px 12px #15976b18}
+.tasbeeh-controls{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:18px}
+.tasbeeh-controls button{min-height:52px;padding:12px 14px;border:1px solid #d7e9df;border-radius:15px;background:#f6fbf8;color:#214f3c;font:850 14px "Cairo",sans-serif;cursor:pointer;transition:transform .15s,background .15s}
+.tasbeeh-controls button:active,.tasbeeh-target-choice:active{transform:scale(.97)}
+.tasbeeh-status{margin:18px 0 0;color:#668273;font-size:13px;line-height:1.9}
+@media(max-width:520px){
+ .quiet-wrap{width:calc(100% - 24px);padding:16px 0 calc(34px + env(safe-area-inset-bottom))}
+ .quiet-top{gap:9px;margin-bottom:19px}
+ .quiet-top h1{font-size:22px;line-height:1.5}
+ .quiet-back{padding:10px 12px;font-size:12px;white-space:nowrap}
+ .quiet-intro{font-size:14px;line-height:1.9;margin-bottom:18px}
+ .tasbeeh-main-card{padding:19px 15px 20px;border-radius:24px}
+ .tasbeeh-card-head{font-size:12px}
+ .tasbeeh-save{font-size:9px;padding:5px 8px}
+ .tasbeeh-phrase{font-size:24px;margin:19px 0 15px}
+ .tasbeeh-touch-zone{width:min(76vw,280px);height:min(76vw,280px);min-width:225px;min-height:225px;margin-bottom:23px}
+ .tasbeeh-touch-inner #tasbeehCount{font-size:82px}
+ .tasbeeh-touch-inner small{font-size:15px}
+ .tasbeeh-progress-wrap{margin-bottom:20px}
+ .tasbeeh-target-choice{min-width:61px;min-height:45px;padding:8px 13px;font-size:13px}
+ .tasbeeh-controls{gap:9px}
+ .tasbeeh-controls button{min-height:54px;font-size:13px}
+ .tasbeeh-status{font-size:12px}
+}
+@media(max-width:360px){
+ .quiet-wrap{width:calc(100% - 18px)}
+ .tasbeeh-main-card{padding:16px 11px}
+ .tasbeeh-touch-zone{width:230px;height:230px;min-width:230px;min-height:230px}
+ .tasbeeh-touch-inner #tasbeehCount{font-size:72px}
+ .tasbeeh-targets{gap:6px}
+ .tasbeeh-target-choice{min-width:55px;padding:7px 10px}
+ .tasbeeh-controls button{font-size:12px}
+}
+
+</style>
 <script>
 (function(){
  var ua=navigator.userAgent||"";
@@ -1272,19 +1338,27 @@ body{margin:0;background:var(--quiet-soft);color:var(--quiet-ink);font-family:in
 @media(max-width:480px){.quiet-menu{grid-template-columns:1fr}}
 </style></head><body dir="rtl"><main class="quiet-wrap"><header class="quiet-top"><h1>📿 السبحة الإلكترونية</h1><a class="quiet-back" href="./quiet.html">← جلسة الهدوء</a></header>
 <p class="quiet-intro">عداد بسيط يحفظ عدد تسبيحاتك على نفس الجهاز.</p>
-<section class="quiet-card">
- <h2 id="tasbeehPhrase">سبحان الله</h2><div id="tasbeehCount" style="font-size:54px;font-weight:900;text-align:center;margin:18px 0;color:#15976b" aria-live="polite">0</div>
- <div style="height:8px;background:#e8f2ed;border-radius:20px;overflow:hidden"><span id="tasbeehProgress" style="display:block;height:100%;width:0;background:#15976b"></span></div>
- <div class="tasbeeh-targets" role="group" aria-label="اختيار هدف التسبيح" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0">
- <button type="button" class="tasbeeh-target-choice is-selected" data-target="33">33</button><button type="button" class="tasbeeh-target-choice" data-target="100">100</button><button type="button" class="tasbeeh-target-choice" data-target="300">300</button><button type="button" class="tasbeeh-target-choice" data-target="0">بدون هدف</button></div>
- <button type="button" id="tasbeehAdd" style="display:block;width:100%;padding:18px;border:0;border-radius:16px;background:#15976b;color:#fff;font-size:20px;font-weight:850">سبّح +1</button>
- <div style="display:flex;gap:10px;margin-top:12px"><button type="button" id="tasbeehChange" style="flex:1;padding:12px;border:1px solid #dcece4;border-radius:12px;background:#f7fcf9">تغيير الذكر</button><button type="button" id="tasbeehReset" style="flex:1;padding:12px;border:1px solid #dcece4;border-radius:12px;background:#f7fcf9">تصفير العداد</button></div>
- <p id="tasbeehStatus" style="font-size:12px;color:#698078;margin:14px 0 0" aria-live="polite">عدادك محفوظ على نفس الجهاز.</p></section></main><script>(()=>{const init=()=>{
+<section class="tasbeeh-main-card">
+ <div class="tasbeeh-card-head"><span class="tasbeeh-live-dot"></span><span>عداد التسبيح</span><span class="tasbeeh-save">يحفظ تلقائيًا</span></div>
+ <h2 id="tasbeehPhrase" class="tasbeeh-phrase">سبحان الله</h2>
+ <button type="button" id="tasbeehAdd" class="tasbeeh-touch-zone" aria-label="اضغط للتسبيح وزيادة العداد واحدًا">
+  <span class="tasbeeh-touch-halo"></span>
+  <span class="tasbeeh-touch-inner"><span id="tasbeehCount" aria-live="polite">0</span><small>اضغط للتسبيح</small></span>
+ </button>
+ <div class="tasbeeh-progress-wrap"><div class="tasbeeh-progress-meta"><span>التقدم نحو الهدف</span><strong id="tasbeehProgressLabel">0%</strong></div><div class="tasbeeh-progress-track"><span id="tasbeehProgress"></span></div></div>
+ <div class="tasbeeh-target-block"><span class="tasbeeh-label">اختر هدفك</span>
+  <div class="tasbeeh-targets" role="group" aria-label="اختيار هدف التسبيح">
+   <button type="button" class="tasbeeh-target-choice is-selected" data-target="33">33</button><button type="button" class="tasbeeh-target-choice" data-target="100">100</button><button type="button" class="tasbeeh-target-choice" data-target="300">300</button><button type="button" class="tasbeeh-target-choice" data-target="0">بدون هدف</button>
+  </div>
+ </div>
+ <div class="tasbeeh-controls"><button type="button" id="tasbeehChange">تغيير الذكر</button><button type="button" id="tasbeehReset">تصفير العداد</button></div>
+ <p id="tasbeehStatus" class="tasbeeh-status" aria-live="polite">عدادك محفوظ على نفس الجهاز.</p>
+</section></main><script>(()=>{const init=()=>{
 const $=id=>document.getElementById(id),phrases=["سبحان الله","الحمد لله","الله أكبر","أستغفر الله","لا إله إلا الله","اللهم صلِّ وسلم على نبينا محمد","سبحان الله وبحمده","سبحان الله العظيم","لا حول ولا قوة إلا بالله","حسبي الله ونعم الوكيل","اللهم اغفر لي","رب اغفر لي وتب عليّ","اللهم أعني على ذكرك وشكرك وحسن عبادتك","اللهم إنك عفو تحب العفو فاعف عني"],key="connect_tasbeeh_state_v1";
 let saved={count:0,target:33,phrase:0};try{saved={...saved,...JSON.parse(localStorage.getItem(key)||"{}")}}catch(e){}
 let count=Math.max(0,Number(saved.count)||0),goal=[0,33,100,300].includes(Number(saved.target))?Number(saved.target):33,phrase=((Number(saved.phrase)||0)%phrases.length+phrases.length)%phrases.length;
 const persist=()=>{try{localStorage.setItem(key,JSON.stringify({count,target:goal,phrase}))}catch(e){}};
-const render=()=>{$("tasbeehCount").textContent=count.toLocaleString("en-US");$("tasbeehPhrase").textContent=phrases[phrase];$("tasbeehProgress").style.width=goal?Math.min(100,count/goal*100)+"%":"0%";document.querySelectorAll(".tasbeeh-target-choice").forEach(b=>b.classList.toggle("is-selected",Number(b.dataset.target)===goal));$("tasbeehStatus").textContent=count===0?"ابدأ بخطوة بسيطة؛ أحب الأعمال إلى الله أدومها وإن قلّ.":count%100===0?"ما شاء الله! أتممت "+count+" ذكرًا، استمر على وردك.":count%33===0?"أحسنت! وصلت إلى "+count+" تسبيحة، تقبّل الله منك.":goal&&count>=goal?"اكتمل هدفك، تقبّل الله منك واجعل لك وردًا ثابتًا.":goal?"باقي "+(goal-count)+" للوصول لهدفك، خذها بهدوء.":"استمر براحتك؛ كل ذكر خير، ولا تجعل العدد يشغلك عن حضور القلب."};
+const render=()=>{$("tasbeehCount").textContent=count.toLocaleString("en-US");$("tasbeehPhrase").textContent=phrases[phrase];$("tasbeehProgress").style.width=goal?Math.min(100,count/goal*100)+"%":"0%";$("tasbeehProgressLabel").textContent=goal?Math.min(100,Math.round(count/goal*100))+"%":"—";document.querySelectorAll(".tasbeeh-target-choice").forEach(b=>b.classList.toggle("is-selected",Number(b.dataset.target)===goal));$("tasbeehStatus").textContent=count===0?"ابدأ بخطوة بسيطة؛ أحب الأعمال إلى الله أدومها وإن قلّ.":count%100===0?"ما شاء الله! أتممت "+count+" ذكرًا، استمر على وردك.":count%33===0?"أحسنت! وصلت إلى "+count+" تسبيحة، تقبّل الله منك.":goal&&count>=goal?"اكتمل هدفك، تقبّل الله منك واجعل لك وردًا ثابتًا.":goal?"باقي "+(goal-count)+" للوصول لهدفك، خذها بهدوء.":"استمر براحتك؛ كل ذكر خير، ولا تجعل العدد يشغلك عن حضور القلب."};
 $("tasbeehAdd").addEventListener("click",()=>{count++;persist();render();if(navigator.vibrate)navigator.vibrate(8)});
 document.querySelectorAll(".tasbeeh-target-choice").forEach(b=>b.addEventListener("click",()=>{goal=Number(b.dataset.target);persist();render()}));
 $("tasbeehChange").addEventListener("click",()=>{phrase=(phrase+1)%phrases.length;persist();render()});

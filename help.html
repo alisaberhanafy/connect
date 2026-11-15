@@ -1,0 +1,124 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#eff7ff"><meta name="description" content="مركز شروحات كونكت واي فاي والدعم الفني."><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icons/icon-192.png"><link rel="stylesheet" href="./assets/fonts/fonts.css"><title>مركز الشروحات | كونكت واي فاي</title><style>
+:root{--ink:#10284b;--muted:#5f748e;--line:#dbe7f2;--blue:#087fd0;--cyan:#18bde3;--bg:#f1f7ff;--shadow:0 14px 34px rgba(15,55,100,.09)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 0%,#d9f3ff 0,transparent 32%),linear-gradient(160deg,#eff7ff,#f8fbff 55%,#edf5ff);color:var(--ink);font-family:"Cairo","Tajawal",Tahoma,sans-serif}
+a{-webkit-tap-highlight-color:transparent}
+.page{width:min(1180px,calc(100% - 48px));margin:auto;padding:24px 0 54px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}.brand-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#087fe0,#13c5e4);color:#fff;font-size:25px;box-shadow:0 8px 20px #087fd044}
+.brand strong{display:block;font-size:18px;font-weight:950}.brand small{display:block;color:var(--muted);font-size:11px}
+.back{padding:11px 16px;border-radius:14px;background:#fff;border:1px solid var(--line);color:#15518a;text-decoration:none;font-size:13px;font-weight:900;box-shadow:0 4px 13px #1a4c7910}
+.hero{position:relative;overflow:hidden;padding:clamp(25px,4vw,42px);border-radius:27px;background:linear-gradient(120deg,#071c51,#0c3d89 65%,#087bb1);color:#fff;box-shadow:0 22px 48px #0b2c6630}
+.hero:before{content:"";position:absolute;width:330px;height:330px;left:-115px;top:-190px;border:1px solid #72dfff3d;border-radius:50%;box-shadow:0 0 0 30px #72dfff0c,0 0 0 65px #72dfff08}
+.hero>*{position:relative}.kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid #7de4ff45;border-radius:30px;background:#ffffff12;color:#9deaff;font-size:12px;font-weight:900}
+.hero h1{font-size:clamp(30px,4vw,46px);line-height:1.4;margin:14px 0 8px;font-weight:950}.hero p{max-width:800px;color:#d7eaff;font-size:15px;line-height:2;margin:0}
+.quick-index{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 28px}
+.quick-index a{padding:9px 14px;border:1px solid #cfe2f2;border-radius:30px;background:#fff;color:#17608e;text-decoration:none;font-size:12px;font-weight:850;box-shadow:0 5px 14px #174a7010}
+.help-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.help-group{min-width:0;padding:21px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(150deg,#fff,#fbfdff);box-shadow:var(--shadow)}
+.help-group:first-child{grid-column:1/-1}
+.help-group-head{display:flex;align-items:center;gap:13px;margin-bottom:16px}
+.help-group-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border-radius:16px;background:#e5f5ff;color:#087bc2;font-size:25px}
+.help-group-head h3{font-size:19px;line-height:1.5;margin:0;font-weight:950}.help-group-head p{font-size:13px;line-height:1.7;color:var(--muted);margin:3px 0 0}
+.help-list{display:grid;grid-template-columns:1fr;gap:11px}
+.help-group:first-child .help-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+.help-link{display:flex;align-items:center;gap:13px;min-width:0;min-height:92px;padding:12px;border:1px solid #e0eaf3;border-radius:17px;background:#fafdff;color:var(--ink);text-decoration:none;transition:transform .2s,border-color .2s,box-shadow .2s}
+.help-link:hover{transform:translateY(-2px);border-color:#9ed8f4;box-shadow:0 10px 22px #174a7010}
+.help-thumb{width:112px;height:72px;flex:0 0 112px;object-fit:cover;border-radius:12px;background:#e6f2fa}
+.help-copy{flex:1;min-width:0}.help-copy strong{display:block;font-size:14px;line-height:1.65;font-weight:950}.help-copy small{display:block;color:var(--muted);font-size:11px;line-height:1.7;margin-top:4px}
+.help-play{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:50%;background:#fff0f0;color:#e53935;font-size:15px}
+.help-download{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:13px;padding:13px;border-radius:13px;background:#e9f8f1;border:1px solid #c8ead8;color:#087b55;font-size:13px;font-weight:950;text-decoration:none}
+.footer{text-align:center;color:#8495a9;font-size:12px;padding-top:28px}
+@media(max-width:760px){.page{width:min(100% - 32px,640px);padding:17px 0 40px}.topbar{margin-bottom:16px}.brand-icon{width:45px;height:45px}.brand strong{font-size:16px}.brand small{font-size:10px}.back{padding:10px 12px;font-size:12px}.hero{padding:25px 21px;border-radius:23px}.hero h1{font-size:31px}.hero p{font-size:14px}.quick-index{gap:7px;margin:15px 0 22px}.quick-index a{font-size:11px;padding:8px 11px}.help-groups{grid-template-columns:1fr;gap:13px}.help-group,.help-group:first-child{grid-column:auto;padding:16px;border-radius:19px}.help-group-head{margin-bottom:13px}.help-group-head h3{font-size:17px}.help-group-head p{font-size:12px}.help-link{min-height:83px;padding:10px;gap:10px}.help-thumb{width:94px;height:64px;flex-basis:94px}.help-copy strong{font-size:13px}.help-copy small{font-size:10px}.help-play{width:34px;height:34px;flex-basis:34px}}
+@media(max-width:430px){.page{width:calc(100% - 24px);padding-top:12px}.hero{padding:22px 18px}.hero h1{font-size:28px}.hero p{font-size:13px;line-height:1.9}.help-group:first-child .help-list{grid-template-columns:1fr}.help-group-icon{width:46px;height:46px;flex-basis:46px;font-size:22px}.help-group-head h3{font-size:16px}.help-link{min-height:78px}.help-thumb{width:82px;height:58px;flex-basis:82px}.help-copy strong{font-size:12px}.help-copy small{font-size:10px}.help-play{width:31px;height:31px;flex-basis:31px}}
+
+/* V145 — dedicated mobile-first tutorial card layout */
+@media(max-width:760px){
+ .page{width:100%;padding:13px 16px calc(34px + env(safe-area-inset-bottom))}
+ .topbar{padding:0 2px;margin-bottom:15px}
+ .brand-icon{width:45px;height:45px;border-radius:14px;font-size:23px}
+ .brand strong{font-size:16px}
+ .brand small{font-size:10px}
+ .back{padding:10px 13px;font-size:12px}
+ .hero{padding:24px 20px;border-radius:22px}
+ .hero h1{font-size:30px;margin:12px 0 7px}
+ .hero p{font-size:14px;line-height:1.95}
+ .quick-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0 23px}
+ .quick-index a{text-align:center;padding:10px 7px;font-size:12px;border-radius:13px}
+ .help-center>.section-title{margin:0 2px 14px;display:block}
+ .help-center>.section-title h2{font-size:22px;line-height:1.5;margin:0 0 3px}
+ .help-center>.section-title span{font-size:12px}
+ .help-groups{display:grid;grid-template-columns:1fr;gap:13px}
+ .help-group,.help-group:first-child{grid-column:auto;padding:16px 14px;border-radius:20px}
+ .help-group-head{gap:11px;margin-bottom:13px}
+ .help-group-icon{width:46px;height:46px;flex:0 0 46px;border-radius:14px;font-size:22px}
+ .help-group-head h3{font-size:17px;line-height:1.5}
+ .help-group-head p{font-size:12px;line-height:1.7}
+ .help-group:first-child .help-list,.help-list{grid-template-columns:1fr;gap:10px}
+ .help-link{display:grid;grid-template-columns:92px minmax(0,1fr) 36px;grid-template-rows:auto;align-items:center;gap:11px;min-height:96px;padding:10px;border-radius:16px;background:#f9fcff}
+ .help-thumb{grid-column:1;grid-row:1;width:92px;height:72px;flex:none;object-fit:cover;border-radius:11px}
+ .help-copy{grid-column:2;grid-row:1;min-width:0}
+ .help-copy strong{font-size:14px;line-height:1.65}
+ .help-copy small{font-size:11px;line-height:1.65;margin-top:4px}
+ .help-play{grid-column:3;grid-row:1;width:34px;height:34px;flex:0 0 34px;font-size:14px}
+ .help-download{min-height:48px;padding:12px 10px;font-size:12px;border-radius:13px;text-align:center}
+ .footer{font-size:11px;padding:22px 5px 0}
+}
+@media(max-width:430px){
+ .page{padding:11px 12px calc(30px + env(safe-area-inset-bottom))}
+ .hero{padding:21px 17px;border-radius:20px}
+ .hero h1{font-size:27px}
+ .hero p{font-size:13px;line-height:1.9}
+ .quick-index{gap:7px;margin:12px 0 20px}
+ .quick-index a{font-size:11px;padding:9px 5px}
+ .help-center>.section-title h2{font-size:20px}
+ .help-group,.help-group:first-child{padding:14px 12px;border-radius:18px}
+ .help-group-head h3{font-size:16px}
+ .help-group-head p{font-size:11px}
+ .help-link{grid-template-columns:84px minmax(0,1fr) 32px;gap:9px;min-height:88px;padding:9px}
+ .help-thumb{width:84px;height:66px}
+ .help-copy strong{font-size:13px;line-height:1.6}
+ .help-copy small{font-size:10px}
+ .help-play{width:31px;height:31px;flex-basis:31px;font-size:13px}
+}
+@media(max-width:350px){
+ .help-link{grid-template-columns:72px minmax(0,1fr) 29px;gap:7px}
+ .help-thumb{width:72px;height:60px}
+ .help-copy strong{font-size:12px}
+ .help-copy small{font-size:9px}
+ .help-play{width:28px;height:28px;flex-basis:28px}
+}
+
+</style></head><body><main class="page"><header class="topbar"><div class="brand"><span class="brand-icon">▶</span><span><strong>كونكت واي فاي</strong><small>مركز الشروحات والدعم الفني</small></span></div><a class="back" href="./index.html">⌂ الرئيسية</a></header><section class="hero"><span class="kicker">دليل الاستخدام والدعم</span><h1>مركز الشروحات</h1><p>كل اللي تحتاج تعرفه عن استخدام خدمات كونكت وإدارة باقتك، في مكان واحد. اختار القسم المناسب وشاهد الشرح خطوة بخطوة.</p></section><nav class="quick-index" aria-label="أقسام الشروحات"><a href="#savingDataTitle">التوفير في الباقة</a><a href="#customerGuidesTitle">لوحة العميل</a><a href="#speedTestTitle">اختبار السرعة</a><a href="#whatsappGuideTitle">واتساب</a></nav><section class="help-center" id="help-center" aria-labelledby="helpCenterTitle">
+ <div class="section-title"><h2 id="helpCenterTitle">مركز الشروحات والدعم الفني</h2><span>فيديوهات تساعدك خطوة بخطوة</span></div>
+ <div class="help-groups">
+  <section class="help-group" aria-labelledby="savingDataTitle">
+   <div class="help-group-head"><span class="help-group-icon">📉</span><div><h3 id="savingDataTitle">التوفير في استهلاك الباقة</h3><p>خطوات لتقليل استهلاك الإنترنت ومنع التحميلات التلقائية</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtu.be/I4NZAv-mJ44?feature=shared" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/I4NZAv-mJ44/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;>▶</span>'"><span class="help-copy"><strong>الحفاظ على الباقة من التحميلات التلقائية</strong><small>شاهد الفيديو واتبع الخطوات لتقليل استهلاك الباقة</small></span><span class="help-play">▶</span></a>
+   </div>
+  </section>
+  <section class="help-group" aria-labelledby="customerGuidesTitle">
+   <div class="help-group-head"><span class="help-group-icon">▶</span><div><h3 id="customerGuidesTitle">شروحات لوحة العميل الجديدة</h3><p>كل ما تحتاجه لإدارة حسابك وباقتك</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtube.com/shorts/NyQc1QyXaLM?si=3YMdJwFKSEoXnpuY" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/NyQc1QyXaLM/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>كيفية تثبيت تطبيق كونكت واي فاي</strong><small>فيديو قصير · تثبيت التطبيق</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://youtu.be/9XDRLK3f8m0" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/9XDRLK3f8m0/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شرح سريع للوحة العميل الجديدة</strong><small>التعرف على أقسام اللوحة</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://youtube.com/shorts/kMZaMkU9tp4?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/kMZaMkU9tp4/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>تغيير الرقم السري لحساب العميل</strong><small>تأمين حسابك وتحديث كلمة المرور</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://www.youtube.com/shorts/FQ1B7VURuuM" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/FQ1B7VURuuM/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شراء جيجات إضافية من لوحة العميل</strong><small>إضافة سعة إنترنت لحسابك</small></span><span class="help-play">▶</span></a>
+    <a class="help-link" href="https://youtube.com/shorts/CiCwQqufMVc?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/CiCwQqufMVc/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شحن باقات لجميع المشتركين في كونكت</strong><small>شرح خاص بعملية شحن الباقات</small></span><span class="help-play">▶</span></a>
+   </div>
+  </section>
+  <section class="help-group" aria-labelledby="speedTestTitle">
+   <div class="help-group-head"><span class="help-group-icon">⚡</span><div><h3 id="speedTestTitle">اختبار سرعة الإنترنت</h3><p>اعرف إزاي تقيس سرعة اتصالك</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtube.com/shorts/TbiPP9H7a0g?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/TbiPP9H7a0g/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>شرح عمل Speed Test</strong><small>طريقة اختبار سرعة الإنترنت</small></span><span class="help-play">▶</span></a>
+   </div>
+   <a class="help-download" href="https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest" target="_self" rel="noopener noreferrer">تحميل تطبيق Speedtest من Google Play ↗</a>
+  </section>
+  <section class="help-group" aria-labelledby="whatsappGuideTitle">
+   <div class="help-group-head"><span class="help-group-icon">⌖</span><div><h3 id="whatsappGuideTitle">شروحات واتساب</h3><p>مشاركة موقعك مع الدعم الفني</p></div></div>
+   <div class="help-list">
+    <a class="help-link" href="https://youtube.com/shorts/JPUACV3Hx-I?feature=share" target="_self" rel="noopener noreferrer"><img class="help-thumb" loading="lazy" src="https://img.youtube.com/vi/JPUACV3Hx-I/hqdefault.jpg" alt="" onerror="this.onerror=null;this.outerHTML='<span class=&quot;help-thumb youtube-thumb&quot; role=&quot;img&quot; aria-label=&quot;YouTube&quot;><svg viewBox=&quot;0 0 48 34&quot; aria-hidden=&quot;true&quot;><rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;46&quot; height=&quot;32&quot; rx=&quot;9&quot; fill=&quot;#ff0033&quot;/><path d=&quot;M20 10.5v13l11-6.5z&quot; fill=&quot;#fff&quot;/></svg></span>'" ><span class="help-copy"><strong>كيفية إرسال اللوكيشن من واتساب</strong><small>إرسال موقعك الحالي بسهولة</small></span><span class="help-play">▶</span></a>
+   </div>
+  </section>
+ </div>
+</section><footer class="footer">كونكت واي فاي · شروحات مبسطة لخدمتك</footer></main></body></html>
